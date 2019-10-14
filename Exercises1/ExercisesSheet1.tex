@@ -86,12 +86,53 @@ Notation: here is a brief summary of the notation used in this worksheet.
     very large (greater computational cost), while this problem doesn't
     happen with inversion, since every sample is used.
 
+\end{enumerate}
+
+\newpage
+\section*{Exercise 2 (Rejection)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+
+	\item Let $A$ be the event where the value is accepted at some point,
+	while $A_b$ is accepted at step (b) and $A_c$ is accepted at step (c):
+
+	In step (b) we have:
+	$$\mathbb{P}(X \in A_b)
+	= \frac{h(x)}{M\tilde{q}(x)}$$
+	In step (c) we have:
+	$$\mathbb{P}(X \in A_c)
+	= \frac{\tilde{\pi}(x) - h(x)}{M\tilde{q}(x) - h(x)}$$
+	Since step (b) is independent of (c),
+	$$\mathbb{P}(X \in A) = \mathbb{P}(X \in A_b \cup X \in A_c) =$$
+	$$= \mathbb{P}(X\in A_b)+\mathbb{P}(X\in A_b)-
+	\mathbb{P}(X \in A_b \cap X \in A_c) = $$
+	$$ = \frac{h(x)}{M\tilde{q}(x)} +
+	\frac{\tilde{\pi}(x) - h(x)}{M\tilde{q}(x) - h(x)} + 
+	\frac{h(x)}{M\tilde{q}(x)}\cdot
+	\frac{\tilde{\pi}(x) - h(x)}{M\tilde{q}(x) - h(x)} =
+	\frac{\tilde{\pi}(x)}{M\tilde{q}(x)}
+	$$
+
+	\item Let B be an arbitrary event.
+	$$\mathbb{P}(X \in B \mid X \in A) =
+	\mathbb{P}(X \in B \cap X \in A) / \mathbb{P}(X \in A) \therefore$$
+	$$ \mathbb{P}(X \in B \cap X \in A) =
+	\int_{\chi}\int_{0}^{1}
+	\mathbb{I}_B(x)\mathbb{I}
+	\left( u \leq \frac{\tilde{\pi}(x)}{M\tilde{q}(x)} \right) du dx$$
+	$$ \mathbb{P}(X \in B \cap X \in A) =
+	\int_{B}
+	\frac{\tilde{\pi}(x)}{M\tilde{q}(x)}\tilde{q}(x)\cdot Z_q^{-1} dx$$
+	$$ \mathbb{P}(X \in B \cap X \in A) =
+	\frac{\pi(B)\cdot Z_\pi}{M \cdot Z_q}
+	$$
+	Finally,
+
+	$$\mathbb{P}(X \in A) = \frac{Z_\pi}{M\cdot Z_q} \therefore 
+	\mathbb{P}(X \in B \mid X \in A) =
+	\frac{\pi(B) Z_\pi}{M Z_q}\cdot \frac{M Z_q}{Z_\pi} = \pi(B)$$.
 
 
 \end{enumerate}
-
-% \newpage
-% \section*{Question 2}
 % \setcounter{equation}{0}
 % \begin{enumerate}[leftmargin=!,labelindent=5pt]
 %     \item Equations from parts 1 and 2
