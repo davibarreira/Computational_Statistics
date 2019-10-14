@@ -7,6 +7,8 @@
 \newcommand\course{Computational Statistics}
 \newcommand\hwnumber{1}
 \newcommand\userID{Davi Sales Barreira}
+\DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}}
+\newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}}
 
 \begin{document}
 % \textbf{\Large Worksheet completed with Octave.}
@@ -96,15 +98,15 @@ Notation: here is a brief summary of the notation used in this worksheet.
 	while $A_b$ is accepted at step (b) and $A_c$ is accepted at step (c):
 
 	In step (b) we have:
-	$$\mathbb{P}(X \in A_b)
+	$$\mathbb{P}(x \in A_b)
 	= \frac{h(x)}{M\tilde{q}(x)}$$
 	In step (c) we have:
-	$$\mathbb{P}(X \in A_c)
+	$$\mathbb{P}(x \in A_c)
 	= \frac{\tilde{\pi}(x) - h(x)}{M\tilde{q}(x) - h(x)}$$
 	Since step (b) is independent of (c),
-	$$\mathbb{P}(X \in A) = \mathbb{P}(X \in A_b \cup X \in A_c) =$$
-	$$= \mathbb{P}(X\in A_b)+\mathbb{P}(X\in A_b)-
-	\mathbb{P}(X \in A_b \cap X \in A_c) = $$
+	$$\mathbb{P}(x \in A) = \mathbb{P}(x \in A_b \cup x \in A_c) =$$
+	$$= \mathbb{P}(x\in A_b)+\mathbb{P}(x\in A_b)-
+	\mathbb{P}(x \in A_b \cap x \in A_c) = $$
 	$$ = \frac{h(x)}{M\tilde{q}(x)} +
 	\frac{\tilde{\pi}(x) - h(x)}{M\tilde{q}(x) - h(x)} + 
 	\frac{h(x)}{M\tilde{q}(x)}\cdot
@@ -118,7 +120,7 @@ Notation: here is a brief summary of the notation used in this worksheet.
 	$$ \mathbb{P}(X \in B \cap X \in A) =
 	\int_{\chi}\int_{0}^{1}
 	\mathbb{I}_B(x)\mathbb{I}
-	\left( u \leq \frac{\tilde{\pi}(x)}{M\tilde{q}(x)} \right) du dx$$
+	\left( u \leq \frac{\tilde{\pi}(x)}{M\tilde{q}(x)} \right) q(x) du dx$$
 	$$ \mathbb{P}(X \in B \cap X \in A) =
 	\int_{B}
 	\frac{\tilde{\pi}(x)}{M\tilde{q}(x)}\tilde{q}(x)\cdot Z_q^{-1} dx$$
@@ -130,6 +132,28 @@ Notation: here is a brief summary of the notation used in this worksheet.
 	$$\mathbb{P}(X \in A) = \frac{Z_\pi}{M\cdot Z_q} \therefore 
 	\mathbb{P}(X \in B \mid X \in A) =
 	\frac{\pi(B) Z_\pi}{M Z_q}\cdot \frac{M Z_q}{Z_\pi} = \pi(B)$$.
+
+	\item We want to show that:
+	$$\mathbb{P}(\text{Step (c) is necessery}) = 1 - \frac{\int_{\chi}h(x)dx}{MZ_q}$$
+
+	First, note that
+	$\mathbb{P}(\text{Step (c) is necessery}) =
+	\mathbb{P}(\text{X not accepted in step(b)})$, hence:
+
+	$$\mathbb{P}(\text{X not accepted in step(b)}) = 
+	1 - \mathbb{P}(X \in A_b) =
+	1 - \mathbb{P}\left(U \leq \frac{h(X)}{M\tilde{q}(X)} \right)$$
+
+	$$\mathbb{P}(X \in A_b) = \mathbb{P}(X \in \rchi \cap X \in A_b)=$$
+	$$ \int_{\chi}\int_{0}^{1}
+	\mathbb{I}_\chi(x)\mathbb{I}
+	\left( u \leq \frac{h(x)}{M\tilde{q}(x)} \right) du dx = $$
+	$$\int_{\chi}\frac{h(x)\tilde{q}(x)}{M\tilde{q}(x)Z_q}dx = 
+	\frac{\int_{\chi}h(x)dx}{MZ_q} \therefore $$
+	$$\mathbb{P}(\text{Step(c) is necessery}) = 1
+	 - \frac{\int_{\chi}h(x)dx}{MZ_q}$$.
+
+	 \item 
 
 
 \end{enumerate}
