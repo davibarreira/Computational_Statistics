@@ -27,8 +27,67 @@ Notation: here is a brief summary of the notation used in this worksheet.
     formula above.
         % \end{flalign}
         
-    \item
-    $$p(X=x \mid a \leq X \leq b) = p(X=x, a \leq X \leq b)$$
+    \item Let $X = Y \mid a \leq Y \leq b$.
+    First, let's show that $X = F_Y^{-1}(F_Y(a)(1-U)+F_Y(b)U)$:
+
+    % $$p(X=x \mid a \leq X \leq b) = \frac{p(X=x, a \leq X \leq b)}{p()}$$
+    $$\mathbb{P}(X \leq x) = \mathbb{P}(F_Y^{-1}(F_Y(a)(1-U)+F_Y(b)U)\leq x)
+    = \mathbb{P}(F_Y^{-1}(F_Y(a)+U[F_Y(b)-F_X(a)])\leq x)$$
+    % If $x \notin [a,b]$ then $\mathbb{P}(X \leq x) = 0$.
+    $$ = \mathbb{P}(F_Y(a)+U[F_Y(b)-F_X(a)]\leq F_Y(x)) = 
+    \mathbb{P}\left(U \leq \frac{F_Y(x) - F_Y(a)}{F_Y(b)-F_Y(a)}\right)
+    =\frac{F_Y(x) - F_Y(a)}{F_Y(b)-F_Y(a)}$$
+
+    Note that since $x \in [a,b]$: 
+    $$\mathbb{P}(Y \leq x \mid a \leq Y \leq b)
+    = \frac{\mathbb{P}(Y \leq x, a \leq Y \leq b)}
+    {\mathbb{P}(a \leq Y \leq b)}
+    =\frac{\mathbb{P}(a \leq Y \leq x)}{F_Y(b) - F_Y(a)}
+    =\frac{F_Y(x) - F_Y(a)}{F_Y(b)-F_Y(a)} = \mathbb{P}(X \leq x)$$
+
+    Now that we proved the above relation, to simulate an exponential
+    conditioned on $\geq a$, we first generate $U \sim Unif[0,1]$, then,
+    for $Y \sim Expo(\lambda)$:
+    $$F_Y(y) = 1 - e^{\lambda y} \therefore F_Y^{-1}(U)
+    = \frac{-\ln(1-U)}{\lambda}$$
+    $$X = \frac{-\ln(1 - (1-U)F_Y(a)+U)}{\lambda} = 
+    \frac{-\ln(e^{-\lambda a}+U\cdot e^{-\lambda a})}{\lambda}
+    = a - \frac{\ln(1-U)}{\lambda}
+    $$
+    The formula yields the same solution as the one obtained using
+    inversion.
+
+    \item Let $q \sim Expo(\lambda)$, and
+    $\pi(x) = \lambda e^{-\lambda(x-a)}\mathbb{I}_{x\geq a}$:
+
+    Note that $M = max_x\pi(x)/q(x) = e^{\lambda a}$, since
+    $\pi(x)/q(x)
+    = \frac{\lambda e^{-\lambda (x-a)}}{\lambda e^{\lambda (x)}}=
+    e^{\lambda a}$
+    $$\therefore$$
+
+    In the rejection method, we sample $x_i \sim q$, $u \sim Unif[0,1]$
+    ,then we accept a sample $x_i$ if
+    $u_i \leq \frac{\pi(x_i)}{Mq(x_i)}$. 
+
+    Hence,
+    \begin{itemize}
+    	\item If $x \leq a \implies \pi(x) = 0 \implies
+    	u \leq 0 \therefore x_i$ is rejected;
+    	\item If $x > a \implies \pi(x) = 1
+    	\implies u \leq 1 \therefore x_i$ is accepted;
+    \end{itemize}
+
+    Which is the same procedure described in the question, implying that
+    it is equal to the rejection algorithm.
+
+    Finally, the expected number of trials is equal to $M = e^{\lambda a}$.
+    Therefore, for $a \gg 1/\lambda$, the expected number of trials becomes 
+    very large (greater computational cost), while this problem doesn't
+    happen with inversion, since every sample is used.
+
+
+
 \end{enumerate}
 
 % \newpage
