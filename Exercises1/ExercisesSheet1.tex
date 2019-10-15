@@ -441,7 +441,103 @@ Notation: here is a brief summary of the notation used in this worksheet.
 	$$ E_q(w(X)^2) \geq
 	E_{q^*}(w(X)^2)$$
 
+\end{enumerate}
 
+\newpage
+\section*{Exercise 6 (Rejection and Importance Sampling)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+	\item 
+	$$\tilde{\pi}_X(x) =
+	\int_0^1 \tilde\pi_{X,U}(x,u)p_U(u) du =
+	\int_0^1 \tilde\pi_{X,U}(x,u) du = 
+	$$
+
+	$$=
+	\int_0^1 \left(  
+	\mathbb I_{[0,w(x)/M]}(u)\cdot Mq(x) + 
+	\mathbb I_{[w(x)/M,1]}(u)\cdot 0 
+	\right) du =
+	\int_0^{w(x)/M} Mq(x)du  = 
+	$$
+
+	$$ = Mq(x)\cdot w(x)/M = \pi(x) $$
+
+	\item Let $\hat I_n$ be the estimate using important sampling,
+	and $ \hat I_r$ be the one using rejection sampling.
+
+	$$ I = \int_0^1 \int_\chi \tilde\pi_{X,U}(x,u)dx du
+	= \frac{\int_0^1 \int_\chi \tilde\pi_{X,U}(x,u)dx du}
+	{\int_0^1 \int_\chi \tilde w(x,u) \tilde q(x,u)dx du} = 
+	\frac{E_q[\phi(x)\tilde w(x,u)]}{E_{\tilde q}[\tilde w(x,u)]}
+	\implies
+	$$
+	$$\hat I_n =
+	\frac{\sum_{i=1}^{n} \phi(x_i)\tilde w(x_i,u_i)}
+	{\sum_{i=1}^{n} \tilde w(x_i,u_i)} = 
+	\frac{\sum_{i=1}^{n} \phi(x_i)\tilde \pi(x_i,u_i)/\tilde q(x_i,u_i)}
+	{\sum_{i=1}^{n} \tilde \pi(x_i,u_i)/\tilde q(x_i,u_i)}=
+	$$
+
+
+	Let $n$ be the number of trials in the simulation, $n_a$
+	be the number of accepted samples from these trials, and
+	$x^{(a)}$ the accepted samples.
+
+	$$ = 
+	\frac{\sum_{i=1}^{n} \phi(x_i))\cdot
+	\mathbb I(u)_{[0,w(x)/M]} \cdot Mq(x)/(q(x)\cdot \mathbb I(u)_{[0,1]})}
+	{\sum_{i=1}^{n}\mathbb I(u)_{[0,w(x)/M]}\frac{Mq(x)}{q(x)
+	\mathbb I(u)_{[0,1]}}} = 
+	\frac{\sum_{i=1}^{n} \phi(x_i)I(u)_{[0,w(x)/M]}}
+	{\sum_{i=1}^{n}I(u)_{[0,w(x)/M]}}
+	$$
+
+	In the rejection sampling we have:
+	$$ \hat I_r = \frac{\sum_{i=1}^{n_a}\phi(x^{(a)}_i)}{n_a}$$
+
+	Finally, note that:
+	$$\sum_{i=1}^{n}I(u)_{[0,w(x)/M]} = n_a$$
+	$$\sum_{i=1}^{n} \phi(x_i)I(u)_{[0,w(x)/M]} =
+	\sum_{i=1}^{n_a}\phi(x^{(a)}_i))$$
+
+	Therefore, $\hat I_n = \hat I_r$.
+
+	\item We want to show that
+	$\mathbb V_q(w(X)) \leq \mathbb V_{\tilde q_{X,U}}(\tilde w(X,U))$.
+
+	Note that:
+	$$E_q[w(X)] = \int_\chi \pi(x)q(x)/q(x)dx = 1 \therefore$$
+	$$ V_q(w(X)) = E_q[w(X)^2] - E_q[w(X)]^2 =E_q[w(X)^2] - 1$$
+	$$E_{\tilde q}[\tilde w(X,U)] =
+	\int_\chi \int_0^1 \tilde \pi(x,u)\tilde q(x,u)/\tilde q(x,u)dudx
+	= 1 \therefore$$
+	$$ V_{\tilde q}(\tilde w(X,U)) =
+	E_{\tilde q}[\tilde w(X,U)^2] - 1$$
+
+	Hence, we only need to show that
+	$E_q[w(X)^2] \leq E_{\tilde q}[\tilde w(X,U)^2]$.
+
+	$$E_{\tilde q}[\tilde w(X,U)^2] =
+	\int_0^1\int_\chi \frac{\tilde \pi(x,u)^2}{\tilde q(x,u)}dxdu =
+	\int_0^1\int_\chi \frac{M^2 q(x)^2 \mathbb I(u)_{[0,w(x)/M]}dx du
+	}{q(x)}dxdu =
+	$$
+
+	$$ =
+	M^2 \int_\chi\int_0^{w(x)/M}q(x)du dx =
+	M^2 \int_\chi \frac{w(x)q(x)}{M}dx =
+	M \cdot E_q[w(X)] = M
+	$$
+
+	Finally, using rejection we know that:
+	$$
+	Mq(x) \geq \pi(x) \implies Mq(x)w(x) \geq \pi(x)w(x) \implies
+	M \int_\chi q(x)w(x)dx \geq \int_\chi \pi(x) w(x)dx
+	$$
+	Which means that
+	$\mathbb V_q(w(X)) \leq \mathbb V_{\tilde q_{X,U}}(\tilde w(X,U))$.
+
+	\item Couldn't solve.
 
 \end{enumerate}
 
