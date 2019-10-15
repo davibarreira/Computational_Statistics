@@ -291,6 +291,65 @@ Notation: here is a brief summary of the notation used in this worksheet.
 	\frac{\tilde{\pi}(w)}{Z_G} = \frac{\tilde{\pi}(w)}{Z_\pi} 
 	$$
 
+	\item Let $R = \left(\left[
+	0, \sup_x\sqrt{\tilde{\pi}(x)}
+	\right],
+	\left[
+	\inf_x x\sqrt{\tilde{\pi}(x)}, \sup_x\sqrt{\tilde{\pi}(x)}
+	\right]
+	\right)$.
+
+	Since
+	$G = \{ (u,v) \mid 0 \leq u \leq \sqrt{\tilde{\pi}(v/u)}\}$,
+	it's evident that
+	$$\inf_G u = 0, \sup_G u = \sup_x \sqrt{\tilde{\pi}(x)}
+	\implies u \in [0, \sup_x \sqrt{\tilde{\pi}(x)}]$$
+
+	Note that, for $x = v/u$:
+	$$0 \leq u \leq \sqrt{\tilde{\pi}(v/u)} \implies
+	 0 \leq  v/x \leq \sqrt{\tilde{\pi}(v/u)} \therefore
+	 0 \leq v \leq x \sqrt{\tilde{\pi}(v/u)}, \forall x \neq 0
+	$$ 
+
+	Then, similarly to $u$, we have:
+	$$\inf_G v = \inf_x x\sqrt{\tilde{\pi}(x)},
+	\sup_G v = \sup_x x\sqrt{\tilde{\pi}(x)}
+	\implies v \in
+	[\inf_x x\sqrt{\tilde{\pi}(x)},\sup_x x\sqrt{\tilde{\pi}(x)}]$$
+
+	We conclude that $G \subset R$.
+
+	To sample uniformly in $G$, first:
+	\begin{itemize}
+	\item Generate $u_i \sim Unif[0, \sup_x \sqrt{\tilde{\pi}(x)}]$ and
+	\item Generate $v_i \sim Unif[\inf_x x\sqrt{\tilde{\pi}(x)},
+	\sup_x x\sqrt{\tilde{\pi}(x)}]$
+	\end{itemize}
+	Then, accept $(u_i,v_i)$ if
+	$0 \leq u_i \leq \sqrt{\tilde{\pi}(v_i/u_i)}$, where
+	$\tilde{\pi}(x)$ is a probability density function.
+
+	\item Let $\tilde{\pi}(x) = exp(-x^2/2)$.
+	$$\sup_{x \in \mathbb{R}}exp(-x^2/2) = exp(0) = 1$$
+	$$ \inf_{x \in \mathbb{R}}x \sqrt{exp(-x^2/2)} = 0$$
+	$$\sup_{x \in \mathbb{R}}x\sqrt{exp(-x^2/2)} =
+	  \sup_{x \in \mathbb{R}}x\cdot exp(-x^2/4)
+	$$
+	Note that:
+	$$\frac{d}{dx} x\cdot exp(-x^2/4) =
+	exp(-x^2/4) - \frac{x^2}{2}exp(-x^2/4)=0 \implies
+	x = \pm\sqrt2
+	$$
+	$$\sup_{x \in \mathbb{R}}x\sqrt{exp(-x^2/2)} = \sqrt{2exp(-2/2)}=
+	\sqrt{2exp(-1)}
+	$$
+
+	$$U \sim Unif[0,1],
+	V \sim Unif[0, \sqrt{2exp(-1)}]$$
+
+	Therefore, generate samples from $U$ and $V$. For the sample $(u,v)$,
+	if $0 \leq u \leq \sqrt{2\cdot exp(-v^2/u^2)}$, then accept $x = v/u$,
+	which will be a sample from $\tilde{\pi}(x)$.
 
 
 \end{enumerate}
