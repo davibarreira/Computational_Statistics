@@ -191,51 +191,56 @@ Notation: here is a brief summary of the notation used in this worksheet.
 	 rejection sampling procedure because this algorithmcan be more
 	 computationally efficient.
 
+\end{enumerate}
+
+\newpage
+\section*{Exercise 3 (Transformation)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+
+	\item Let $V = arctan(U_2/U_1)$ and $Y = U_1^2 + U_2^2 \leq 1$.
+	We want to show that:
+	$$p_{Y,V}(y,\theta) =
+	\mathbb{I}_{[0,1]}(y)\frac{\mathbb{I}_{[0,2\pi]}(\theta)}{2\pi}$$
+	First, note that $p_{Y,V}(y,\theta) = p_{U_1,U_2}(u_1,u_2)
+	\left|\begin{array}{ccc}
+	\frac{\partial u_1}{\partial y} & \frac{\partial u_1}{\partial \theta}
+	\\
+	\frac{\partial u_2}{\partial y} & \frac{\partial u_2}{\partial \theta}
+	\end{array}\right|$
+
+	$$
+	\left|\begin{array}{ccc}
+	\frac{\partial u_1}{\partial y} & \frac{\partial u_1}{\partial \theta}
+	\\
+	\frac{\partial u_2}{\partial y} & \frac{\partial u_2}{\partial \theta}
+	\end{array}\right| =
+	\left|\begin{array}{ccc}
+	\frac{\partial y}{\partial u_1} & \frac{\partial \theta}{\partial u_1}
+	\\
+	\frac{\partial y}{\partial u_2} & \frac{\partial \theta}{\partial u_2}
+	\end{array}\right|^{-1} = 
+	\left|\begin{array}{ccc}
+	2u_1 & \frac{1}{1+(u_1/u_2)^2}\cdot \frac{-1u_2}{u_1^2}
+	\\
+	2u_2 & \frac{1}{1+(u_1/u_2)^2}\cdot \frac{1}{u_1^2}
+	\end{array}\right|^{-1} = 
+	\frac{2}{1+(u_2/u_1)^2} + \frac{2(u_2/u_1)^2}{1+(u_2/u_1)^2}=
+	$$
+	$$ = \frac{2}{1+\theta^2} + \frac{2(1+\theta^2)}{1+\theta^2} = 2$$
+	$$
+	p_{Y,V}(y,\theta) = p_{U_1,U_2}(u_1,u_2)\cdot\frac{1}{2} =
+	p_{U_1,U_2}(\sqrt y cos(\theta), \sqrt y sin(\theta))\cdot\frac{1}{2}
+	$$
+
+	Note that $p_{U_1,U_2}(\sqrt y cos(\theta), \sqrt y sin(\theta))$
+	is a uniform distribution over a circle of radius $Y \leq 1$, therefore, it's normalizing constant is equal to $pi$, which is the
+	area of the circumference of radius 1. With that we can write:
+
+	$$p_{Y,V}(y,\theta) =
+	\mathbb{I}_{[0,1]}(y)\frac{\mathbb{I}_{[0,2\pi]}(\theta)}{2\pi}$$
 
 
-	 % \begin{itemize}
-	 % 	\item Generate $u \sim Unif[0,1], x \sim q$ 
-	 % 	\item If $u \leq \frac{h(x)}{M\tilde{q}(x)}$, accept $x$;
-	 % 	\item Else, generate $v \sim Unif[0,1]$;
-	 % 	\item Check if
-	 % 	$v \leq \frac{\tilde{\pi}(x)-h(x)}{M\tilde{q}(x) - h(x)}$;
-	 % 	\item I
-
-	 % \end{itemize}
 
 
 \end{enumerate}
-% \setcounter{equation}{0}
-% \begin{enumerate}[leftmargin=!,labelindent=5pt]
-%     \item Equations from parts 1 and 2
-%         \begin{enumerate}
-%             \item Write the equation of the surface in the form $z = f(x, y)$.
-%             \begin{flalign}
-%                 f(x)=(x+a)(x+b)\\
-%                 L' = {L}{\sqrt{1-\frac{v^2}{c^2}}} \\
-%                 \lim_{x\to 0}{\frac{e^x-1}{2x}}\\
-%                 \overset{\left[\frac{0}{0}\right]}{\underset{\mathrm{H}}{=}}\\
-%                 \lim_{x\to 0}{\frac{e^x}{2}}={\frac{1}{2}}
-%             \end{flalign}
-        
-%         \item Make inline math with dollar dollar y'all $woo$! Also centered equations. Tell LaTeX where you want to align equations with \&.
-%             \begin{align*}
-%                 f(x) &= x^2 \\
-%                 g(x) &= \frac{1}{x} \\
-%                 F(x) &= \int^a_b \frac{1}{3}x^3
-%             \end{align*}
-%         \end{enumerate}
-%     \newpage
-    
-%     % \item Plots for Part 3
-%     %     \begin{enumerate}
-%     %         \item Good times.
-%     %             \begin{figure}[H]
-%     %                 \centering
-%     %                 \includegraphics[width=15cm]{images/figure3.jpg}
-%     %                 \caption{A meme.}
-%     %                 \label{fig:3}
-%     %             \end{figure}
-%     %     \end{enumerate}
-% \end{enumerate}
 \end{document}
