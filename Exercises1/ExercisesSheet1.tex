@@ -351,6 +351,36 @@ Notation: here is a brief summary of the notation used in this worksheet.
 	if $0 \leq u \leq \sqrt{2\cdot exp(-v^2/u^2)}$, then accept $x = v/u$,
 	which will be a sample from $\tilde{\pi}(x)$.
 
+\end{enumerate}
+
+\newpage
+\section*{Exercise 5 (Rejection and Importance Sampling)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+
+	\item Let $A = \text{sample is accepted in step (a)}$.
+	$$ q^*(x) = p(X=x \mid X \in A) =
+	\frac{P(X \in A \mid X=x) p(X=x)}{p(X \in A)} = 
+	\frac{P(U \leq min\{1,\frac{\pi(x)}{q(x)\cdot c}\}\mid X=x)
+	q(x)}{P(X \in A)}
+	$$
+	$$ P(X \in A) = \int_\chi P(X \in A \mid X=x) q(x) dx =
+	\int_\chi min\{1,\frac{\pi(x)}{q(x)\cdot c}\}q(x) dx = Z_c
+	$$
+	Hence,
+	$$q^*(x) = \frac{ min\{1,\frac{\pi(x)}{q(x)\cdot c}\}q(x)}{Z_c}=
+	\frac{
+	\left(
+	P(U \leq 1) \cdot \mathbb{I}_{\{ \frac{w(x)}{c}\geq 1\}}(x) + 
+	\frac{\pi(x)}{q(x)c}
+	\mathbb{I}_{\{ \frac{w(x)}{c} < 1\}}(x) \right)q(x)}{Z_c}
+	$$
+	$$ q^*(x) =
+	\frac{
+	\mathbb{I}_{\{ \frac{w(x)}{c}\geq 1\}}(x)\cdot q(x) + 
+	\frac{\pi(x)}{c}
+	\mathbb{I}_{\{ \frac{w(x)}{c} < 1\}}(x)}{Z_c}
+	$$
 
 \end{enumerate}
+
 \end{document}
