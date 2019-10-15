@@ -381,6 +381,38 @@ Notation: here is a brief summary of the notation used in this worksheet.
 	\mathbb{I}_{\{ \frac{w(x)}{c} < 1\}}(x)}{Z_c}
 	$$
 
+	\item For $w*(x)=\pi(x)/q^*(x)$, we want to show that:
+	$$ E_{q^*}([w^*(X)]^2) = Z_c E_q(max\{ w(X), c\}w(X))$$
+
+	First:
+	$$ E_{q*}([w^*(X)]^2]) = \int_\chi w(x)^2\cdot q^*(x) dx =
+	\int_\chi \frac{\pi(x)^2}{q*(x)}dx = 
+	% \int_\chi \frac{\pi(x)^2 Z_c}{min\{1,w(x)/c\}q(x)}dx=
+	\int_\chi \frac{\pi(x)w(x)Z_c}{min\{1,w(x)/c\}}dx
+	$$
+	$$E_q(max\{ w(X), c\}w(X)) = \int_\chi w(x)q(x)max\{ w(X), c\}dx=
+	\int_\chi \pi(x)max\{ w(X), c\}dx$$
+
+	Now, note that:
+	\begin{itemize}
+		\item If $w(x)/c < 1 \therefore w(x)/min\{1,w(x)/c\} =
+		w(x)c/w(x)=c \therefore max\{ w(X), c\} = c $
+		\item If $w(x)/c \geq 1 \therefore w(x)/min\{1,w(x)/c\} =
+		w(x)\cdot 1=w(x) \therefore max\{ w(X), c\} = w(x) $
+	\end{itemize}
+	Hence,
+	$$w(x)/min\{1,w(x)/c\} =max\{ w(X), c\} $$
+
+	With that, we conclude:
+	$$ E_{q*}([w^*(X)]^2]) =
+	Z_c\int_\chi \frac{\pi(x)w(x)}{min\{1,w(x)/c\}}dx = 
+	Z_c\int_\chi \pi(x)max\{ w(X), c\}dx	$$
+
+	$$ E_{q*}([w^*(X)]^2]) = Z_cE_q(max\{ w(X), c\}w(X)) $$
+
+	\item Couldn't solve.
+
+
 \end{enumerate}
 
 \end{document}
