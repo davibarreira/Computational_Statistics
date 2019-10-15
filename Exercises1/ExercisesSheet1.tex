@@ -259,6 +259,38 @@ Notation: here is a brief summary of the notation used in this worksheet.
 	trigonometric functions (cossine and sine) which are computationally
 	expensie.
 
+\end{enumerate}
+
+\newpage
+\section*{Exercise 4 (Transformation)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+
+	\item Let $W = V/U$.
+	$$p_{W,U}(w,u) = p_{U,V}(u,v)
+	\left|\begin{array}{ccc}
+	\frac{\partial u}{\partial w} & \frac{\partial u}{\partial u}
+	\\
+	\frac{\partial v}{\partial w} & \frac{\partial v}{\partial u}
+	\end{array}\right|$$ 
+	$$p_{U,V}(u,v)
+	\left|\begin{array}{ccc}
+	\frac{-u}{w} & 1
+	\\
+	u & w
+	\end{array}\right| = 
+	p_{W,U}(w,u) = p_{U,V}(u,v)\cdot 2u $$
+
+	$$ p_W(w) = \int_{\mathbb{U}}p_{W,U}(w,u)du =
+	2\int_{\mathbb{U}}u\cdot p_{U,V}(u,v)du$$
+	Note that $p_{U,V}(u,v) = \frac{\mathbb{I}_G(u,v)}{Z_G}$, hence:
+
+	$$ p_W(w) =
+	\frac{2}{Z_G}\int_{\mathbb{U}}u\cdot \mathbb{I}_G(u,v)du = 
+	\frac{2}{Z_G}\int_{0}^{\sqrt{\tilde{\pi}(w)}}u du =
+	\frac{2}{Z_G}[u^2/2]\Bigr|_0^{\sqrt{\tilde{\pi}(w)}} =
+	\frac{\tilde{\pi}(w)}{Z_G} = \frac{\tilde{\pi}(w)}{Z_\pi} 
+	$$
+
 
 
 \end{enumerate}
