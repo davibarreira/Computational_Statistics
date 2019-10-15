@@ -412,6 +412,36 @@ Notation: here is a brief summary of the notation used in this worksheet.
 
 	\item Couldn't solve.
 
+	\item 
+	We want to show that
+	$\mathbb V_{q^*} (w^*(X)) \leq \mathbb V_q(w(X))$.
+
+	We will use the results from items (2) and (3), eventhough
+	item (3) was not properly proven.
+
+	First, using (3) we have:
+	$$ E_q(w(X)^2) = \frac{1}{c}E_q(w(X)^2\cdot c)
+	\geq \frac{1}{c}E_{q}(max\{ w(X), c\})w(X))E_q(min\{w(x),c\})$$
+	$$ E_q(w(X)^2) \geq
+	\frac{1}{c} \frac{E_{q^*}(w(X)^2)E_q(min\{w(x),c\})}{Z_c}$$
+
+	Note that:
+	\begin{itemize}
+		\item If $w(X) > c$, then $min\{w(X),c\}/c = w(X)/c$;
+		\item If $w(X) \leq c$, then $min\{w(X),c\}/c = 1$.
+	\end{itemize}
+	Hence, $min\{w(X),c\}/c = min\{1,w(x)/c\}$, which implie:
+
+	$$ \frac{E_q(min\{w(x),c\})}{c} =
+	\int_\chi min\{w(x),c\} \cdot \frac{q(x)}{c}dx = 
+	\int_\chi min\{1,w(x)/c\} \cdot q(x)dx = Z_c
+	$$
+
+	Therefore:
+	$$ E_q(w(X)^2) \geq
+	E_{q^*}(w(X)^2)$$
+
+
 
 \end{enumerate}
 
