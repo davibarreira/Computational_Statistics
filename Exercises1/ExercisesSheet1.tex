@@ -239,6 +239,25 @@ Notation: here is a brief summary of the notation used in this worksheet.
 	$$p_{Y,V}(y,\theta) =
 	\mathbb{I}_{[0,1]}(y)\frac{\mathbb{I}_{[0,2\pi]}(\theta)}{2\pi}$$
 
+	\item We have shown that $p_{Y,V}(y,\theta) =
+	\mathbb{I}_{[0,1]}(y)\frac{\mathbb{I}_{[0,2\pi]}(\theta)}{2\pi}$.
+	Since we can factor the functions of $Y$ and $V$, this means
+	that they are independent and that
+	$Y \sim Unif[0,1], V \sim Unif[0,2\pi]$.
+
+	Note that for $Z = \sqrt{-2\log(Y)}$:
+
+	$$ X_1 = Z\frac{U_1}{\sqrt Y} = Z cos(V) , X_2
+	= Z\frac{U_2}{\sqrt Y} = Z sin(V)$$
+
+	Therefore, we get the Box-Muller algorithm, hence the proof proceeds
+	accordingly to show that $X_1$ and $X_2$ are independent standard
+	normal distributions.
+
+
+	\item In this approach it is not necessery to calculate the 
+	trigonometric functions (cossine and sine) which are computationally
+	expensie.
 
 
 
