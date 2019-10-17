@@ -541,4 +541,115 @@ Notation: here is a brief summary of the notation used in this worksheet.
 
 \end{enumerate}
 
+\newpage
+\section*{Simulation Question (Rejection)}
+	The simulations were implemented in Julia 1.05. The code
+	was omitted when the question didn't specifically
+	request it. Still,
+	the code for all
+	simulations are in the Appendix.
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+    \item Estimating $\pi$.
+
+    $\pi = 3.14844$
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=15cm]{images/Ex1.png}
+            \caption{Blue dots outisde of circle and red dots inside}
+            \label{fig:1}
+        \end{figure}
+
+\newpage
+	\item Implementation of function for simulating Box-Muller.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=15cm]{images/Ex2.png}
+            \caption{In the left the histograms for the distributions
+            and in the right a scatter plot to highlight that X and
+            Y are independent}
+            \label{fig:2}
+        \end{figure}
+        \lstinputlisting
+        {code/Simulation_Exercise2.jl}
+
+
+	\newpage
+    \item Genetic Linkage model, generating histograms.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=10cm]{images/Ex3_1.png}
+            \caption{Histogram for 10.000 samples from
+            $p(\theta \mid y_1,...,y_4$ obtained by rejection sampling}
+            \label{fig:3}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=10cm]{images/Ex3_2.png}
+            \caption{Histogram of waiting time distribution before
+            acceptance}
+            \label{fig:4}
+        \end{figure}
+
+	\newpage
+	\item Implementation of function for Gaussian Mixture.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=10cm]{images/Ex4.png}
+            \caption{Histogram of mixture of Gaussians $N(0,1)$
+            and $N(5,2)$, with mixture parameter of 0.5}
+            \label{fig:5}
+        \end{figure}
+        \lstinputlisting
+        {code/Simulation_Exercise4.jl}
+
+	\newpage
+	\item Let $h(x) = cos(50x)+sin(20x)$
+	\begin{itemize}
+		\item The exact answer for the integral of $h(x)$ between
+		0 and 1 is 0.02435;
+
+		\item Using rejection sampling with an uniform distribution,
+		we are able to get an error of roughly 4.31\% for a sample of
+		size 1.000.000;
+
+		\item Using an importance sampling with $q ~ Beta(2,2)$ and
+		a sample size of 1.000.000, we get an error of roughly 0.62\%.
+
+
+	\end{itemize}
+
+\end{enumerate}
+
+
+\newpage
+\section*{Appendix (Simulation code)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+	\item Estimating $\pi$.
+        \lstinputlisting
+        {code/Simulation_Exercise1.jl}
+
+	\newpage
+	\item Box-Muller.
+        \lstinputlisting
+        {code/Simulation_Exercise2.jl}
+
+	\newpage
+	\item Genetic Linkage model.
+        \lstinputlisting
+        {code/Simulation_Exercise3.jl}
+
+	\newpage
+	\item Gaussian Mixture.
+        \lstinputlisting
+        {code/Simulation_Exercise4.jl}
+
+	\newpage
+	\item Rejection and Important Sampling.
+        \lstinputlisting
+        {code/Simulation_Exercise5.jl}
+
+
+\end{enumerate}
+
 \end{document}

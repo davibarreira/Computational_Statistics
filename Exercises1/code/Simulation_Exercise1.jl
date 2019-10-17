@@ -13,11 +13,12 @@ function calculate_pi(N = 1000)
             c[i] = 1
         end
     end
-    π = 4*S/N
-    return π,x,y,c
+    pi_hat = 4*S/N
+    return pi_hat,x,y,c
 end
 
 N = [100,1_000,10_000,100_000]
 v,x,y,c = calculate_pi(10_000)
 
 p = scatter(x,y,zcolor=c,markersize=2,markerstrokewidth = 0,c=:bluesreds,fmt =:png,legend=false)
+savefig(p,"./images/Ex1.png")
