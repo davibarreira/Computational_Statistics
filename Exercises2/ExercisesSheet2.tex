@@ -9,6 +9,7 @@
 \newcommand\userID{Davi Sales Barreira}
 \DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}}
 \newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}}
+\newcommand*{\QEDA}{\hfill\ensuremath{\blacksquare}}%
 
 \begin{document}
 % \textbf{\Large Worksheet completed with Octave.}
@@ -23,18 +24,100 @@
 	= \int_{\mathbb{R}^d} \phi(x+\theta) exp(\frac{-1}{2}\theta^T
 	\theta - \theta^T X)\pi(x)dx_1...dx_d = $$
 
-	$$ \propto \int_{\mathbb{R}^d} \phi(x+\theta) exp\left(\frac{-1}{2}
+	$$ =  \int_{\mathbb{R}^d} \phi(x+\theta) exp\left(\frac{-1}{2}
 	\theta^T
-	\theta - \theta^T X \right)exp(-x^T x / 2)dx_1...dx_d = $$
+	\theta - \theta^T X \right)exp(-x^T x / 2)\frac{1}{(\sqrt{2\pi})^d}
+	dx_1...dx_d = $$
 
 	$$ \int_{\mathbb{R}^d} \phi(x+\theta) exp\left(\frac{-1}{2}
-	(x-\theta)^T(x-\theta)\right)
+	(x-\theta)^T(x-\theta)\right)\frac{1}{(\sqrt{2\pi})^d}
 	dx_1...dx_d$$
 
 	Finally, making $x-\theta = y$,
 	$$ \int_{\mathbb{R}^d} \phi(y) exp\left(\frac{-1}{2}
-	(y)^T(y)\right)
+	(y)^T(y)\right)\frac{1}{(\sqrt{2\pi})^d}
 	dx_1...dx_d = E[\phi(Y)] $$
+	\qed
+
+
+	\item Let's show that
+	$$ \sigma^2(\theta) = E\left[ 
+	\phi^2(X) exp\left(
+		\frac{-1}{2}X^T X + \frac{1}{2}(X - \theta)^T(X - \theta)
+		\right)
+	\right] - (E[\phi(X)]^2$$
+
+	Note that, using the result in the previous item we have:
+	$$ \sigma^2(\theta) = V\left[
+	\phi(X + \theta)exp\left(
+		\frac{-1}{2}\theta^T \theta - \theta^T X
+		\right)
+	\right] = $$
+
+	$$
+	= E \left[ \left(
+	\phi(X + \theta)exp\left(
+		\frac{-1}{2}\theta^T \theta - \theta^T X
+		\right) \right ) ^ 2
+	\right] -
+	E \left[
+	\phi(X + \theta)exp\left(
+		\frac{-1}{2}\theta^T \theta - \theta^T X
+		\right)
+	\right] ^2  = 
+	$$
+
+	$$
+	= E \left[ \left(
+	\phi(X + \theta)exp\left(
+		\frac{-1}{2}\theta^T \theta - \theta^T X
+		\right) \right ) ^ 2
+	\right] -
+	E \left[ \phi(X)
+	\right] ^2
+	$$
+	Now, let's rearrange the first term in the variance.
+	$$ \sigma^2(\theta) = 
+	\int_{\mathbb{R}^d} \phi(x+\theta)^2 exp\left(
+	 - \theta^T
+	\theta - 2\theta^T X \right)exp(-x^T x / 2)\frac{1}{(\sqrt{2\pi})^d}
+	dx_1...dx_d = $$
+
+	Make $X + \theta = Y$, then:
+
+	$$
+	\int_{\mathbb{R}^d} \phi(y)^2 exp\left(
+	 - \theta^T
+	\theta - 2\theta^T (y-\theta) \right)exp(-(y-\theta)^T (y-\theta) / 2)
+	\frac{1}{(\sqrt{2\pi})^d}
+	dx_1...dx_d = $$
+
+	$$ = 
+	\int_{\mathbb{R}^d} \phi(y)^2 exp\left(
+	\frac{1}{2}(y-\theta)^T(y-\theta) - \frac{y^Ty}{2}
+	\right)
+	exp \left( \frac{-y^Ty}{2}
+	\right)
+	\frac{1}{(\sqrt{2\pi})^d}
+	dx_1...dx_d = $$
+	$$ 
+	= E\left[ 
+	\phi^2(X) exp\left(
+		\frac{-1}{2}X^T X + \frac{1}{2}(X - \theta)^T(X - \theta)
+		\right)
+	\right]
+	$$
+
+	Therefore, 
+	$$ \sigma^2(\theta) = E\left[ 
+	\phi^2(X) exp\left(
+		\frac{-1}{2}X^T X + \frac{1}{2}(X - \theta)^T(X - \theta)
+		\right)
+	\right] - (E[\phi(X)]^2 $$ \qed
+
+
+
+	\item 
 
 \end{enumerate}
 
