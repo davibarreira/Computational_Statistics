@@ -1,0 +1,41 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{./preamble}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Edit These for yourself
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\course{Computational Statistics}
+\newcommand\hwnumber{2}
+\newcommand\userID{Davi Sales Barreira}
+\DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}}
+\newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}}
+
+\begin{document}
+% \textbf{\Large Worksheet completed with Octave.}
+
+\section*{Exercise 1 (Monte Carlo for Gaussians)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+	\item Let's prove that $E[\phi(X)] = E[\phi(X+\theta)
+	exp(\frac{-1}{2}\theta^T\theta - \theta^T X)]$.
+	% $$ E[\phi(X)] = \int_{\mathbb{R}^d} \phi(x) \pi(x) dx_1...dx_d$$
+
+	$$ E[\phi(X+\theta)exp(\frac{-1}{2}\theta^T\theta - \theta^T X)]
+	= \int_{\mathbb{R}^d} \phi(x+\theta) exp(\frac{-1}{2}\theta^T
+	\theta - \theta^T X)\pi(x)dx_1...dx_d = $$
+
+	$$ \propto \int_{\mathbb{R}^d} \phi(x+\theta) exp\left(\frac{-1}{2}
+	\theta^T
+	\theta - \theta^T X \right)exp(-x^T x / 2)dx_1...dx_d = $$
+
+	$$ \int_{\mathbb{R}^d} \phi(x+\theta) exp\left(\frac{-1}{2}
+	(x-\theta)^T(x-\theta)\right)
+	dx_1...dx_d$$
+
+	Finally, making $x-\theta = y$,
+	$$ \int_{\mathbb{R}^d} \phi(y) exp\left(\frac{-1}{2}
+	(y)^T(y)\right)
+	dx_1...dx_d = E[\phi(Y)] $$
+
+\end{enumerate}
+
+\end{document}
