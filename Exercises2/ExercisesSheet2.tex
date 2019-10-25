@@ -117,7 +117,56 @@
 
 
 
-	\item 
+	\item Let's calculate $\nabla ^2\sigma^2(\theta) = H(\theta)$.
+	$$
+	\frac{\partial \sigma^2(\theta)}{\partial \theta_i} =
+	\frac{E[\phi(X)^2exp(\frac{-X^T X+(X-\theta)^T(X-\theta)}{2} )]}
+	{\partial \theta_i} =
+	$$
+	$$
+	= \int_\chi \phi(x)^2 exp(-x^Tx)
+	\frac{\partial}{\partial \theta_i}
+	exp \left(\frac{(x-\theta)^T(x-\theta)}{2}\right)
+	\frac{1}{(\sqrt{2\pi})^d}
+	dx = 
+	$$
+	$$
+	= \int_\chi \phi(x)^2 exp(-x^Tx)
+	(\theta_i - x_i)
+	exp \left(\frac{(x-\theta)^T(x-\theta)}{2}\right)
+	\frac{1}{(\sqrt{2\pi})^d}
+	dx
+	$$
+
+	We calculated the gradient, let's now calculate the second derivative.
+	First the diagonal.
+	$$
+	\frac{\partial}{\partial \theta_i}\int_\chi \phi(x)^2 exp(-x^Tx)
+	(\theta_i - x_i)
+	exp \left(\frac{(x-\theta)^T(x-\theta)}{2}\right)
+	\frac{1}{(\sqrt{2\pi})^d}
+	dx =
+	$$
+	$$
+	 = E[\phi(X)^2] + \int_\chi \phi(x)^2 exp(-x^T x)
+	exp\left(\frac{(x - \theta)^T(x - \theta)}{2}\right)
+	(x_i-\theta_i)(x_i - \theta_i)dx
+	$$
+
+	Now the rest:
+	$$
+	\frac{\partial}{\partial \theta_j}\int_\chi \phi(x)^2 exp(-x^Tx)
+	(\theta_i - x_i)
+	exp \left(\frac{(x-\theta)^T(x-\theta)}{2}\right)
+	\frac{1}{(\sqrt{2\pi})^d}
+	dx =
+	$$
+	$$
+	 = \int_\chi \phi(x)^2 exp(-x^T x)
+	exp\left(\frac{(x - \theta)^T(x - \theta)}{2}\right)
+	(x_i-\theta_i)(x_j - \theta_j)dx
+	$$
+	\qed
 
 \end{enumerate}
 
