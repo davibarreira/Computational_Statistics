@@ -324,4 +324,35 @@ $$
 
 \end{enumerate}
 
+\newpage
+\section*{Exercise 4 (Gibbs Sampler)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+\item 
+$$
+\pi(x \mid y) = \frac{\pi(x,y)}{\pi(y)} \propto
+\frac{exp((x-1)^2(y-2)^2)/2}{(y-2)^{-1}} \sim N(1,(y-2)^{-2})
+$$
+Now, follow the same procedure to for $\pi(y \mid x)$, hence:
+$$
+\pi(y\mid x) \sim N(2, (x-1)^{-2})
+$$
+\qed
+
+\item The sampler doesn't make sense, because:
+$$
+\int_{-\infty}^{\infty}
+\int_{-\infty}^{\infty}
+\pi(x,y)dxdy \propto
+\int_{-\infty}^{\infty}
+\int_{-\infty}^{\infty}
+exp((x-1)^2(y-2)^2)/2 dx dy =
+$$
+$$ = 
+\int_{-\infty}^{\infty}
+\sqrt{2\pi}((y-2)^{-2})^{\frac{1}{2}}dy = \infty
+$$
+\qed
+
+\end{enumerate}
+
 \end{document}
