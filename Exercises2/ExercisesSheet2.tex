@@ -204,6 +204,72 @@
 	$$ E[\phi(X)^2(\theta -X)exp(-\theta^TX)] = 0$$
 	\qed
 
+	\item Couldn't solve.
 \end{enumerate}
+
+\newpage
+\section*{Exercise 2 (Metropolis-Hastings)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+\item First, generate $Y \sim q(X_t, \cdot)$. 
+With probability equal to $\alpha(x,y)$, make $X_{t+1} = Y$, and with
+probability $1 - \sum_{z \in \mathbb Z} \alpha(x,z)q(x,z)$ make
+$X_{t+1} = X_t$. Then, repeat the process.
+
+\item We want to show that $\pi(x)T(x,y) = \pi(y)T(y,x)$.
+For $y=x$, this is trivial. Now, assume $y\neq x$. Therefore:
+$$
+\pi(x)T(x,y) = \pi(x)\alpha(x,y)q(x,y) =
+\pi(x)\frac{\gamma(x,y)}{\pi(x)q(x,y)} = \gamma(y,x) =
+$$
+$$
+= 
+\pi(y)\frac{\gamma(y,x)q(y,x)}{\pi(y)q(y,x)} = \pi(y)T(y,x)
+$$
+\qed
+
+
+\item Using Metropolis-Hastings, one has:
+$$ \alpha = min \left\{ 
+1, \frac{\pi(x^*)q(x_{t-1}) \mid x^*}{\pi(x_{t-1})q(x^*\mid x_{t-1})}
+\right\}$$
+So, $\alpha(x,y) = \frac{\gamma(x,y)}{\pi(x)q(x,y)}$, for
+$x = x_{t-1}, x^* = y, q(x,y) = q(x^* \mid x_{t-1})$.
+
+Make:
+$$ \gamma(x,y) = max \left\{ 
+\pi(y)q(y,x),\pi(x)q(x,y)
+\right\}$$
+$$ \therefore $$
+$$\alpha(x,y) =
+\frac{max\{ \pi(y)q(y,x), \pi(x)q(x,y)\}}{\pi(x)q(x,y)} = 
+$$
+$$ = min \left\{ 
+1, \frac{\pi(y)q(y,x)}{\pi(x)q(x,y)}
+\right\}$$
+\qed
+
+\item First, let's rewrite the estimate as a function of $Y$.
+Note that $Y^{(k)} = X^{(\tau_k)}$, hence:
+$$
+\frac{1}{\tau_k - 1} \sum_{t=1}^{\tau_k-1} \phi(X^{(t)}) =
+\frac{1}{k - 1} \sum_{t=1}^{k-1} \phi(Y^{(t)})
+$$
+Now, let's prove it has the transition desired transition kernel.
+$$
+K(x,y) = P(Y^{(k)}= y \mid Y^{(k-1)}=x) =
+P(X^{(\tau_k)}=y \mid X^{(\tau_k -1)}=x)
+$$
+
+The event $X^{(\tau_k)}=y \mid X^{(\tau_k -1)}=x$ is equivalent
+to selecting $y$ starting from $x$ and then accepting $y$, hence
+$q(x,y)\cdot \alpha(x,y) = P(X^{(\tau_k)}=y \mid X^{(\tau_k -1)}=x)$.
+
+Therefore, $P(Y^{(k)}= y \mid Y^{(k-1)}=x) =
+\frac{q(x,y)\alpha(x,y)}{\sum_{z \in \mathbb Z}\alpha(x,z)q(x,y)} $.
+\qed
+
+
+\end{enumerate}
+
 
 \end{document}
