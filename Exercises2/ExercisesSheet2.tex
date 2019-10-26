@@ -150,7 +150,8 @@
 	$$
 	 = E[\phi(X)^2] + \int_\chi \phi(x)^2 exp(-x^T x)
 	exp\left(\frac{(x - \theta)^T(x - \theta)}{2}\right)
-	(x_i-\theta_i)(x_i - \theta_i)dx
+	(x_i-\theta_i)(x_i - \theta_i)
+	\frac{1}{(\sqrt{2\pi})^d}dx
 	$$
 
 	Now the rest:
@@ -164,8 +165,43 @@
 	$$
 	 = \int_\chi \phi(x)^2 exp(-x^T x)
 	exp\left(\frac{(x - \theta)^T(x - \theta)}{2}\right)
-	(x_i-\theta_i)(x_j - \theta_j)dx
+	(x_i-\theta_i)(x_j - \theta_j)
+	\frac{1}{(\sqrt{2\pi})^d}dx
 	$$
+	\qed
+
+	\item We already know that the Hessian is positive definite. Hence,
+	we only need to show that the derivative is equal to zero at
+	$\theta^*$.
+
+	$$\nabla \sigma^2(\theta) =
+	\int_\chi \phi(x)^2 exp(-x^Tx)(\theta - x)
+	exp \left(\frac{-(x-\theta)^T(x-\theta)}{2} \right)
+	\frac{1}{(\sqrt{2\pi})^d}dx = 
+	$$
+	$$
+	= 	
+	\int_\chi \phi(x)^2 exp(-x^Tx)(\theta - x)
+	exp \left(\frac{-(x-\theta)^T(x-\theta)}{2} \right)
+	\frac{1}{(\sqrt{2\pi})^d}dx = 
+	$$
+	$$
+	= 
+	\int_\chi \phi(x)^2 (\theta - x)
+	exp \left(\frac{-x^Tx}{2} - \theta^Tx
+	+ \frac{-\theta^T\theta}{2}\right)
+	\frac{1}{(\sqrt{2\pi})^d}dx = 
+	$$
+	$$
+	= 
+	\int_\chi \phi(x)^2 (\theta - x)
+	exp(-\theta^Tx)exp(-x^Tx/2)
+	\frac{exp(\theta^T\theta/2)}{(\sqrt{2\pi})^d}dx =  0
+	$$
+	Finally, since the last term doens't depend on $X$, we can eliminate
+	it, obtaining:
+
+	$$ E[\phi(X)^2(\theta -X)exp(-\theta^TX)] = 0$$
 	\qed
 
 \end{enumerate}
