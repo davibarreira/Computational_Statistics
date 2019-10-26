@@ -268,6 +268,33 @@ Therefore, $P(Y^{(k)}= y \mid Y^{(k-1)}=x) =
 \frac{q(x,y)\alpha(x,y)}{\sum_{z \in \mathbb Z}\alpha(x,z)q(x,y)} $.
 \qed
 
+\item Let's show that
+$
+\tilde{\pi}(x)K(x,y) = \tilde{\pi}(y)K(y,x)
+$.
+
+$$
+\frac{\pi(x)m(x)}{\sum_{z \in \mathbb{Z}}\pi(z)m(z)} \cdot 
+\frac{q(x,y)\alpha(x,y)}{\sum_{z \in \mathbb{Z}}\alpha(x,z)q(x,z)}
+=
+\frac{\pi(x)q(x,y)\alpha(x,y)}
+{\sum_{z \in \mathbb{Z}}\pi(z)m(z)}
+$$
+Note that $\alpha(x,y) =
+\frac{\gamma(x,y)}{\pi(x)q(x,y)} =
+\frac{\gamma(y,x)}{\pi(x)q(x,y)}$. Therefore:
+$$
+\frac{\pi(x)q(x,y)\gamma(x,y)}
+{\alpha(x,z)q(x,z)\sum_{z \in \mathbb{Z}}\pi(z)m(z)} = 
+\frac{\gamma(y,x)}
+{\sum_{z \in \mathbb{Z}}\pi(z)m(z)} =
+\frac{\alpha(y,x)\pi(y)q(y,x)}{\sum_{z \in \mathbb{Z}}\pi(z)m(z)}=
+\tilde{\pi}(y)K(y,x)
+$$
+\qed
+
+\item Couldn't solve.
+
 
 \end{enumerate}
 
