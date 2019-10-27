@@ -468,6 +468,7 @@ The above distribution is discrete with finite support, hence,
 one can calculate the value for each $z_i$ and then normalize
 by the sum, obtaining a probability mass function from which
 values can be sampled.
+\qed
 
 \item
 $$
@@ -500,6 +501,7 @@ $$
 
 Since the distribution is a Dirichlet, it is known how to
 sample from it.
+\qed
 
 \item
 $$
@@ -551,6 +553,40 @@ $$\mu_j \mid X, Z, p,\sigma^2
 {n_k\sigma^2_k}
 , [n_k\sigma_k^{-2} + \tau^{-2}]^{-1}
 \right)$$
+\qed
+
+\item 
+
+$$
+P(\sigma_k ^2 \mid X, Z, p, \mu) \propto
+P(X \mid Z, p, \mu, \sigma_k^2) P(Z \mid p) \pi(\sigma_k^2)
+\propto
+$$
+
+$$
+\frac{p_k^{n_k} exp\left(
+	\frac{-\sum_{i=1}^{n_k}(x_i - \mu_k)^2}{2\sigma^2_k}
+\right)}
+{\sigma_k^{n_k}}
+\sigma_k^{-\alpha -1}exp(-\beta \sigma_k^{-2}) \propto
+$$
+$$
+exp \left( 
+\left [
+	\frac{-\sum_{i=1}^{n_k}(x_i - \mu_k)^2}{2}
+	- \beta
+\right] \sigma_k^{-2}
+\right)
+\sigma_k^{-\alpha -1 - \frac{n_k}{2}} \sim
+\text{Inverse Gamma}\left(
+\alpha + \frac{n_k}{2}, \beta +
+\frac{\sum_{i=1}^{n_k}(x_i - \mu_k)^2}{2}
+\right)
+$$
+
+To sample from the Inverse Gamma, just sample $Y$ from a Gamma with these
+parameters and then do $Y^{-1}$.
+\qed
 
 
 \end{enumerate}
