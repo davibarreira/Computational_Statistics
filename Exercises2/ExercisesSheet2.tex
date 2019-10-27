@@ -355,4 +355,84 @@ $$
 
 \end{enumerate}
 
+\newpage
+\section*{Exercise 5 (Gibbs Sampler)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+\item  
+$$
+p(Z_i = z \mid \theta_1, \theta_2) = p(X_i + Y_i = z \mid
+\theta_1,\theta_2) =
+\sum_{y = 0}^{z}p(X_i+Y_i = z \mid Y_i = y, \theta_1,\theta_2)
+p(Y_i = y \mid \theta_2) =
+$$
+$$ = 
+\sum_{y = 0}^{z}p(X_i = z - y \mid \theta_1 )p(Y_i = y\mid\theta_2) =
+\sum_{y = 0}^{z}\binom{m_i}{z-y}
+\theta_1^{z - y}(1-\theta_1)^{m_i - (z-y)}
+\binom{n_i}{y}
+\theta_2^{y}(1-\theta_2)^{n_i - y} \therefore
+$$
+$$
+p(Z_1,...,Z_T \mid \theta_1, \theta_2) = 
+\prod_{i=1}^{T}\left ( 
+\sum_{y_i = 0}^{z_i}\binom{m_i}{z_i-y_i}
+\theta_1^{z_i - y_i}(1-\theta_1)^{m_i - (z_i-y_i)}
+\binom{n_i}{y_i}
+\theta_2^{y_i}(1-\theta_2)^{n_i - y_i}
+\right)
+$$
+\qed
+
+\item To sample from
+$
+p(\theta_1,\theta_2 \mid Z_1,...,Z_T)
+$
+we will use auxiliary varibles $X_{1:T}, Y_{1:T}$. 
+$$
+p(\theta_1 \mid \theta_2, X_{1:T},Y_{1:T},Z_{1:T}) \propto 
+\pi(\theta_1 \mid \theta_2, Y_{1:T})
+p(X_{1:T} \mid \theta_1,\theta_2, Y_{1:T}) \propto
+$$
+$$
+\propto 
+\pi(\theta_1)p(X_{1:T}\mid \theta_1) \propto
+\theta_1^{\sum x_i}(1-\theta_1)^{\sum m_i - x_i} \therefore
+$$
+
+$$
+\theta_1 \mid X_{1:T} \sim Beta \left(
+1 + \sum_{i=1}^T x_i, 1 + \sum_{i=1}^T m_i - x_i
+\right)
+$$
+
+Similarly to $\theta_2$:
+$$
+\theta_2 \mid Y_{1:T} \sim Beta \left(
+1 + \sum_{i=1}^T y_i, 1 + \sum_{i=1}^T n_i - y_i
+\right)
+$$
+Finally,
+$$
+p(X_{1:T},Y_{1:T} \mid \theta_1, \theta_2, Z_{1:T}) \propto
+\prod_{i=1}^{T}\binom{m_i}{x_i}\theta_1^{x_i}(1-\theta_1)^{m_i - x_i}
+\binom{n_i}{y_i}\theta_2^{y_i}(1-\theta_2)^{n_i - y_i}
+\mathbb{I}_{\{
+x_i + y_i = z_i
+\}}
+$$
+Note that we can now use a Gibbs sampler by first
+sampling $\theta_1^{(0)}$
+and  $\theta_2^{(0)}$ from independent $U_{[0,1]}$. Secondly, we can sample
+$X^{(0)}$ and $Y^{(0)}$ from $p(X_{1:T},Y_{1:T}
+\mid \theta_1^{(0)}, \theta_2^{(0)}, Z_{1:T})$,
+since the distribution found is discrete with finite 
+support, hence, we can calculate the probabilty for each possible value
+of $X^{(0)}$ and $Y^{(0)}$.
+With the values for the auxiliary variables, we 
+sample $\theta_1^{(1)}$ and $\theta_2^{(1)}$ from their posteriors, which is possible
+since they are Beta distributions. Again we sample $X,Y$ using the
+updated $\theta_1,\theta_2$ and repeat the process.
+
+\end{enumerate}
+
 \end{document}
