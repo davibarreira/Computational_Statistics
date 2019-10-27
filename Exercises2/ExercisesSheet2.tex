@@ -432,6 +432,126 @@ With the values for the auxiliary variables, we
 sample $\theta_1^{(1)}$ and $\theta_2^{(1)}$ from their posteriors, which is possible
 since they are Beta distributions. Again we sample $X,Y$ using the
 updated $\theta_1,\theta_2$ and repeat the process.
+\qed
+
+\end{enumerate}
+
+\newpage
+\section*{Simulation question (Normal mixture model - Gibbs sampling)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+\item  
+$$
+P(X_i = x_i \mid p,\mu, \sigma^2) =
+\sum_{z_i = 1}^{k}P(X_i = x_i \mid Z_i = z_i, p, \mu, \sigma^2)
+P(Z_i = z_i \mid p,\mu, \sigma^2) = 
+$$
+$$ = 
+\sum_{z_i = 1}^{k}\varphi(x_i; \mu_{z_i}, \sigma^2_{z_i})p_{z_i}
+$$
+\qed
+
+\item 
+
+$$
+P(Z_i = z_i \mid X_i, p, \mu, \sigma^2) \propto
+P(X_i \mid Z_i, p, \mu, \sigma^2)P(Z_i \mid, p, \mu, \sigma^2)
+\propto
+$$
+$$
+\varphi(x_i; \mu_{z_i},\sigma^2_{z_i}) p_{z_i} \propto
+exp \left(
+\frac{-(x-\mu_{z_i})^2}{2\sigma^2_{z_i}}
+\right) p_{z_i}
+$$
+
+The above distribution is discrete with finite support, hence,
+one can calculate the value for each $z_i$ and then normalize
+by the sum, obtaining a probability mass function from which
+values can be sampled.
+
+\item
+$$
+P(p \mid X, Z, \mu, \sigma^2) \propto
+P(X,Z \mid \mu, \sigma^2, p) P(p \mid \mu, \sigma^2) \propto
+P(X \mid Z, \mu, \sigma^2, p)P(Z \mid \mu, \sigma^2, p)\pi(p)
+$$
+Note that
+$P(X \mid Z, \mu, \sigma^2, p) \propto
+\prod_{i=1}^N\phi(x_i;\mu_i,\sigma^2_i)$ is not a function
+$p$, so it can be thrown as a constant. Also, 
+$P(Z \mid \mu, \sigma^2, p) = P(Z \mid p)$
+therefore:
+$$
+P(p \mid X, Z, \mu, \sigma^2) \propto
+\pi(p) \prod_{i=1}^N p_{z_i} \propto
+\prod_{j=1}^K p_j^{\gamma_j -1}\prod_{i=1}^N p_{z_i} 
+$$
+
+Let $n_j = \sum_{i=1}^N z_i \mathbb I_{z_i = j}$, so $n_j$ is
+the number of times the $j$-th Gaussian has being picked. Finally:
+
+$$
+P(p \mid X, Z, \mu, \sigma^2) \propto
+\prod_{j=1}^K p_j^{\gamma_j -1 + n_j} 
+$$
+$$
+p \mid X, Z, \mu, \sigma^2 \sim Dirichlet
+$$
+
+Since the distribution is a Dirichlet, it is known how to
+sample from it.
+
+\item
+$$
+P(\mu \mid X, Z, p, \sigma^2) \propto
+P(X,Z \mid \mu, p, \sigma^2)P(\mu \mid p, \sigma^2) \propto
+$$
+$$
+P(X \mid Z, \mu, p, \sigma^2)P(Z \mid \mu, p, \sigma^2)\pi(\mu) \propto
+$$
+$$
+\left(
+\prod_{j=1}^N exp \left(
+	\frac{-(x_j - \mu_{z_j})^2 p_{z_j}}{2\sigma^2_{z_j}}
+	\right)
+\right)
+\prod_{k=1}^K exp \left(
+	\frac{-(\mu_k - m)^2}{2\tau^2}
+\right) \propto
+$$
+$$
+\prod_{k=1}^K
+p_k^{n_k}
+exp \left(
+	\frac{-\sum_{i=1}^{n_k}(x_i^{(k)} - \mu_k)^2}{2\sigma_j^2} -
+	\frac{(\mu_k - m)^2}{2\tau^2}
+\right)
+$$
+$$\therefore$$
+
+$$
+P(\mu_k \mid X, Z, p, \sigma^2) \propto
+exp \left(
+	\frac{-\sum_{i=1}^{n_k}(x_i^{(k)} - \mu_k)^2}{2\sigma_k^2} -
+	\frac{(\mu_k - m)^2}{2\tau^2}
+\right)
+$$
+First, note that $x_i^{(k)}$ is the $i$-th value from $X$ such
+that $z = k$, in other words, it is the $i$-th sampled value that came
+from the $k$-th Gaussian distribution.
+
+Now, that the above equation is the same as updating each
+Normal
+prior distribution $\mu_k \sim N(m, \tau^2)$ and
+$X^{(k)} \mid \mu_k \sim N(\mu_k, \sigma^2_k)$ with $\sigma^2_k$ known.
+Therefore, let $\bar{x_k}$ be the sample average, then:
+$$\mu_j \mid X, Z, p,\sigma^2
+\sim N\left(
+\frac{n_k \sigma_k ^{-2}\bar{x_k} + \tau^{-2}\mu_k}
+{n_k\sigma^2_k}
+, [n_k\sigma_k^{-2} + \tau^{-2}]^{-1}
+\right)$$
+
 
 \end{enumerate}
 
