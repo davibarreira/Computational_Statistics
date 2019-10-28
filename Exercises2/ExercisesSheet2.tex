@@ -542,14 +542,14 @@ First, note that $x_i^{(k)}$ is the $i$-th value from $X$ such
 that $z = k$, in other words, it is the $i$-th sampled value that came
 from the $k$-th Gaussian distribution.
 
-Now, that the above equation is the same as updating each
+Note that the above equation is the same as updating each
 Normal
 prior distribution $\mu_k \sim N(m, \tau^2)$ and
 $X^{(k)} \mid \mu_k \sim N(\mu_k, \sigma^2_k)$ with $\sigma^2_k$ known.
 Therefore, let $\bar{x_k}$ be the sample average, then:
 $$\mu_j \mid X, Z, p,\sigma^2
 \sim N\left(
-\frac{n_k \sigma_k ^{-2}\bar{x_k} + \tau^{-2}\mu_k}
+\frac{n_k \sigma_k ^{-2}\bar{x_k} + \tau^{-2}m}
 {n_k\sigma^2_k}
 , [n_k\sigma_k^{-2} + \tau^{-2}]^{-1}
 \right)$$
@@ -587,6 +587,28 @@ $$
 To sample from the Inverse Gamma, just sample $Y$ from a Gamma with these
 parameters and then do $Y^{-1}$.
 \qed
+
+\item To sample $(y_1,...,y_N)$ from a mixture model,
+use $p = (p_1,...,p_k)$ to sample $Z = (z_1,...,z_k)$. Then,
+sample each $y_i$ from $N(\mu_{z_i},\sigma^2_{z_i})$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/Ex6.png}
+    \caption{Histogram for 30 samples from
+    Gaussian Mixture model with
+    $\mu = (-5, 0, 5),\sigma^2 =(1,2,3), p = (0.5,0.2,0.3)$.
+    }
+    \label{fig:1}
+\end{figure}
+	% \item Sample $p^{(0)}$ from a Dirichlet with parameters $\gamma$;
+	% \item Sample each $\mu_k^{(0)} \sim N(m, \tau)$ and each
+	% $(\sigma_k^2)^{(0)} \sim IG(\alpha, \beta)$;
+	% \item Sample each $Z_i^{(0)} \mid p^{(0)}$, which is
+	% $P(Z_i^{(0)} = k \mid p^{(0)}) = p_k^{(0)}$,
+	% for values in $\{1,...,K\}$;
+	% \item Sample each $X_i^{(0)} \mid Z_i^{(0)} = z_i,
+	% p^{(0)},\mu^{(0)}, (\sigma^2)^{(0)} \sim
+	% N (\mu_{z_i}^{(0)}, (\sigma_{z_i}^2)^{(0)})$
 
 
 \end{enumerate}
