@@ -459,9 +459,9 @@ P(X_i \mid Z_i, p, \mu, \sigma^2)P(Z_i \mid, p, \mu, \sigma^2)
 $$
 $$
 \varphi(x_i; \mu_{z_i},\sigma^2_{z_i}) p_{z_i} \propto
-exp \left(
+\frac{exp \left(
 \frac{-(x-\mu_{z_i})^2}{2\sigma^2_{z_i}}
-\right) p_{z_i}
+\right)}{\sqrt{2\pi\sigma^2_{z_i}}} p_{z_i}
 $$
 
 The above distribution is discrete with finite support, hence,
