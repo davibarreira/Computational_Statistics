@@ -249,11 +249,36 @@ $$ = min \left\{
 \qed
 
 \item First, let's rewrite the estimate as a function of $Y$.
-Note that $Y^{(k)} = X^{(\tau_k)}$, hence:
+Note that $Y^{(k)} = X^{(\tau_k)}$ and our estimate is:
+$$
+\frac{1}{\tau_k - 1} \sum_{t=1}^{\tau_k-1} \phi(X^{(t)})
+$$
+$Y$ is the sequence of values accepted in the M-H algorithm, while
+$X$ is the sequence containing the whole sequence, for example:
+$$
+(X_t) = [0,1,1,1,2,3,3,1]
+$$
+$$
+(Y_t) = [0,1,2,3,1]
+$$
+
+$$
+\tau_1 = 1 \implies Y^{(1)} = X^{(1)} = 0
+$$
+$$
+\tau_3 = 5 \implies Y^{(2)} = X^{(5)} = 2
+$$
+Hence, our estimator is the average of
+$\phi(X)$ until the time $\tau_k - 1$. To write it in terms of $Y$,
+each value of $Y^{(k)}$ must be multiplied by the number of times
+the chain stayed in that value. Therefore:
 $$
 \frac{1}{\tau_k - 1} \sum_{t=1}^{\tau_k-1} \phi(X^{(t)}) =
-\frac{1}{k - 1} \sum_{t=1}^{k-1} \phi(Y^{(t)})
+\frac{1}{\tau_k - 1} \sum_{t=1}^{k-1} \phi(Y^{(t)})
+(\tau_{t+1} - \tau_{t})
 $$
+
+
 Now, let's prove it has the transition desired transition kernel.
 $$
 K(x,y) = P(Y^{(k)}= y \mid Y^{(k-1)}=x) =
@@ -262,10 +287,11 @@ $$
 
 The event $X^{(\tau_k)}=y \mid X^{(\tau_k -1)}=x$ is equivalent
 to selecting $y$ starting from $x$ and then accepting $y$, hence
-$q(x,y)\cdot \alpha(x,y) = P(X^{(\tau_k)}=y \mid X^{(\tau_k -1)}=x)$.
+$q(x,y)\cdot \alpha(x,y) \propto P(X^{(\tau_k)}=y \mid X^{(\tau_k -1)}=x)$.
 
-Therefore, $P(Y^{(k)}= y \mid Y^{(k-1)}=x) =
-\frac{q(x,y)\alpha(x,y)}{\sum_{z \in \mathbb Z}\alpha(x,z)q(x,y)} $.
+Therefore, we just normalize to get the proper equation
+$$P(Y^{(k)}= y \mid Y^{(k-1)}=x) =
+\frac{q(x,y)\alpha(x,y)}{\sum_{z \in \mathbb Z}\alpha(x,z)q(x,y)}$$
 \qed
 
 \item Let's show that
@@ -320,7 +346,32 @@ $$
 $$
 \qed
 
-\item Couldn't solve.
+\item Note that $X_t = \alpha X^* + (1-\alpha)X_{t-1}$, where
+$X^* \sim q(\cdot)$ and $\alpha$ is the probability of acceptance
+. Hence:
+$$
+Cov(X_1,X_2) = Cov(X_1,\alpha X^* + (1-\alpha)X_{1})=
+Cov(X_1,\alpha X^*) + (1-\alpha)Cov(X_1,X_1)
+$$
+Since the value of $X^*$ is not correlated with the previous step,
+we get:
+$$Cov(X_1,X_2) = (1-\alpha) \mathbb V(X_1)$$
+Using recursion, we have:
+$$Cov(X_1,X_k) = (1-\alpha)^{k-1} \mathbb V(X_1)$$
+$$
+\sigma_X^2 = \mathbb V(X_1) + 2\sum_{k=2}^\infty Cov(X_1,X_k)=
+\mathbb V(x_1) + 2\mathbb V(X_1)
+\sum_{k=2}^\infty (1-\alpha)^{k-1}=
+$$
+
+$$
+=
+\mathbb V(x_1) + 2\mathbb V(X_1)
+\sum_{m=1}^\infty (1-\alpha)^{m}=
+\mathbb V(x_1) + \frac{2\mathbb V(X_1)}{\alpha}
+$$
+\qed
+
 
 \end{enumerate}
 
