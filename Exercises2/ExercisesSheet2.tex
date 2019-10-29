@@ -597,10 +597,10 @@ from the $k$-th Gaussian distribution.
 
 Note that the above equation is the same as updating each
 Normal
-prior distribution $\mu_k \sim N(m, \tau^2)$ and
+prior distribution $\mu_k \sim N(m, \tau^2)$ with likelihood
 $X^{(k)} \mid \mu_k \sim N(\mu_k, \sigma^2_k)$ with $\sigma^2_k$ known.
 Therefore, let $\bar{x_k}$ be the sample average, then:
-$$\mu_j \mid X, Z, p,\sigma^2
+$$\mu_k \mid X, Z, p,\sigma^2
 \sim N\left(
 \frac{n_k \sigma_k ^{-2}\bar{x_k} + \tau^{-2}m}
 {\tau^{-2} + n_k\sigma^{-2}_k}
