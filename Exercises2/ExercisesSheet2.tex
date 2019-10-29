@@ -219,7 +219,7 @@ $X_{t+1} = X_t$. Then, repeat the process.
 For $y=x$, this is trivial. Now, assume $y\neq x$. Therefore:
 $$
 \pi(x)T(x,y) = \pi(x)\alpha(x,y)q(x,y) =
-\pi(x)\frac{\gamma(x,y)}{\pi(x)q(x,y)} = \gamma(y,x) =
+\pi(x)\frac{\gamma(x,y)}{\pi(x)q(x,y)}q(x,y) = \gamma(y,x) =
 $$
 $$
 = 
@@ -230,12 +230,13 @@ $$
 
 \item Using Metropolis-Hastings, one has:
 $$ \alpha = min \left\{ 
-1, \frac{\pi(x^*)q(x_{t-1}) \mid x^*}{\pi(x_{t-1})q(x^*\mid x_{t-1})}
+1, \frac{\pi(x^*)q(x_{t-1} \mid x^*)}{\pi(x_{t-1})q(x^*\mid x_{t-1})}
 \right\}$$
-So, $\alpha(x,y) = \frac{\gamma(x,y)}{\pi(x)q(x,y)}$, for
+% So, $\alpha(x,y) = \frac{\gamma(x,y)}{\pi(x)q(x,y)}$, for
+Note that 
 $x = x_{t-1}, x^* = y, q(x,y) = q(x^* \mid x_{t-1})$.
 
-Make:
+Now make:
 $$ \gamma(x,y) = max \left\{ 
 \pi(y)q(y,x),\pi(x)q(x,y)
 \right\}$$
@@ -254,7 +255,8 @@ $$
 \frac{1}{\tau_k - 1} \sum_{t=1}^{\tau_k-1} \phi(X^{(t)})
 $$
 $Y$ is the sequence of values accepted in the M-H algorithm, while
-$X$ is the sequence containing the whole sequence, for example:
+$X$ is the sequence containing all values, even when the chain
+didn't move. For example:
 $$
 (X_t) = [0,1,1,1,2,3,3,1]
 $$
@@ -266,7 +268,7 @@ $$
 \tau_1 = 1 \implies Y^{(1)} = X^{(1)} = 0
 $$
 $$
-\tau_3 = 5 \implies Y^{(2)} = X^{(5)} = 2
+\tau_3 = 5 \implies Y^{(3)} = X^{(5)} = 2
 $$
 Hence, our estimator is the average of
 $\phi(X)$ until the time $\tau_k - 1$. To write it in terms of $Y$,
@@ -279,14 +281,14 @@ $$
 $$
 
 
-Now, let's prove it has the transition desired transition kernel.
+Now, let's prove it has the desired transition kernel.
 $$
 K(x,y) = P(Y^{(k)}= y \mid Y^{(k-1)}=x) =
 P(X^{(\tau_k)}=y \mid X^{(\tau_k -1)}=x)
 $$
 
 The event $X^{(\tau_k)}=y \mid X^{(\tau_k -1)}=x$ is equivalent
-to selecting $y$ starting from $x$ and then accepting $y$, hence
+to moving from $x$ to $y$ and then accepting $y$, hence
 $q(x,y)\cdot \alpha(x,y) \propto P(X^{(\tau_k)}=y \mid X^{(\tau_k -1)}=x)$.
 
 Therefore, we just normalize to get the proper equation
