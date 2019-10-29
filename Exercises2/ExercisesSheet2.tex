@@ -637,7 +637,6 @@ $$
 
 To sample from the Inverse Gamma, just sample $Y$ from a Gamma with these
 parameters and then do $Y^{-1}$.
-\qed
 
 \item To sample $(y_1,...,y_N)$ from a mixture model,
 use $p = (p_1,...,p_k)$ to sample $Z = (z_1,...,z_k)$. Then,
@@ -645,22 +644,72 @@ sample each $y_i$ from $N(\mu_{z_i},\sigma^2_{z_i})$.
 \begin{figure}[H]
     \centering
     \includegraphics[width=10cm]{images/Ex6.png}
-    \caption{Histogram for 30 samples from
+    \caption{Histogram for 500 samples from
     Gaussian Mixture model with
-    $\mu = (-5, 0, 5),\sigma^2 =(1,2,3), p = (0.5,0.2,0.3)$.
+    $\mu = (-2, 2),\sigma^2 =(1,1), p = (0.7,0.3)$.
     }
     \label{fig:1}
 \end{figure}
-	% \item Sample $p^{(0)}$ from a Dirichlet with parameters $\gamma$;
-	% \item Sample each $\mu_k^{(0)} \sim N(m, \tau)$ and each
-	% $(\sigma_k^2)^{(0)} \sim IG(\alpha, \beta)$;
-	% \item Sample each $Z_i^{(0)} \mid p^{(0)}$, which is
-	% $P(Z_i^{(0)} = k \mid p^{(0)}) = p_k^{(0)}$,
-	% for values in $\{1,...,K\}$;
-	% \item Sample each $X_i^{(0)} \mid Z_i^{(0)} = z_i,
-	% p^{(0)},\mu^{(0)}, (\sigma^2)^{(0)} \sim
-	% N (\mu_{z_i}^{(0)}, (\sigma_{z_i}^2)^{(0)})$
 
+\item The ideia of empirical bayes
+is to use the maximum-likelihood estimates
+to set the parameters of the priors. We will only use the
+sample average to set $m$, the location parameter for the
+prior distribution of $\mu$. For the other hyperparameters,
+we will chose them as to make the priors non-informative. Therefore:
+$$\mu_k \sim N(m = -0.86,\tau = 100)$$
+$$\sigma^2_k \sim IG(\alpha = 0.01,\beta = 0.01)$$
+$$p \sim Dirichlet(\gamma_1 =1,\gamma_2 = 1)$$
+
+\item The following steps were used in the implementation of the Gibbs
+sampler:
+
+\begin{itemize}
+	\item Sample the initial values from the priors;	
+	\subitem Sample $p^{(0)}$ from a Dirichlet with parameters $\gamma$;
+	\subitem Sample each $\mu_k^{(0)} \sim N(m, \tau)$ and each
+$(\sigma_k^2)^{(0)} \sim IG(\alpha, \beta)$;
+
+\item Enter loop and start sampling from the full conditionals;
+	\subitem Sample each $Z_i^{(t)} \mid
+	p^{(t-1)},X_i,\mu^{(t-1)},(\sigma^2)^{(t-1)}$;
+	\subitem Sample $p^{(t)} \mid Z^{(t)}$
+	\subitem Sample $\mu^{(t)} \mid Z^{(t)},(\sigma^2)^{(t-1)},X$
+	\subitem Sample $(\sigma^2)^{(t)}
+	\mid Z^{(t)},(\mu)^{(t)},X$
+\end{itemize}
+
+Below we show the results of the simulation:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/Ex8_1.png}
+    \caption{Posterior distribution of $\mu$.
+    }
+    \label{fig:2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/Ex8_2.png}
+    \caption{Posterior distribution of $p$.
+    }
+    \label{fig:3}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/Ex8_3.png}
+    \caption{Posterior distribution of $\sigma^2$.
+    }
+    \label{fig:4}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/Ex8_4.png}
+    \caption{Trace plot of the sampler for each parameter
+    }
+    \label{fig:4}
+\end{figure}
 
 \end{enumerate}
 
