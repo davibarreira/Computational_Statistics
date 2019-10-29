@@ -22,11 +22,11 @@
 
 	$$ E[\phi(X+\theta)exp(\frac{-1}{2}\theta^T\theta - \theta^T X)]
 	= \int_{\mathbb{R}^d} \phi(x+\theta) exp(\frac{-1}{2}\theta^T
-	\theta - \theta^T X)\pi(x)dx_1...dx_d = $$
+	\theta - \theta^T x)\pi(x)dx_1...dx_d = $$
 
 	$$ =  \int_{\mathbb{R}^d} \phi(x+\theta) exp\left(\frac{-1}{2}
 	\theta^T
-	\theta - \theta^T X \right)exp(-x^T x / 2)\frac{1}{(\sqrt{2\pi})^d}
+	\theta - \theta^T x \right)exp(-x^T x / 2)\frac{1}{(\sqrt{2\pi})^d}
 	dx_1...dx_d = $$
 
 	$$ \int_{\mathbb{R}^d} \phi(x+\theta) exp\left(\frac{-1}{2}
@@ -36,7 +36,7 @@
 	Finally, making $x-\theta = y$,
 	$$ \int_{\mathbb{R}^d} \phi(y) exp\left(\frac{-1}{2}
 	(y)^T(y)\right)\frac{1}{(\sqrt{2\pi})^d}
-	dx_1...dx_d = E[\phi(Y)] $$
+	dy_1...dy_d = E[\phi(Y)] $$
 	\qed
 
 
@@ -45,7 +45,7 @@
 	\phi^2(X) exp\left(
 		\frac{-1}{2}X^T X + \frac{1}{2}(X - \theta)^T(X - \theta)
 		\right)
-	\right] - (E[\phi(X)]^2$$
+	\right] - E[\phi(X)]^2$$
 
 	Note that, using the result in the previous item we have:
 	$$ \sigma^2(\theta) = V\left[
@@ -90,7 +90,7 @@
 	 - \theta^T
 	\theta - 2\theta^T (y-\theta) \right)exp(-(y-\theta)^T (y-\theta) / 2)
 	\frac{1}{(\sqrt{2\pi})^d}
-	dx_1...dx_d = $$
+	dy_1...dy_d = $$
 
 	$$ = 
 	\int_{\mathbb{R}^d} \phi(y)^2 exp\left(
@@ -99,7 +99,7 @@
 	exp \left( \frac{-y^Ty}{2}
 	\right)
 	\frac{1}{(\sqrt{2\pi})^d}
-	dx_1...dx_d = $$
+	dy_1...dy_d = $$
 	$$ 
 	= E\left[ 
 	\phi^2(X) exp\left(
@@ -120,7 +120,7 @@
 	\item Let's calculate $\nabla ^2\sigma^2(\theta) = H(\theta)$.
 	$$
 	\frac{\partial \sigma^2(\theta)}{\partial \theta_i} =
-	\frac{E[\phi(X)^2exp(\frac{-X^T X+(X-\theta)^T(X-\theta)}{2} )]}
+	\frac{\partial E[\phi(X)^2exp(\frac{-X^T X+(X-\theta)^T(X-\theta)}{2} )]}
 	{\partial \theta_i} =
 	$$
 	$$
@@ -201,7 +201,7 @@
 	Finally, since the last term doens't depend on $X$, we can eliminate
 	it, obtaining:
 
-	$$ E[\phi(X)^2(\theta -X)exp(-\theta^TX)] = 0$$
+	$$ E[\phi(X)^2(\theta^* -X)exp(-\theta^{*T}X)] = 0$$
 	\qed
 
 	\item Couldn't solve.
@@ -511,7 +511,7 @@ $$
 $$
 \varphi(x_i; \mu_{z_i},\sigma^2_{z_i}) p_{z_i} \propto
 \frac{exp \left(
-\frac{-(x-\mu_{z_i})^2}{2\sigma^2_{z_i}}
+\frac{-(x_i-\mu_{z_i})^2}{2\sigma^2_{z_i}}
 \right)}{\sqrt{2\pi\sigma^2_{z_i}}} p_{z_i}
 $$
 
