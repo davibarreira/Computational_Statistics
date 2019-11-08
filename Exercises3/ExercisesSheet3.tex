@@ -1,0 +1,71 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{./preamble}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Edit These for yourself
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\course{Computational Statistics}
+\newcommand\hwnumber{2}
+\newcommand\userID{Davi Sales Barreira}
+\DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}}
+\newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}}
+\newcommand*{\QEDA}{\hfill\ensuremath{\blacksquare}}%
+
+\begin{document}
+% \textbf{\Large Worksheet completed with Octave.}
+
+\section*{Exercise 1 (Gibbs Sampler)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+\item First, let $X' = X^{(t)}$, $X = X^{(t-1)}$, $Y' = Y^{(t)}$ and
+$Y = Y^{(t-1)}$
+. Then:
+$$
+K^S((x,y),(x',y')) = \pi_{Y\mid X}(y' \mid x) \pi_{X \mid Y}(x' \mid y')
+$$
+
+Then, to show that it is not reversible:
+$$
+\pi(x,y)K((x,y),(x',y')) = \pi(x,y) \pi(y' \mid x) \pi(x' \mid y')
+$$
+$$ 
+\pi(x',y')K((x',y'),(x,y)) = \pi(x',y') \pi(y \mid x') \pi(x \mid y)
+$$
+$$
+\therefore
+$$
+$$
+\frac{\pi(x,y)K((x,y),(x',y'))}
+{\pi(x',y')K((x',y'),(x,y))} =
+\frac{\pi(x,y) \pi(y' \mid x) \pi(x' \mid y')}
+{\pi(x',y') \pi(y \mid x') \pi(x \mid y)} = 
+\frac{\pi(y)\pi(y' \mid x)}
+{\pi(y')\pi(y \mid x')} \neq 1
+$$
+Therefore, it is not reversible.
+\qed
+
+\item First, the kernel expression:
+$$
+K(x, x') = \int \pi(y' \mid x) \pi(x' \mid y') dy'
+$$
+
+Now, let's show that it is $\pi_X$-reversible.
+$$
+\pi(x')K(x', x) = \pi(x') \int \pi(y \mid x') \pi(x \mid y) dy
+=
+\int \pi(x') \frac{\pi(y,x')}{\pi(x')}\pi(x\mid y) dy =
+$$
+$$
+=
+\int \pi(y,x') \pi(x \mid y) dy = 
+\int \pi(y,x') \frac{\pi(x,y)}{\pi(y)}dy =
+\int \pi(x,y) \frac{\pi(x',y)}{\pi(y)}dy =
+$$
+$$
+= \pi(x)\int \pi(y \mid x) \pi(x' \mid y)  dy = \pi(x)K(x,x')
+$$
+\qed
+
+\end{enumerate}
+
+\end{document}
