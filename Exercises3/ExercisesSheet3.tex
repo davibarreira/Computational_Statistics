@@ -106,10 +106,43 @@ $$
 \newpage
 \section*{Exercise 2 (Metropolis-within-Gibbs)}
 \begin{enumerate}[leftmargin=!,labelindent=5pt]
-\item 
+\item Note that:
 $$
-q(x_1' \mid x_1,x_2)
+\alpha(X_1 \mid X_1^{(t-1)}, X_2^{(t-2)}) =
+min \left\{
+1,
+\frac{\pi(X_1' , X_2^{(t-1)})\pi(X_1^{(t-1)}\mid X_2^{(t-1)})}
+{\pi(X_1^{(t-1)} , X_2^{(t-1)})\pi(X_1'\mid X_2^{(t-1)})}
+\right\} = min \{1, 1\}
 $$
+Therefore, we get a systematic scan Gibbs sampler, where one
+samples $X^t_1 \sim \pi(\cdot \mid X_2^{(t-1)})$, then we accept,
+since $\alpha=1$, and finally sample $X_2^t \sim
+\pi(\cdot \mid X_1^{(t)})$.
+\qed
+
+\item First, let's write the kernel. Since we only accept or reject
+the variabel $X_1$, the kernel is the M-H kernel multiplied by the
+probability density function of $\pi_{X_2\mid X_1}(X_2\mid X_1)$. Let
+$X_1^t, X_2^t = Y_1, Y_2$:
+$$
+K((x_1,x_2),(y_1, y_2)) =
+(q(y_1 \mid x_1, x_2)\alpha(y_1 \mid x_1,x_2)) +
+(1 - a(y_1 \mid x_1, x_2))\delta_{y_1}(x_1)\pi_{(Y_2\mid Y_1}(y_2 \mid y_1)
+$$
+Note that $\alpha = 1$. With that, we show that the kernel is invarant:
+
+$$
+\int \int
+K((x_1,x_2),(y_1, y_2))\pi(x_1,x_2) dx_1 dx_2 =
+\int \int \pi(y_1 \mid x_2)\pi(y_2 \mid y_1) \pi(x_1, x_2)dx_1 dx_2 =
+$$
+$$=
+\int \pi(y_1 \mid x_2) \pi(y_2 \mid y_1) \pi(x_2) dx_2 =
+\int \pi(y_1, x_2)\pi(y_2 \mid y_1) dx_2 = \pi(y_1, y_2)
+$$
+\qed
+
 \end{enumerate}
 
 \end{document}
