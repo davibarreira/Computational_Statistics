@@ -66,6 +66,47 @@ $$
 $$
 \qed
 
+\item First, the kernel expression is:
+$$
+K^R((x,y),(x',y')) = 
+\pi(y' \mid x)\pi(x' \mid y')0.5 + \pi(x' \mid y)\pi(y' \mid x')0.5
+$$
+Note that it is half the density of sampling first from $y$ plus 
+half the density of sampling first from $x$.
+
+Now, let's show that it is reversible:
+$$
+\frac{\pi(x,y)[\pi(y' \mid x)\pi(x' \mid y')0.5 +
+\pi(x' \mid y)\pi(y' \mid x')0.5]}
+{
+\pi(x',y')[\pi(y \mid x')\pi(x \mid y')0.5 +
+\pi(x \mid y')\pi(y \mid x)0.5 ]
+} = 
+$$
+$$ =
+\frac{
+	\frac{\pi(y' \mid x)}
+	{\pi(y')}
+	+
+	\frac{\pi(x' \mid y)}
+	{\pi(x')}
+}
+{
+	\frac{\pi(y \mid x')}
+	{\pi(y)}
+	+
+	\frac{\pi(x \mid y')}
+	{\pi(x)}
+} = 
+1
+$$
+\qed
+\end{enumerate}
+
+\newpage
+\section*{Exercise 2 (Metropolis-within-Gibbs)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+\item 
 \end{enumerate}
 
 \end{document}
