@@ -256,7 +256,38 @@ $$
 Since we the density function $f(v \mid x)$ is unknown, then we cannot 
 evaluate this $\alpha_{MH}$.
 
-\item
+\item Let's show that the chain is invariant:
+$$
+\int \int \pi(x,v) g(y \mid v) f(\theta \mid y)
+\cdot min \left \{
+1, \frac{\pi(y)g(x \mid \theta)}{\pi(x)g(y\mid v)}
+\right\} dv dx = 
+$$
+If $\alpha =1 $, then
+
+$$
+\int \pi(v) g(y \mid v) f(\theta \mid y)
+\cdot 1
+dv = f(\theta \mid y) \pi(y) = \bar\pi(y, \theta)
+$$
+
+Else:
+$$
+\int \int \pi(x,v) g(y \mid v) f(\theta \mid y)
+\cdot 
+\frac{\pi(y)g(x \mid \theta)}{\pi(x)g(y\mid v)}
+dv dx = 
+\int \pi(y) f(\theta \mid y) g(x \mid \theta) dx =
+$$
+$$
+= \pi(y) f(\theta \mid y) = \bar\pi(y, \theta)
+$$
+
+Finally, $\bar\pi(y) = \int \bar\pi(y,\theta) d\theta = 
+\int \pi(y) f(\theta \mid y) d\theta = \pi(y)$.
+
+\qed
+
 
 
 \end{enumerate}
