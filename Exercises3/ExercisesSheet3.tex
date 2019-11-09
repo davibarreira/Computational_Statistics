@@ -288,6 +288,27 @@ Finally, $\bar\pi(y) = \int \bar\pi(y,\theta) d\theta =
 
 \qed
 
+\item First, note that $min(U,V) = \frac{U+V -\mid U - V \mid}{2}$, hence:
+$$
+E \left[
+	\frac{U + V - \mid U - V \mid}{2}
+\right] = 
+\frac{E[U] + E[V] - E[\mid U - V \mid] }{2}
+$$
+Without loss of generality, assume $E[U] \geq E[V]$. Then:
+$$
+E[\mid U - V \mid] \geq E[U] - E[V]
+$$
+$$
+\therefore
+$$
+$$
+\frac{E[U] + E[V] - E[\mid U - V \mid] }{2} \leq
+\frac{E[U] + E[V] - E[U]- E[V]}{2} = E[V]
+$$
+\qed
+
+\item Couldn't solve.
 
 
 \end{enumerate}
