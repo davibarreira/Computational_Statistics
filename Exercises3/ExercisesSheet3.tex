@@ -1,11 +1,12 @@
 \documentclass[12pt,letterpaper]{article}
 \usepackage{./preamble}
+\usepackage{amsmath}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Edit These for yourself
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand\course{Computational Statistics}
-\newcommand\hwnumber{2}
+\newcommand\hwnumber{3}
 \newcommand\userID{Davi Sales Barreira}
 \DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}}
 \newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}}
@@ -350,4 +351,113 @@ it implies that thinning doesn't improve the results, in other words,
 it doesn't lower the variance.
 \end{enumerate}
 
+\newpage
+\section*{Simulation question (Probit model - Gibbs and M-H)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+\item 
+In the probit model we have the similar situation that we have for the linear regression,
+hence:
+$$
+Y = \beta_0 + \beta_1 x_1 + ... + \beta_n x_n
+$$
+But $Y = 0$ or $1$, so we have to transform the linear equation to fall between 0 and 1.
+To do that, we use the cdf for the normal distribution.
+$$
+Y = \phi(\beta_0 + \beta_1 x_1 + ... + \beta_n x_n)
+$$
+Note that the cdf will guarantee a value between 0 and 1.
+Thus, we can generate synthetic dataset $Y$ by choosing values
+for a $beta$ than sampling $X$ from a multivariate normal with
+chosen parameters, and finally,
+applying the probit formulat to get $Y$. For this simulation,
+we set 
+$$
+\beta =
+\begin{bmatrix}
+1 \\ -1
+\end{bmatrix}
+, X \sim MVN \left ( \mu = 
+\begin{bmatrix}
+0 \\ 0
+\end{bmatrix}
+, \Sigma = 
+\begin{bmatrix}
+1 & 0 \\ 0 & 2
+\end{bmatrix}
+\right)
+$$
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/Ex6_1.png}
+    \caption{Synthetic dataset Y of size 50.
+    $\beta = [1, -1], X \sim MVN(
+    \mu, \Sigma)$.
+    }
+    \label{fig:1}
+\end{figure}
+
+\item 
+
+$$\pi(\beta) = N (0, B)$$
+
+For a $p \times p$ covariance matrix B, the posterior is given by
+$$
+p(\beta \mid Y) \propto \pi(\beta)\prod^n_{i=1}\phi(X_i^T\beta)^{y_i}(1-\phi X_i^T \beta)^{1-y_i}
+$$
+$$
+B = \begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix}
+$$
+
+We then write a function taking
+$\beta$ as argument and returning the log-posterior density function evaluated at $\beta$.
+
+Below we show the contour-plot
+of the posterior, which is obtained by transforming back
+the log-posterior.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=10cm]{images/Ex6_2.png}
+    \caption{ Contour plot for 
+    $p(\beta \mid Y)$
+    }
+    \label{fig:2}
+\end{figure}
+
+\item Running Metropolis-Hasting algorithm with 10.000 steps.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/Ex6_3.png}
+    \caption{ Left showing each step of the chain over the distribution.
+    Right showing 2D Histogram of the M-H simulation (removing the burnin).
+    }
+    \label{fig:3}
+\end{figure}
+\item The trucated normal distributions were implemented to
+be used in the Gibbs sampler.
+
+\item Running Gibbs sampler with 10.000 samples.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/Ex6_4.png}
+    \caption{ Left: Showing each step of the chain over the distribution.
+    Right: 2D Histogram of the Gibbs sampler.
+    }
+    \label{fig:4}
+\end{figure}
+
+\item Finally, we compare the performance of each model by evaluating
+their autocorrelations.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{images/Ex6_6.png}
+    \caption{ Comparison of autocorrelation.
+    }
+    \label{fig:5}
+\end{figure}
+
+\end{enumerate}
 \end{document}
