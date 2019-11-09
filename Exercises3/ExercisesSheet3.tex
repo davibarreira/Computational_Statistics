@@ -240,6 +240,24 @@ $$
 Therefore, the modified kernel provides estimators
 with lower assymptotic variance.
 \qed
+\end{enumerate}
+
+\newpage
+\section*{Exercise 4 (Metropolis-Hastings)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+\item Let $Y = X'$, $\theta = v'$:
+$$q(y \mid x) = \int f(v \mid x) g(y \mid v) dv$$
+$$
+\alpha_{MH} = min \left \{ 1,
+\frac{\pi(y)\int f(v \mid y) g(x \mid v) dv}
+{\pi(x)\int f(v \mid x) g(y \mid v) dv}
+\right \}
+$$
+Since we the density function $f(v \mid x)$ is unknown, then we cannot 
+evaluate this $\alpha_{MH}$.
+
+\item
+
 
 \end{enumerate}
 
