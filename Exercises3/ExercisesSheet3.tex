@@ -152,12 +152,62 @@ $$
 reversible. If $x \neq y$, then:
 $$
 T(x,y) \pi(x) = \alpha(x,y)q(x,y)\pi(x) =
-\frac{\gamma(x,y)}{\pi(x)}\pi(x) = \gamma(y,x) =
+\frac{\gamma(x,y)}{\pi(x)q(x,y)}q(x,y)\pi(x) = \gamma(y,x) =
 $$
 $$
 = \alpha(y,x) q(y,x) \pi(y) = T(y,x) \pi(y)
 $$
 \qed
+
+\item First, let's verify that it is the M-H algorithm:
+$$
+\alpha = \frac{\gamma(x,y)}{\pi(x)q(x,y)} = 
+\frac{min \{  \pi(x) q(x,y), \pi(y) q(y,x) \}}
+{\pi(x) q(x,y)} =
+min \left \{
+	1, \frac{\pi(y)q(y,x)}
+	{\pi(x)q(x,y)}
+\right\}
+$$
+
+Now, let's give the Barker acceptance ratio:
+$$
+\alpha(x,y) = \frac{\pi(x)q(x,y)\pi(y)q(y,x)}
+{\pi(x)q(x,y)+\pi(y)q(y,x)} =
+\frac{\pi(y)q(y,x)}{\pi(x)q(x,y) + \pi(y)q(y,x)}
+$$
+\qed
+
+\item Let's consider $x \neq y$. Note that:
+$$
+\frac{1}{\pi(x)q(x,y)}
+\geq
+\frac{1}{\pi(x)q(x,y) + \pi(y)q(y,x)}
+$$
+$$
+\therefore
+$$
+$$
+\frac{\pi(y)q(y,x)q(x,y)}{\pi(x)q(x,y)}
+\geq
+\frac{q(x,y)\pi(y)q(y,x)}{\pi(x)q(x,y) + \pi(y)q(y,x)}
+$$
+
+Finally, if $\frac{\pi(y)q(y,x)q(x,y)}{\pi(x)q(x,y)} \leq 1$, then:
+
+$$
+min\left \{
+1,
+\frac{\pi(y)q(y,x)q(x,y)}{\pi(x)q(x,y)}
+\right\}
+\geq
+\frac{q(x,y)\pi(y)q(y,x)}{\pi(x)q(x,y) + \pi(y)q(y,x)}
+$$
+
+We conclude that the M-H algorithm provides estimators with
+lower asymptotic variance than Barker's algorithm.
+
+
 \end{enumerate}
 
 \end{document}
