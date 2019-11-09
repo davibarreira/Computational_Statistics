@@ -145,4 +145,19 @@ $$
 
 \end{enumerate}
 
+\newpage
+\section*{Exercise 3 (Metropolis-Hastings and Gibbs Sampler)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+\item  Let's show that the chain is reversible. If $x=y$, it is trivially
+reversible. If $x \neq y$, then:
+$$
+T(x,y) \pi(x) = \alpha(x,y)q(x,y)\pi(x) =
+\frac{\gamma(x,y)}{\pi(x)}\pi(x) = \gamma(y,x) =
+$$
+$$
+= \alpha(y,x) q(y,x) \pi(y) = T(y,x) \pi(y)
+$$
+\qed
+\end{enumerate}
+
 \end{document}
