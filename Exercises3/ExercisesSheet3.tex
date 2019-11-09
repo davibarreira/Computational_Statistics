@@ -309,7 +309,43 @@ $$
 \qed
 
 \item Couldn't solve.
+\end{enumerate}
 
+\newpage
+\section*{Exercise 4 (Metropolis-Hastings)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+\item
+$$
+E[y^2] + \alpha^2E[Z^2] + 2\alpha |E[YZ]| \geq 0
+$$
+Therefore, we have a second degree polynomial in $\alpha$ that is
+greater or equal than 0. Hence, we know that $b^2 - 4ac \leq 0$, which
+means:
+$$
+(2 E[YZ])^2 - 4E[Z^2]E[Y^2] \leq 0 \therefore
+E[Z^2]E[Y^2] \geq |E[YZ]|
+$$
+\qed
+
+\item Using the inequality from the previouse question, we have:
+$$
+Cov(Y,Z) = E[(Y-E[Y])(Z - E[Z])] \therefore
+Cov(Y,Z)^2 \leq E[(Y-E[Y])^2]E[(Z - E[Z])^2]
+$$
+$$
+\therefore
+$$
+$$
+\sqrt{Var(Y)Var(Z)} \geq Cov(Y,Z)
+$$
+Since $Var(Y) = Var(Z)$ by hypothesis, then:
+
+$$
+Var(Y) \geq Cov(Z,Y)
+$$
+\qed
+
+\item Couldn't solve.
 
 \end{enumerate}
 
