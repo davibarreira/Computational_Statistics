@@ -194,13 +194,26 @@ $$
 \frac{q(x,y)\pi(y)q(y,x)}{\pi(x)q(x,y) + \pi(y)q(y,x)}
 $$
 
-Finally, if $\frac{\pi(y)q(y,x)q(x,y)}{\pi(x)q(x,y)} \leq 1$, then:
+If $\frac{\pi(y)q(y,x)q(x,y)}{\pi(x)q(x,y)} \leq 1$, then:
 
 $$
 min\left \{
 1,
-\frac{\pi(y)q(y,x)q(x,y)}{\pi(x)q(x,y)}
-\right\}
+\frac{\pi(y)q(y,x)}{\pi(x)q(x,y)}
+\right\}q(x,y)
+\geq
+\frac{q(x,y)\pi(y)q(y,x)}{\pi(x)q(x,y) + \pi(y)q(y,x)}
+$$
+Now, if 
+$\frac{\pi(y)q(y,x)q(x,y)}{\pi(x)q(x,y)} > 1$:
+$$ 
+1
+\geq
+\frac{\pi(y)q(y,x)}{\pi(x)q(x,y) + \pi(y)q(y,x)} \therefore
+min\left \{
+1,
+\frac{\pi(y)q(y,x)}{\pi(x)q(x,y)}
+\right\}q(x,y)
 \geq
 \frac{q(x,y)\pi(y)q(y,x)}{\pi(x)q(x,y) + \pi(y)q(y,x)}
 $$
@@ -210,7 +223,7 @@ lower asymptotic variance than Barker's algorithm.
 
 \item First, since the probability of chosing and index is the same
 for both algorithms, it is not important when showing which
-kernel is bigger of equal than the other. Now, consider $x \neq y$.
+kernel is bigger than the other. Now, consider $x \neq y$.
 
 Modified: $T(x_k^{(t-1)}, x_k^*) =
 min\left\{
@@ -223,22 +236,27 @@ Standard: $T(x_k^{(t-1)}, x_k^*) = \pi(x_k^* \mid x_{-k})$
 Let's consider both cases for the Modified kernel, hence, when
 $\alpha = 1$ and
 $\alpha =
-\frac{1- \pi(x_k^{(t-1)} \mid x_{-k})}{1 -  \pi(x_k^* \mid x_{-k})} $
-First, since $1- \pi(x_k^{(t-1)} \mid x_{-k})\leq 1$, we have:
+\frac{1- \pi(x_k^{(t-1)} \mid x_{-k})}{1 -  \pi(x_k^* \mid x_{-k})} $.
+
+First, note that $1- \pi(x_k^{(t-1)} \mid x_{-k})\leq 1$.
+
+In the case of $\alpha = 1$, we have:
 $$
 1 \cdot\frac{\pi(x_k^* \mid x_{-k})}{1- \pi(x_k^{(t-1)} \mid x_{-k})}
 \geq
 \pi(x_k^* \mid x_{-k})
 $$
 
-Also:
+In the case of $\alpha = 
+\frac{1- \pi(x_k^{(t-1)} \mid x_{-k})}{1 -  \pi(x_k^* \mid x_{-k})} $,
+we have $\alpha \geq 1$, therefore:
 $$
 \frac{1- \pi(x_k^{(t-1)} \mid x_{-k})}{1 -  \pi(x_k^* \mid x_{-k})}
 \cdot\frac{\pi(x_k^* \mid x_{-k})}{1- \pi(x_k^{(t-1)} \mid x_{-k})}
 \geq
 \pi(x_k^* \mid x_{-k})
 $$
-Therefore, the modified kernel provides estimators
+We conclude that the modified kernel provides estimators
 with lower assymptotic variance.
 \qed
 \end{enumerate}
@@ -259,10 +277,11 @@ evaluate this $\alpha_{MH}$.
 
 \item Let's show that the chain is invariant:
 $$
+\int \int K((x,v),(y,\theta)) \pi(x,v) dv dx= 
 \int \int \pi(x,v) g(y \mid v) f(\theta \mid y)
 \cdot min \left \{
 1, \frac{\pi(y)g(x \mid \theta)}{\pi(x)g(y\mid v)}
-\right\} dv dx = 
+\right\} dv dx
 $$
 If $\alpha =1 $, then
 
