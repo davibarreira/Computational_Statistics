@@ -1,0 +1,42 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{./preamble}
+\usepackage{amsmath}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Edit These for yourself
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\course{Computational Statistics}
+\newcommand\hwnumber{4}
+\newcommand\userID{Davi Sales Barreira}
+\DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}}
+\newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}}
+\newcommand*{\QEDA}{\hfill\ensuremath{\blacksquare}}%
+
+\begin{document}
+% \textbf{\Large Worksheet completed with Octave.}
+
+\section*{Exercise 1 (Kalma Filter)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+\item 
+$$
+f(X_t \mid X_{t-1}) \sim N(\phi X_{t-1}, \sigma_v^2)
+$$
+$$
+g(Y_t \mid X_{t}) \sim N(\phi X_{t}, \sigma_w^2)
+$$
+
+\item Note that $X_{t+1} = \phi X_t + V_t$. Then:
+$$
+X_{t+1} \mid Y_{1:t} = \phi X_t + V_t \mid Y_{1:t}
+$$
+Therefore, since
+$X_t \mid Y_{1:t} \sim N(m_{t\mid t}, \sigma^2_{t\mid t})$ and
+$V_t \sim N(0, \sigma_v^2)$, we have the sum of normals, hence:
+$$
+X_{t+1} \mid Y_{1:t} \sim N(m_{t\mid t}, \sigma_v^2 +
+\phi^2 \sigma^2_{t\mid t})
+$$
+
+
+\end{enumerate}
+\end{document}
