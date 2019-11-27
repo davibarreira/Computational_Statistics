@@ -1,0 +1,26 @@
+\begin{thebibliography}{1}
+
+\bibitem{Jabot2016}
+F.~Jabot and T.~Lohier.
+\newblock Non-random correlation of species dynamics in tropical tree
+  communities.
+\newblock {\em Oikos}, 125(12):1733--1742, 2016.
+
+\bibitem{Marin2012}
+J.-M. Marin, P.~Pudlo, C.~P. Robert, and R.~J. Ryder.
+\newblock Approximate bayesian computational methods.
+\newblock {\em Statistics and Computing}, 22(6):1167--1180, Nov 2012.
+
+\bibitem{McKinley2018}
+T.~J. McKinley, I.~Vernon, I.~Andrianakis, N.~McCreesh, J.~E. Oakley, R.~N.
+  Nsubuga, M.~Goldstein, and R.~G. White.
+\newblock Approximate bayesian computation and simulation-based inference for
+  complex stochastic epidemic models.
+\newblock {\em Statist. Sci.}, 33(1):4--18, 02 2018.
+
+\bibitem{Tavare505}
+S.~Tavar{\'e}, D.~J. Balding, R.~C. Griffiths, and P.~Donnelly.
+\newblock Inferring coalescence times from dna sequence data.
+\newblock {\em Genetics}, 145(2):505--518, 1997.
+
+\end{thebibliography}

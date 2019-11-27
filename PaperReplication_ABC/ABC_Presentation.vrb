@@ -1,0 +1,10 @@
+\frametitle{Origin}
+
+  ABC methods are known as likelihood-free techniques, thus are
+  a useful approach in problems that the likelihood is intractable.
+  \begin{itemize}
+    \item Coalecent models in population genetics \cite{Tavare505};
+    \item Species dynamics \cite{Jabot2016};
+    \item Real-world model of HIV transmission \cite{McKinley2018}.
+  \end{itemize}
+

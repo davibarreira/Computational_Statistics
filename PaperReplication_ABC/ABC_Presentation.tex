@@ -1,0 +1,84 @@
+\documentclass[10pt]{beamer}
+
+\usetheme[progressbar=frametitle]{metropolis}
+\usepackage{appendixnumberbeamer}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+
+\usepackage{xspace}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+\title{Approximate Bayesian Computation}
+\subtitle{}
+% \date{\today}
+\date{}
+\author{Davi Barreira}
+\institute{FGV - Escola de Matemática Aplicada}
+% \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+
+\begin{document}
+
+\maketitle
+
+% \begin{frame}{Table of contents}
+%   \setbeamertemplate{section in toc}[sections numbered]
+%   \tableofcontents%[hideallsubsections]
+% \end{frame}
+
+\section[Introduction]{Introduction}
+\begin{frame}[fragile]{Objective}
+
+  The objective of this presentation is to give an overview of
+  the Approximate Bayesian Computation (ABC) algorithm through the
+  replication of the
+  paper \textbf{Approximate Bayesian computational methods} by
+  Marin et. al (2012).
+
+  The paper talks about different variants of ABC by estimating the
+  posterior of Moving Average models.
+
+\end{frame}
+
+\begin{frame}[fragile]{Motivation}
+
+  ABC methods are known as likelihood-free techniques, thus are
+  a useful approach in problems that the likelihood is intractable, e.g., likelihood not available in
+  closed form, or likelihood too expensive to calculate.
+  \begin{itemize}
+    \item Coalecent models in population genetics \cite{Tavare505};
+    \item Species dynamics \cite{Jabot2016};
+    \item Real-world model of HIV transmission \cite{McKinley2018}.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Origin}
+
+  ABC methods are known as likelihood-free techniques, thus are
+  a useful approach in problems that the likelihood is intractable.
+  \begin{itemize}
+    \item Coalecent models in population genetics \cite{Tavare505};
+    \item Species dynamics \cite{Jabot2016};
+    \item Real-world model of HIV transmission \cite{McKinley2018}.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{References}
+  Some references to showcase [allowframebreaks] \cite{Marin2012}
+\end{frame}
+
+% \appendix
+
+\begin{frame}[allowframebreaks]{References}
+
+  \bibliography{abc}
+  \bibliographystyle{abbrv}
+
+\end{frame}
+
+\end{document}

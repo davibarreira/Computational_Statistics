@@ -1,5 +1,0 @@
-\beamer@sectionintoc {1}{Motivation for the GCP}{3}{0}{1}
-\beamer@sectionintoc {2}{Why is this important for the counties?}{4}{0}{2}
-\beamer@sectionintoc {3}{What are the key highlights from the GCP report?}{6}{0}{3}
-\beamer@sectionintoc {4}{Some problems with the GCP estimation}{7}{0}{4}
-\beamer@sectionintoc {5}{My Takeaways}{8}{0}{5}
