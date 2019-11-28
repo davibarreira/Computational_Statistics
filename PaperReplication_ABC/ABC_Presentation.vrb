@@ -1,21 +1,25 @@
-\frametitle{Original ABC Algorithm}
+\frametitle{Moving Average}
 
-  For this ABC algorithm, instead of the actual posterior,
-  we get
-  $$
-  \pi_\epsilon(\bm \theta, \bm z \mid \bm y) =
-  \frac{\pi(\bm \theta) p(\bm z \mid \bm \theta)
-  \mathbb I_{A_{\epsilon,\bm y}}(\bm z)}
-  {\int_{A_{\epsilon,\bm y}\times \bm\theta}\pi(\bm \theta)
-  p(\bm z \mid \bm \theta)d\bm z d \bm \theta}
-  $$
-  Where, $A_{\epsilon,\bm y} = \{
-  \bm z \in \mathbb D \mid \rho[\eta(\bm z), \eta(\bm y) \leq \epsilon].
-  \}$
+  We generate a synthetic sample of length 100 using
+  $(\theta_1, \theta_2) = (0.6, 0.2)$. For $q=2$ we can also
+  numerically calculate the real posterior and the marginal distributions.
 
-  Hence, for a tolerance ($\epsilon$) "small enough", we expect a good
-  approximation.
-  $$\pi_\epsilon(\bm \theta \mid \bm y) =
-  \int \pi_\epsilon(\bm \theta, \bm z \mid \bm y) d \bm z \approx
-  \pi(\bm \theta \mid \bm y)$$
+  $$
+  \pi(\bm\theta \mid \bm y) \propto \pi(\bm\theta)
+  p(\bm y \mid \bm \theta), \quad \quad
+  \bm y \mid \bm \theta \sim MVN(0, \Sigma) \quad
+  $$
+
+  $$
+  \Sigma =
+  \tiny{
+  \begin{bmatrix}
+   1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2                     & 0                            & 0        & 0 & ... & 0 \\
+   \theta_1 + \theta_2 \theta_1 & 1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2                     & 0        & 0 & ... & 0 \\
+   \theta_2                     & \theta_1 + \theta_2 \theta_1 & 1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2 & 0 & ... & 0 \\
+   0               & \theta_2   & \theta_1 + \theta_2 \theta_1 & 1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2 &... & 0 \\
+   \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+   0 & 0 & 0 & 0 & 0 & \theta_2 & \theta_1 + \theta_1\theta_2 & 1+\theta_1^2 + \theta_2^2 \\
+  \end{bmatrix}}
+  $$
 

@@ -36,7 +36,7 @@
 
 \AtBeginSection{}
 \section[Objective Motivation]{Objective \& Motivation}
-\begin{frame}[fragile]{Objective}
+\begin{frame}[fragile]{Objective \& Motivation}
 
   The objective of this presentation is to give an overview of
   the Approximate Bayesian Computation (ABC) algorithm through the
@@ -177,6 +177,54 @@
   $$\pi_\epsilon(\bm \theta \mid \bm y) = 
   \int \pi_\epsilon(\bm \theta, \bm z \mid \bm y) d \bm z \approx
   \pi(\bm \theta \mid \bm y)$$
+
+\end{frame}
+
+\AtBeginSection{}
+\section[Moving Average]{Moving Average}
+\begin{frame}[fragile]{Moving Average}
+
+  We will use the Moving Average model, also denoted as MA(q),
+  for assessing the performance of the ABC methods. The MA(q) process
+  is a stochastic process defined by:
+  $$y_k = u_k + \sum_{i=1}^q \theta_i u_{k-i}$$
+  Where $(u_k)_{k \in \mathbb Z} \overset{iid}{\sim} N(0,1)$.
+  For a $q=2$, imposing the standard identifiability condition
+  we obtain the following conditions:
+  $$
+  -2 < \theta_1 < 2, \quad \quad \theta_1+\theta_2 > -1, \quad \quad
+  \theta_1 - \theta_2 < 1.
+  $$
+  Hence, we use an uniform distribution over this triangular region as
+  prior for $\bm \theta$. The likelihood of $\bm y \mid \bm \theta$ is
+  more complex because of the need to integrate $\bm u$.
+
+\end{frame}
+
+\begin{frame}[fragile]{Moving Average}
+  
+  We generate a synthetic sample of length 100 using
+  $(\theta_1, \theta_2) = (0.6, 0.2)$. For $q=2$ we can also
+  numerically calculate the real posterior and the marginal distributions.
+
+  $$
+  \pi(\bm\theta \mid \bm y) \propto \pi(\bm\theta)
+  p(\bm y \mid \bm \theta), \quad \quad
+  \bm y \mid \bm \theta \sim MVN(0, \Sigma) \quad
+  $$
+
+  $$
+  \Sigma =
+  \tiny{
+  \begin{bmatrix}
+   1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2                     & 0                            & 0        & 0 & ... & 0 \\
+   \theta_1 + \theta_2 \theta_1 & 1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2                     & 0        & 0 & ... & 0 \\
+   \theta_2                     & \theta_1 + \theta_2 \theta_1 & 1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2 & 0 & ... & 0 \\
+   0               & \theta_2   & \theta_1 + \theta_2 \theta_1 & 1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2 &... & 0 \\
+   \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+   0 & 0 & 0 & 0 & 0 & \theta_2 & \theta_1 + \theta_1\theta_2 & 1+\theta_1^2 + \theta_2^2 \\
+  \end{bmatrix}}
+  $$
 
 \end{frame}
 
