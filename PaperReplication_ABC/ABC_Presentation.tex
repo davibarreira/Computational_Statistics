@@ -29,12 +29,13 @@
 
 \maketitle
 
-% \begin{frame}{Table of contents}
-%   \setbeamertemplate{section in toc}[sections numbered]
-%   \tableofcontents%[hideallsubsections]
-% \end{frame}
+\begin{frame}{Table of contents}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
 
-\section[Introduction]{Introduction}
+\AtBeginSection{}
+\section[Objective Motivation]{Objective \& Motivation}
 \begin{frame}[fragile]{Objective}
 
   The objective of this presentation is to give an overview of
@@ -48,7 +49,7 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{Motivation}
+\begin{frame}[fragile]{Objective \& Motivation}
 
   ABC methods are known as likelihood-free techniques, thus are
   a useful approach in problems that the likelihood is intractable, e.g., likelihood not available in
@@ -61,7 +62,7 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{Motivation}
+\begin{frame}[fragile]{Objective \& Motivation}
 
   In some settings where we have latent variables, the likelihood is
   expressed as:
@@ -73,7 +74,9 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{Original Algorithm}
+\AtBeginSection{}
+\section[Original]{Original ABC Algorithm}
+\begin{frame}[fragile]{Original ABC Algorithm}
 
   \citet{Rubin1984} described the ABC algorithm as a thought experiment
   to explain how to sample from a posterior distribution.
@@ -98,7 +101,7 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{Original Algorithm}
+\begin{frame}[fragile]{Original ABC Algorithm}
 
   Below we have an schematic drawing with an example of
   the ABC method for Beta/Binomial model.
@@ -112,7 +115,7 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{Original Algorithm}
+\begin{frame}[fragile]{Original ABC Algorithm}
 
   The proof that the algorithm indeed results in an iid sample
   from the posterior is shown below. Let $\bm y$ be the observed,
@@ -127,7 +130,7 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{Original Algorithm}
+\begin{frame}[fragile]{Original ABC Algorithm}
 
   \citet{Pritchard1999} extended the original algorithm to the case
   of continuos sample spaces.
@@ -154,12 +157,12 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{Original Algorithm}
+\begin{frame}[fragile]{Original ABC Algorithm}
 
   For this ABC algorithm, instead of the actual posterior,
   we get
   $$
-  \pi_\epsilon(\bm \theta \mid \bm y) = 
+  \pi_\epsilon(\bm \theta, \bm z \mid \bm y) = 
   \frac{\pi(\bm \theta) p(\bm z \mid \bm \theta)
   \mathbb I_{A_{\epsilon,\bm y}}(\bm z)}
   {\int_{A_{\epsilon,\bm y}\times \bm\theta}\pi(\bm \theta)
@@ -168,7 +171,7 @@
   Where, $A_{\epsilon,\bm y} = \{
   \bm z \in \mathbb D \mid \rho[\eta(\bm z), \eta(\bm y) \leq \epsilon].
   \}$
-  
+
   Hence, for a tolerance ($\epsilon$) "small enough", we expect a good
   approximation.
   $$\pi_\epsilon(\bm \theta \mid \bm y) = 

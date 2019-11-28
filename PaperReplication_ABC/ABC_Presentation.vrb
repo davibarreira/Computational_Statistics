@@ -1,9 +1,9 @@
-\frametitle{Original Algorithm}
+\frametitle{Original ABC Algorithm}
 
   For this ABC algorithm, instead of the actual posterior,
   we get
   $$
-  \pi_\epsilon(\bm \theta \mid \bm y) =
+  \pi_\epsilon(\bm \theta, \bm z \mid \bm y) =
   \frac{\pi(\bm \theta) p(\bm z \mid \bm \theta)
   \mathbb I_{A_{\epsilon,\bm y}}(\bm z)}
   {\int_{A_{\epsilon,\bm y}\times \bm\theta}\pi(\bm \theta)
