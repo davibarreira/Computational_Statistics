@@ -73,7 +73,7 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{Origin}
+\begin{frame}[fragile]{Original Algorithm}
 
   \citet{Rubin1984} described the ABC algorithm as a thought experiment
   to explain how to sample from a posterior distribution.
@@ -88,12 +88,54 @@
  \Repeat{$\bm y = \bm z$}{
     Sample $\bm\theta' \sim \pi(\cdot)$
 
-    Generate $z \sim p(\cdot \mid \bm\theta')$
+    Generate $\bm z \sim p(\cdot \mid \bm\theta')$
  }
   
 }
  \caption{Original ABC method}
 \end{algorithm}
+
+
+\end{frame}
+
+\begin{frame}[fragile]{Original Algorithm}
+
+  Below we have an schematic drawing with an example of
+  the ABC method for Beta/Binomial model.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=10cm]{images/Vis-ABC.png}
+        \caption{Schematic drawing of ABC method for Beta/Binomial
+        model
+        }
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]{Original Algorithm}
+
+  \citet{Pritchard1999} extended the original algorithm to the case
+  of continuos sample spaces.
+
+  \vspace{0.3cm}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\For{i=1 to N}{
+ \Repeat{$\rho[\eta(\bm y) , \eta (\bm z)] \leq \epsilon$}{
+    Sample $\bm\theta' \sim \pi(\cdot)$
+
+    Generate $\bm z \sim p(\cdot \mid \bm\theta')$
+ }
+  
+}
+ \caption{ABC method for discrete and continuous distributions}
+\end{algorithm}
+\begin{itemize}
+  \item[--] $\eta$: function defining a statistic (e.g. the mean),
+  \item[--] $\rho$: a distance function,
+  \item[--] $\epsilon$: acceptance tolerance.
+\end{itemize}
 
 \end{frame}
 
