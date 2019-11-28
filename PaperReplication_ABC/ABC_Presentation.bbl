@@ -1,26 +1,32 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{}
 
-\bibitem{Jabot2016}
-F.~Jabot and T.~Lohier.
+\bibitem[\protect\astroncite{Jabot and Lohier}{2016}]{Jabot2016}
+Jabot, F. and Lohier, T. (2016).
 \newblock Non-random correlation of species dynamics in tropical tree
   communities.
-\newblock {\em Oikos}, 125(12):1733--1742, 2016.
+\newblock {\em Oikos}, 125(12):1733--1742.
 
-\bibitem{Marin2012}
-J.-M. Marin, P.~Pudlo, C.~P. Robert, and R.~J. Ryder.
+\bibitem[\protect\astroncite{Marin et~al.}{2012}]{Marin2012}
+Marin, J.-M., Pudlo, P., Robert, C.~P., and Ryder, R.~J. (2012).
 \newblock Approximate bayesian computational methods.
-\newblock {\em Statistics and Computing}, 22(6):1167--1180, Nov 2012.
+\newblock {\em Statistics and Computing}, 22(6):1167--1180.
 
-\bibitem{McKinley2018}
-T.~J. McKinley, I.~Vernon, I.~Andrianakis, N.~McCreesh, J.~E. Oakley, R.~N.
-  Nsubuga, M.~Goldstein, and R.~G. White.
+\bibitem[\protect\astroncite{McKinley et~al.}{2018}]{McKinley2018}
+McKinley, T.~J., Vernon, I., Andrianakis, I., McCreesh, N., Oakley, J.~E.,
+  Nsubuga, R.~N., Goldstein, M., and White, R.~G. (2018).
 \newblock Approximate bayesian computation and simulation-based inference for
   complex stochastic epidemic models.
-\newblock {\em Statist. Sci.}, 33(1):4--18, 02 2018.
+\newblock {\em Statist. Sci.}, 33(1):4--18.
 
-\bibitem{Tavare505}
-S.~Tavar{\'e}, D.~J. Balding, R.~C. Griffiths, and P.~Donnelly.
+\bibitem[\protect\astroncite{Rubin}{1984}]{Rubin1984}
+Rubin, D.~B. (1984).
+\newblock Bayesianly justifiable and relevant frequency calculations for the
+  applied statistician.
+\newblock {\em Ann. Statist.}, 12(4):1151--1172.
+
+\bibitem[\protect\astroncite{Tavar{\'e} et~al.}{1997}]{Tavare505}
+Tavar{\'e}, S., Balding, D.~J., Griffiths, R.~C., and Donnelly, P. (1997).
 \newblock Inferring coalescence times from dna sequence data.
-\newblock {\em Genetics}, 145(2):505--518, 1997.
+\newblock {\em Genetics}, 145(2):505--518.
 
 \end{thebibliography}

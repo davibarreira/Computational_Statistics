@@ -1,5 +1,7 @@
 \documentclass[10pt]{beamer}
 
+\usepackage{natbib}
+
 \usetheme[progressbar=frametitle]{metropolis}
 \usepackage{appendixnumberbeamer}
 
@@ -11,6 +13,8 @@
 
 \usepackage{xspace}
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+\usepackage{amsmath, bm}
 
 \title{Approximate Bayesian Computation}
 \subtitle{}
@@ -36,7 +40,7 @@
   the Approximate Bayesian Computation (ABC) algorithm through the
   replication of the
   paper \textbf{Approximate Bayesian computational methods} by
-  Marin et. al (2012).
+  \cite{Marin2012}.
 
   The paper talks about different variants of ABC by estimating the
   posterior of Moving Average models.
@@ -49,22 +53,28 @@
   a useful approach in problems that the likelihood is intractable, e.g., likelihood not available in
   closed form, or likelihood too expensive to calculate.
   \begin{itemize}
-    \item Coalecent models in population genetics \cite{Tavare505};
-    \item Species dynamics \cite{Jabot2016};
-    \item Real-world model of HIV transmission \cite{McKinley2018}.
+    \item Coalecent models in population genetics \citep{Tavare505};
+    \item Species dynamics \citep{Jabot2016};
+    \item Real-world model of HIV transmission \citep{McKinley2018}.
   \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Motivation}
+
+  In some settings where we have latent variables, the likelihood is
+  expressed as:
+  $$\ell(\bm\theta \mid \bm y) =
+  \bm\int \ell^*(\bm\theta \mid \bm y, \bm u) d\bm u$$
+
+  Hence, $\bm y$ is observed and $\bm u$ is latent and $\bm\theta$
+  is the parameter of interest.
 
 \end{frame}
 
 \begin{frame}[fragile]{Origin}
 
-  ABC methods are known as likelihood-free techniques, thus are
-  a useful approach in problems that the likelihood is intractable.
-  \begin{itemize}
-    \item Coalecent models in population genetics \cite{Tavare505};
-    \item Species dynamics \cite{Jabot2016};
-    \item Real-world model of HIV transmission \cite{McKinley2018}.
-  \end{itemize}
+  \citet{Rubin1984}
 
 \end{frame}
 
@@ -77,7 +87,9 @@
 \begin{frame}[allowframebreaks]{References}
 
   \bibliography{abc}
-  \bibliographystyle{abbrv}
+  % \bibliographystyle{plainnat}
+  % \bibliographystyle{plain}
+  \bibliographystyle{apa}
 
 \end{frame}
 
