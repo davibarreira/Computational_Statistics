@@ -15,6 +15,7 @@
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
 \usepackage{amsmath, bm}
+\usepackage[ruled,vlined]{algorithm2e}
 
 \title{Approximate Bayesian Computation}
 \subtitle{}
@@ -74,21 +75,38 @@
 
 \begin{frame}[fragile]{Origin}
 
-  \citet{Rubin1984}
+  \citet{Rubin1984} described the ABC algorithm as a thought experiment
+  to explain how to sample from a posterior distribution.
+  \citet{Tavare505} is usually considered the paper responsible for the
+  proposing ABC for infering the posterior distribution.
 
-\end{frame}
+  \vspace{1cm}
 
-\begin{frame}{References}
-  Some references to showcase [allowframebreaks] \cite{Marin2012}
+\begin{algorithm}[H]
+\SetAlgoLined
+\For{i=1 to N}{
+ \Repeat{$\bm y = \bm z$}{
+    Sample $\bm\theta' \sim \pi(\cdot)$
+
+    Generate $z \sim p(\cdot \mid \bm\theta')$
+ }
+  
+}
+ \caption{Original ABC method}
+\end{algorithm}
+
 \end{frame}
 
 % \appendix
 
 \begin{frame}[allowframebreaks]{References}
 
+% \renewcommand{\bibsection}{\section{}}
+  \renewcommand{\section}[2]{}%
   \bibliography{abc}
   % \bibliographystyle{plainnat}
   % \bibliographystyle{plain}
+  % \bibliographystyle{abbrv}
   \bibliographystyle{apa}
 
 \end{frame}
