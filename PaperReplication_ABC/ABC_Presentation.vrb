@@ -1,25 +1,21 @@
 \frametitle{Original Algorithm}
 
-  \citet{Pritchard1999} extended the original algorithm to the case
-  of continuos sample spaces.
+  For this ABC algorithm, instead of the actual posterior,
+  we get
+  $$
+  \pi_\epsilon(\bm \theta \mid \bm y) =
+  \frac{\pi(\bm \theta) p(\bm z \mid \bm \theta)
+  \mathbb I_{A_{\epsilon,\bm y}}(\bm z)}
+  {\int_{A_{\epsilon,\bm y}\times \bm\theta}\pi(\bm \theta)
+  p(\bm z \mid \bm \theta)d\bm z d \bm \theta}
+  $$
+  Where, $A_{\epsilon,\bm y} = \{
+  \bm z \in \mathbb D \mid \rho[\eta(\bm z), \eta(\bm y) \leq \epsilon].
+  \}$
 
-  \vspace{0.3cm}
-
-\begin{algorithm}[H]
-\SetAlgoLined
-\For{i=1 to N}{
- \Repeat{$\rho[\eta(\bm y) , \eta (\bm z)] \leq \epsilon$}{
-    Sample $\bm\theta' \sim \pi(\cdot)$
-
-    Generate $\bm z \sim p(\cdot \mid \bm\theta')$
- }
-
-}
- \caption{ABC method for discrete and continuous distributions}
-\end{algorithm}
-\begin{itemize}
-  \item[--] $\eta$: function defining a statistic (e.g. the mean),
-  \item[--] $\rho$: a distance function,
-  \item[--] $\epsilon$: acceptance tolerance.
-\end{itemize}
+  Hence, for a tolerance ($\epsilon$) "small enough", we expect a good
+  approximation.
+  $$\pi_\epsilon(\bm \theta \mid \bm y) =
+  \int \pi_\epsilon(\bm \theta, \bm z \mid \bm y) d \bm z \approx
+  \pi(\bm \theta \mid \bm y)$$
 

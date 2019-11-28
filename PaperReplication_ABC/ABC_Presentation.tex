@@ -114,6 +114,21 @@
 
 \begin{frame}[fragile]{Original Algorithm}
 
+  The proof that the algorithm indeed results in an iid sample
+  from the posterior is shown below. Let $\bm y$ be the observed,
+  $\bm \theta$ the parameter of interest and $\bm z$ the generated
+  samples.
+  $$
+  p(\bm \theta_i) \propto \sum_{\bm z \in \mathbb{D}}
+  \pi(\bm \theta_i) p(\bm z \mid \bm \theta_i) \mathbb I_{\bm y}(\bm z)
+  = \pi(\bm \theta_i) p(\bm y \mid \bm \theta_i) \propto
+  \pi(\bm \theta_i \mid \bm y)
+  $$
+
+\end{frame}
+
+\begin{frame}[fragile]{Original Algorithm}
+
   \citet{Pritchard1999} extended the original algorithm to the case
   of continuos sample spaces.
 
@@ -136,6 +151,29 @@
   \item[--] $\rho$: a distance function,
   \item[--] $\epsilon$: acceptance tolerance.
 \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Original Algorithm}
+
+  For this ABC algorithm, instead of the actual posterior,
+  we get
+  $$
+  \pi_\epsilon(\bm \theta \mid \bm y) = 
+  \frac{\pi(\bm \theta) p(\bm z \mid \bm \theta)
+  \mathbb I_{A_{\epsilon,\bm y}}(\bm z)}
+  {\int_{A_{\epsilon,\bm y}\times \bm\theta}\pi(\bm \theta)
+  p(\bm z \mid \bm \theta)d\bm z d \bm \theta}
+  $$
+  Where, $A_{\epsilon,\bm y} = \{
+  \bm z \in \mathbb D \mid \rho[\eta(\bm z), \eta(\bm y) \leq \epsilon].
+  \}$
+  
+  Hence, for a tolerance ($\epsilon$) "small enough", we expect a good
+  approximation.
+  $$\pi_\epsilon(\bm \theta \mid \bm y) = 
+  \int \pi_\epsilon(\bm \theta, \bm z \mid \bm y) d \bm z \approx
+  \pi(\bm \theta \mid \bm y)$$
 
 \end{frame}
 
