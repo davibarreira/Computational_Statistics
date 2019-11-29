@@ -409,7 +409,110 @@ target $\pi_\epsilon(\bm \theta, \bm z \mid \bm y)$.
     \end{figure}
 
 \end{frame}
+
+\begin{frame}[fragile]{ABC Variations}
+
+  Sequential techniques are also used with ABC to enhance the
+  efficiency of the algorithms. A popular method in this regard is
+  the ABC-PMC (ABC population Monte Carlo) by \citet{Beaumont2009}.
+  It estimates the scale of the random walk step from the previous
+  simulations and
+  uses a sequence of tolerance thresholds
+  ($\epsilon_1 \geq ... \geq \epsilon_T$) to approximate the distribution.
+
+   A recent work by \citet{Simola2019} propose a method
+   for adaptively selecting this sequence of tolerances that
+   improves computationla efficiency and defines a stopping rule,
+   thus assisting in automating the termination of the sampling
+   procedure.
+\end{frame}
+
+\begin{frame}[fragile]{ABC Variations}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{images/ABC-PMC.png}
+        \caption{Comparison of ABC-PMC samples with the true posterior
+        marginal distribution for $\theta_1$ (\textit{left}) and
+        $\theta_2$ (\textit{right}) using $\epsilon = 0.1\%$.
+        }
+    \end{figure}
+
+\end{frame}
 % \appendix
+\AtBeginSection{}
+\section[Post-Processing of ABC]{Post-processing of ABC}
+\begin{frame}[fragile]{Post-processing of ABC}
+  
+  \textit{Local linear regression} was proposed by
+  \citet{Beaumont2012} as a way improve the result of simulations
+  without the need to use restrictively low threshold values.
+  The idea is then to use a weighted least squares regression
+  of $\bm \theta$ on $(\eta(\bm y) - \eta(\bm z))$, with weights
+  according to a chosen kernel.
+  $$
+  \bm \theta^* = \bm \theta - (\eta(\bm y) - \eta(\bm z))^T\hat\beta
+  $$
+
+\end{frame}
+
+\begin{frame}[fragile]{Post-processing of ABC}
+  
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{images/RegressionABC1.png}
+        \caption{Scatter plots of simulated $\theta_1$ and
+        $(\eta(\bm y)-\eta(\bm z))$ for autocovariance with
+        $lag = 1$. On the \textit{left} there are all the
+        $N=10^6$ simulations, while in the \textit{right} only the
+        accepted samples for $\epsilon = 10\%$ with the regression
+        line.
+        }
+    \end{figure}
+
+
+\end{frame}
+
+\begin{frame}[fragile]{Post-processing of ABC}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{images/ABCRegression_Marginal.png}
+        \caption{Comparison of ABC samples corrected through
+        local linear regression versus the true marginal posterior
+        distribution for $\theta_1$ (\textit{left}) and
+        $\theta_2$ (\textit{right}) using $\epsilon = 10\%$.
+        }
+    \end{figure}
+
+\end{frame}
+
+
+
+\AtBeginSection{}
+\section[Model Choice]{Model Choice}
+\begin{frame}[fragile]{Model Choice}
+  The estimation of the posterior using ABC is straightfoward.
+
+  \begin{algorithm}[H]
+  \SetAlgoLined
+  \For{i=1 to N}{
+    \Repeat{$\rho[\eta(\bm y) , \eta (\bm z)] \leq \epsilon$}{
+      Sample $m \sim \pi(\mathcal{M}=m)$
+
+      Sample $\bm\theta_m \sim \pi_m(\bm \theta_m)$
+
+      Generate $\bm z \sim p_m(\cdot \mid \bm\theta_m)$
+   }
+   Set $m^{(i)}=m$ and $\bm\theta^{(i)} = \bm\theta_m$
+    
+  }
+   \caption{ABC Model Choice}
+  \end{algorithm}
+
+
+
+\end{frame}
 
 \begin{frame}[allowframebreaks]{References}
 

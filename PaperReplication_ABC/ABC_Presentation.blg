@@ -4,45 +4,45 @@ The top-level auxiliary file: ABC_Presentation.aux
 The style file: apa.bst
 Database file #1: abc.bib
 Warning--empty journal in fearnhead2010constructing
-You've used 10 entries,
+You've used 13 entries,
             1940 wiz_defined-function locations,
-            551 strings with 5692 characters,
-and the built_in function-call counts, 4236 in all, are:
-= -- 406
-> -- 182
+            573 strings with 6247 characters,
+and the built_in function-call counts, 5499 in all, are:
+= -- 527
+> -- 246
 < -- 5
-+ -- 62
-- -- 62
-* -- 411
-:= -- 738
-add.period$ -- 29
-call.type$ -- 10
-change.case$ -- 81
-chr.to.int$ -- 10
-cite$ -- 11
-duplicate$ -- 138
-empty$ -- 291
-format.name$ -- 76
-if$ -- 805
++ -- 84
+- -- 84
+* -- 535
+:= -- 962
+add.period$ -- 38
+call.type$ -- 13
+change.case$ -- 107
+chr.to.int$ -- 13
+cite$ -- 14
+duplicate$ -- 176
+empty$ -- 370
+format.name$ -- 101
+if$ -- 1041
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 10
-newline$ -- 52
-num.names$ -- 30
-pop$ -- 60
+missing$ -- 12
+newline$ -- 67
+num.names$ -- 39
+pop$ -- 80
 preamble$ -- 1
-purify$ -- 81
+purify$ -- 107
 quote$ -- 0
-skip$ -- 107
+skip$ -- 135
 stack$ -- 0
-substring$ -- 335
-swap$ -- 19
+substring$ -- 429
+swap$ -- 24
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 60
+type$ -- 78
 warning$ -- 1
-while$ -- 33
+while$ -- 42
 width$ -- 0
-write$ -- 129
+write$ -- 167
 (There was 1 warning)

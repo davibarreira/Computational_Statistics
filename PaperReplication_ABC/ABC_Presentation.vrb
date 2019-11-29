@@ -1,13 +1,21 @@
-\frametitle{ABC Variations}
+\frametitle{Model Choice}
+The estimation of the posterior using ABC is straightfoward.
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=9cm]{images/NoisyABC.png}
-        \caption{
-        Illustration of \textit{Noisy} ABC rejection kernels, where
-        $s$ is the statistic from the ABC sampler and $s_{obs}$ is
-        the observed value from the data.
-        Figure from \cite{Beaumont2018}.
-        }
-    \end{figure}
+  \begin{algorithm}[H]
+  \SetAlgoLined
+  \For{i=1 to N}{
+    \Repeat{$\rho[\eta(\bm y) , \eta (\bm z)] \leq \epsilon$}{
+      Sample $m \sim \pi(\mathcal{M}=m)$
+
+      Sample $\bm\theta_m \sim \pi_m(\bm \theta_m)$
+
+      Generate $\bm z \sim p_m(\cdot \mid \bm\theta_m)$
+   }
+   Set $m^{(i)}=m$ and $\bm\theta^{(i)} = \bm\theta_m$
+
+  }
+   \caption{ABC Model Choice}
+  \end{algorithm}
+
+
 
