@@ -3,5 +3,5 @@
 \beamer@sectionintoc {3}{Moving Average}{11}{0}{3}
 \beamer@sectionintoc {4}{Calibration of ABC}{15}{0}{4}
 \beamer@sectionintoc {5}{ABC Variations}{18}{0}{5}
-\beamer@sectionintoc {6}{Post-processing of ABC}{24}{0}{6}
-\beamer@sectionintoc {7}{Model Choice}{27}{0}{7}
+\beamer@sectionintoc {6}{Post-processing of ABC}{26}{0}{6}
+\beamer@sectionintoc {7}{Model Choice}{29}{0}{7}
