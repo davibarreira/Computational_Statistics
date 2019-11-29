@@ -1,3 +1,5 @@
 \beamer@sectionintoc {1}{Objective \& Motivation}{3}{0}{1}
 \beamer@sectionintoc {2}{Original ABC Algorithm}{6}{0}{2}
 \beamer@sectionintoc {3}{Moving Average}{11}{0}{3}
+\beamer@sectionintoc {4}{Calibration of ABC}{15}{0}{4}
+\beamer@sectionintoc {5}{ABC Variations}{18}{0}{5}

@@ -1,25 +1,13 @@
-\frametitle{Moving Average}
+\frametitle{ABC Variations}
 
-  We generate a synthetic sample of length 100 using
-  $(\theta_1, \theta_2) = (0.6, 0.2)$. For $q=2$ we can also
-  numerically calculate the real posterior and the marginal distributions.
-
-  $$
-  \pi(\bm\theta \mid \bm y) \propto \pi(\bm\theta)
-  p(\bm y \mid \bm \theta), \quad \quad
-  \bm y \mid \bm \theta \sim MVN(0, \Sigma) \quad
-  $$
-
-  $$
-  \Sigma =
-  \tiny{
-  \begin{bmatrix}
-   1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2                     & 0                            & 0        & 0 & ... & 0 \\
-   \theta_1 + \theta_2 \theta_1 & 1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2                     & 0        & 0 & ... & 0 \\
-   \theta_2                     & \theta_1 + \theta_2 \theta_1 & 1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2 & 0 & ... & 0 \\
-   0               & \theta_2   & \theta_1 + \theta_2 \theta_1 & 1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2 &... & 0 \\
-   \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
-   0 & 0 & 0 & 0 & 0 & \theta_2 & \theta_1 + \theta_1\theta_2 & 1+\theta_1^2 + \theta_2^2 \\
-  \end{bmatrix}}
-  $$
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{images/NoisyABC.png}
+        \caption{
+        Illustration of \textit{Noisy} ABC rejection kernels, where
+        $s$ is the statistic from the ABC sampler and $s_{obs}$ is
+        the observed value from the data.
+        Figure from \cite{Beaumont2018}.
+        }
+    \end{figure}
 

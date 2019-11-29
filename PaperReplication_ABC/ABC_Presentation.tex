@@ -24,6 +24,8 @@
 \author{Davi Barreira}
 \institute{FGV - Escola de Matemática Aplicada}
 % \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+\usepackage{caption}
+\captionsetup[figure]{font=footnotesize}
 
 \begin{document}
 
@@ -109,8 +111,7 @@
         \centering
         \includegraphics[width=10cm]{images/Vis-ABC.png}
         \caption{Schematic drawing of ABC method for Beta/Binomial
-        model
-        }
+        model}
     \end{figure}
 
 \end{frame}
@@ -228,6 +229,186 @@
 
 \end{frame}
 
+\begin{frame}[fragile]{Moving Average}
+
+  For this model, the ABC algorithm consists of:
+  \begin{itemize}
+    \item Sample $\bm \theta ^ *$ from the uniform triangular prior
+    using rejection sampling;
+    \item For each $k \in \{-1,0, 1, ..., 100 \}$, sample
+    $u_k \overset{iid}{\sim} N(0,1)$.
+    \item For each $k \in \{ 1, 2, ..., 100\}$, calculate 
+    $z_k = u_k + \sum^2_{i=1}\theta_i^* u_{k-i}$.
+  \end{itemize}
+
+  Two distance metrics are used. The raw distance between the series
+  $$
+  \rho^2\{ \bm z, \bm y\} = \sum^{n=100}_{k=1}(y_k - z_k)^2
+  $$
+  And the sum of the quadratic distances between the first $q = 2$
+  autocovariances
+  $$
+  \tau_j(\bm x) = \sum^{n=100}_{k = j+1} x_k x_{k-j}, \quad \quad
+  \rho^2 = \sum^{q=2}_{j=0}(\tau_j(\bm y) - \tau_j(\bm z))^2
+  $$
+
+\end{frame}
+
+\begin{frame}[fragile]{Moving Average}
+
+  Below we present the results of running ABC for the MA(2) process.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=6cm]{images/ABCmodel1.png}
+        \caption{Comparison between the true posterior
+        (\textit{line in black}), with the samples produced using the ABC
+        . The number of simulations is $N = 10^6$,
+        and the threshold $\epsilon$ corresponds to the quantile of
+        accepting 0.1\%. The $\rho$ used was the distance
+        of the autocovariances.}
+    \end{figure}
+
+\end{frame}
+
+\AtBeginSection{}
+\section[Calibration]{Calibration of ABC}
+\begin{frame}[fragile]{Calibration of ABC}
+  \textbf{Summary Statistics}($\eta$). As the number of observations
+  grow, using the raw distance between each observation becomes too
+  prohibitive. The alternative is to try using summary statistics,
+  if possible, sufficient statistics.
+
+  \citet{fearnhead2010constructing} created a way of constructing
+  appropriate summary statistics for ABC in a semi-automatic manner.
+
+  \textbf{Tolerance threshold}. The standard practice is to use 
+  $\epsilon$  as a quantile of the simulated distances.
+
+\end{frame}
+
+\begin{frame}[fragile]{Calibration of ABC}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{images/ABCmodel1_Comparison.png}
+        \caption{Comparison of ABC method when using autocovariance
+        distance 
+\footnote{in the rest of the slides we will
+        only use the autocovariance distances}
+        (\textit{left}) versus raw distance (\textit{right}).
+        The number of simulations is $N = 10^6$ and different
+        thresholds $\epsilon$ are used.}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]{Calibration of ABC}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{images/ABCmodel1_Marginal.png}
+        \caption{Comparison of ABC samples with the true posterior
+        marginal distribution for $\theta_1$ (\textit{left}) and
+        $\theta_2$ (\textit{right}).
+        }
+    \end{figure}
+
+\end{frame}
+
+\AtBeginSection{}
+\section[ABC Variations]{ABC Variations}
+\begin{frame}[fragile]{ABC Variations}
+  Using non-informative priors is usually very inefficient,
+  because it leads to lots of rejections. To tackle this
+  problem, \citet{Marjoram2013} came up with MCMC-ABC.
+
+
+\footnotesize
+\begin{algorithm}[H]
+\SetAlgoLined
+Use Algorithm 2 to get $(\bm \theta^{(0), \bm z^{(0)}}$ from the
+target $\pi_\epsilon(\bm \theta, \bm z \mid \bm y)$.
+
+\For{i=1 to N}{
+ \Repeat{$\rho[\eta(\bm y) , \eta (\bm z)] \leq \epsilon$}{
+    Sample $\bm\theta'$ from the Markov kernel
+    $q(\cdot \mid \theta^{(i-1)})$
+
+    Generate $\bm z \sim p(\cdot \mid \bm\theta')$
+
+    Sample $u \sim U[0,1]$
+
+    \If{
+      $u \leq \frac{
+                    \pi(\bm\theta')q(\bm\theta^{(i-1)}\mid)}
+          {\pi(\bm\theta^{(i-1)})q(\bm\theta^{(i-1)}\mid)}$ and
+      $\rho\{ \eta(\bm z'),\eta(\bm y) \} \leq \epsilon$
+    }
+    {Set $(\bm \theta^{(i)}, \bm z^{(i)}) =
+    (\bm \theta', \bm z')$}
+    % \If{$u \leq \frac{
+    % \pi(\bm\theta')q(\bm\theta^{(i-1)}\mid)}
+    % {\pi(\bm\theta^{(i-1)})q(\bm\theta^{(i-1)}\mid)}$}
+    % }
+    \Else
+    {Set $(\bm \theta^{(i)}, \bm z^{(i)}) =
+    (\bm \theta^{(i-1)}, \bm z^{(i-1)})$}
+}
+}
+ \caption{MCMC-ABC}
+\end{algorithm}
+\end{frame}
+
+\begin{frame}[fragile]{ABC Variations}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{images/ABC-MCMC.png}
+        \caption{Comparison of ABC-MCMC samples with the true posterior
+        marginal distribution for $\theta_1$ (\textit{left}) and
+        $\theta_2$ (\textit{right}) using $\epsilon = 0.1\%$.
+        }
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]{ABC Variations}
+
+  Another variation of ABC is called \textit{Noisy} ABC, that was
+  proposed by \citet{Wilkinson2013}. The original ABC algorithm can
+  be thought as a rejection algorithm using a uniform kernel
+  ($\mathbb I_{A_{\epsilon, \bm y}(\bm z)}$). The \textit{Noisy} version
+  generalizes this, allowing the use of different kernels, hence:
+  $$
+  \pi_\epsilon(\bm \theta, \bm z \mid \bm y) = 
+  \frac{\pi(\bm \theta) p(\bm z \mid \bm \theta)
+  K_\epsilon(\bm y - \bm z)}
+  {\int \pi(\bm \theta)
+  p(\bm z \mid \bm \theta)K_\epsilon(\bm y - \bm z)d\bm z d \bm \theta}
+  $$
+
+  Now, instead of accepting if
+  $\rho\{\eta(\bm y),\eta(\bm z)\} \leq \epsilon$, we accept with 
+  probability
+  $\frac{K_\epsilon(\bm y - \bm z)}{max\{K_\epsilon(\bm y - \bm z\})}
+  $.
+
+\end{frame}
+
+\begin{frame}[fragile]{ABC Variations}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{images/NoisyABC.png}
+        \caption{
+        Illustration of \textit{Noisy} ABC rejection kernels, where
+        $s$ is the statistic from the ABC sampler and $s_{obs}$ is 
+        the observed value from the data.
+        Figure from \cite{Beaumont2018}.
+        }
+    \end{figure}
+
+\end{frame}
 % \appendix
 
 \begin{frame}[allowframebreaks]{References}
