@@ -1,21 +1,12 @@
-\frametitle{Model Choice}
-The estimation of the posterior using ABC is straightfoward.
+\frametitle{Post-processing of ABC}
 
-  \begin{algorithm}[H]
-  \SetAlgoLined
-  \For{i=1 to N}{
-    \Repeat{$\rho[\eta(\bm y) , \eta (\bm z)] \leq \epsilon$}{
-      Sample $m \sim \pi(\mathcal{M}=m)$
-
-      Sample $\bm\theta_m \sim \pi_m(\bm \theta_m)$
-
-      Generate $\bm z \sim p_m(\cdot \mid \bm\theta_m)$
-   }
-   Set $m^{(i)}=m$ and $\bm\theta^{(i)} = \bm\theta_m$
-
-  }
-   \caption{ABC Model Choice}
-  \end{algorithm}
-
-
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=11.2cm]{images/ModelChoice_MA1.png}
+        \caption{Barplots of evolution of Bayes factor approximations
+        in terms of visits to models MA(1) and MA(2) using
+        ABC using thresholds of 10, 1, 0.1 , 0.01 \% on autocovariance
+        distance. The true model is MA(1) and the true Bayes factor is 0.943.
+        }
+    \end{figure}
 

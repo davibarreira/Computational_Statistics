@@ -510,7 +510,40 @@ target $\pi_\epsilon(\bm \theta, \bm z \mid \bm y)$.
    \caption{ABC Model Choice}
   \end{algorithm}
 
+  The posterior probability $\pi(\mathcal{M}=m \mid \bm y)$
+  if the acceptance frequency from model m,
+  $$
+  \frac{1}{N}\sum^N_{i=1}\mathbb I_{m^{(i)}=m}
+  $$
 
+
+\end{frame}
+
+\begin{frame}[fragile]{Post-processing of ABC}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=11.2cm]{images/ModelChoice_MA2.png}
+        \caption{Barplots of evolution of Bayes factor approximations
+        in terms of visits to models MA(1) and MA(2) using
+        ABC using thresholds of 10, 1, 0.1 , 0.01 \% on autocovariance
+        distance. The true model is MA(2) and the true Bayes factor is 0.952.
+        }
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]{Post-processing of ABC}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=11.2cm]{images/ModelChoice_MA1.png}
+        \caption{Barplots of evolution of Bayes factor approximations
+        in terms of visits to models MA(1) and MA(2) using
+        ABC using thresholds of 10, 1, 0.1 , 0.01 \% on autocovariance
+        distance. The true model is MA(1) and the true Bayes factor is 0.943.
+        }
+    \end{figure}
 
 \end{frame}
 
