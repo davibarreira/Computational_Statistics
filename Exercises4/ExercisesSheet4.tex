@@ -65,4 +65,76 @@ Y_{t+1} \mid Y_{1:t} = N(\mu_1,
 $$
 
 \end{enumerate}
+
+\newpage
+\section*{Exercise 2 (SIS filter)}
+\begin{enumerate}[leftmargin=!,labelindent=5pt]
+\item
+\end{enumerate}
+
+
+
+\newpage
+\section*{Simulation question (Reversible jump MCMC)}
+The model samples
+$$
+\pi(\theta \mid k=1) = exp(-\theta^2/2)
+\quad \quad
+\pi(\theta \mid k=2) = exp(-(\theta_1^2 + \theta_2^2)/2)
+$$
+The analytical rate of visits of $\frac{k=2}{k=1}$
+is given by $\sqrt{2\pi} \approx 2.51$.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=10cm]{images/Reversible.png}
+        \caption{Distribution of $\theta$ for each model. The jump
+        probability used was 0.1. The distribution for $u$ was a
+        standard Cauchy distribution.
+        The proportion
+        of visits found is 2.47.}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=10cm]{images/Jumps.png}
+        \caption{Trace plot of the model sampled. It shows that both
+        models are well sampled.}
+        
+    \end{figure}
+
+\newpage
+\section*{Simulation question (Reversible jump MCMC)}
+
+The target distribution is $\pi(x) \approx exp(-10(x-1)^2)$.
+The tempered distributions are shown in the graph below.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=10cm]{images/Tempered.png}
+        \caption{Tempered distributions.
+        }
+    \end{figure}
+
+
+Looking at the trace plot, for the distributions
+with higher $\gamma$ we 
+won't get a very good mixture. This problem is not
+present when $\gamma$ is lower.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=16cm]{images/Trace1.png}
+        \caption{Trace plot for different values of tempering.}
+    \end{figure}
+
+Implementing the \textit{parallel tempering}, this problem is solved as
+can be seen in the figure below.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=16cm]{images/Trace2.png}
+        \caption{Trace plot for the \textit{parallel tempering} model.}
+    \end{figure}
+
 \end{document}
