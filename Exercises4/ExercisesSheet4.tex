@@ -37,6 +37,32 @@ X_{t+1} \mid Y_{1:t} \sim N(m_{t\mid t}, \sigma_v^2 +
 \phi^2 \sigma^2_{t\mid t})
 $$
 
+\item Note that:
+$$
+p(X_{t=1} \mid Y_{1:t},Y_{t+1}) \propto
+N(X_{t+1},\sigma_w^2)N(m_{t+1}, \sigma_{t+1}^2)
+$$
+
+The update of normal distribution by normal distribution is given by:
+$$
+\mu_1 = \frac{y_{t+1}\sigma_w ^{-2} + m_{t+1}\sigma_{t+1}^2}
+{\sigma_w^{-2} + \sigma_{t+1}^{-2}}
+\quad \quad
+\tau_1^2 = (\sigma_w^{-2}+\sigma_v^{-2})^{-1}
+$$
+Hence, $p(x_{t+1} \mid y_{1:t}) = N(\mu_1, \tau_1^2) =
+N(m_{t+1\mid t},\sigma^2_{t+1 \mid t})$.
+
+\item Note that:
+$$
+Y_{t+1} \mid Y_{1:t} = X_{t+1} + W_{t+1} \mid Y_{1:t} =
+N(\mu_1,\tau_1) + N(0, \sigma_w ^2)
+$$
+
+$$
+Y_{t+1} \mid Y_{1:t} = N(\mu_1,
+\sigma_w^2 + \tau_1^2)
+$$
 
 \end{enumerate}
 \end{document}
