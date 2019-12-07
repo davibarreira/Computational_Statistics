@@ -11,6 +11,11 @@ Beaumont, M.~A. (2019).
 \newblock Approximate bayesian computation.
 \newblock {\em Annual Review of Statistics and Its Application}, 6(1):379--403.
 
+\bibitem[\protect\astroncite{Beaumont et~al.}{2009}]{Beaumont2009}
+Beaumont, M.~A., Cornuet, J.-M., Marin, J.-M., and Robert, C.~P. (2009).
+\newblock Adaptive approximate bayesian computation.
+\newblock {\em Biometrika}, 96(4):983–990.
+
 \bibitem[\protect\astroncite{Fearnhead and
   Prangle}{2010}]{fearnhead2010constructing}
 Fearnhead, P. and Prangle, D. (2010).
@@ -47,9 +52,20 @@ Rubin, D.~B. (1984).
   applied statistician.
 \newblock {\em Ann. Statist.}, 12(4):1151--1172.
 
+\bibitem[\protect\astroncite{Simola et~al.}{2019}]{Simola2019}
+Simola, U., Cisewski-Kehe, J., Gutmann, M.~U., and Corander, J. (2019).
+\newblock Adaptive approximate bayesian computation tolerance selection.
+
 \bibitem[\protect\astroncite{Tavar{\'e} et~al.}{1997}]{Tavare505}
 Tavar{\'e}, S., Balding, D.~J., Griffiths, R.~C., and Donnelly, P. (1997).
 \newblock Inferring coalescence times from dna sequence data.
 \newblock {\em Genetics}, 145(2):505--518.
+
+\bibitem[\protect\astroncite{Wilkinson}{2013}]{Wilkinson2013}
+Wilkinson, R.~D. (2013).
+\newblock Approximate bayesian computation (abc) gives exact results under the
+  assumption of model error.
+\newblock {\em Statistical Applications in Genetics and Molecular Biology},
+  12(2).
 
 \end{thebibliography}

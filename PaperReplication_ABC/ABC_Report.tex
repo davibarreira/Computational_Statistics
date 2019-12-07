@@ -456,8 +456,108 @@ in Figure ~\ref{fig:mcmcabc}.
 
 \subsection{Noisy ABC}
 \label{subsec:statistical-summaries}
-% \section{Moving Average}
 
+Another variation of ABC is called Noisy ABC, that was
+proposed by \citet{Wilkinson2013}. The original ABC algorithm can
+be thought as a rejection algorithm using a uniform kernel
+($\mathbb I_{A_{\epsilon, \bm y}(\bm z)}$). The \textit{Noisy} version
+generalizes this, allowing the use of different kernels, hence:
+\begin{equation}
+\pi_\epsilon(\bm \theta, \bm z \mid \bm y) = 
+\frac{\pi(\bm \theta) p(\bm z \mid \bm \theta)
+K_\epsilon(\bm y - \bm z)}
+{\int \pi(\bm \theta)
+p(\bm z \mid \bm \theta)K_\epsilon(\bm y - \bm z)d\bm z d \bm \theta}
+\end{equation}
+
+Now, instead of accepting if
+$\rho\{\eta(\bm y),\eta(\bm z)\} \leq \epsilon$, we accept with 
+probability
+$\frac{K_\epsilon(\bm y - \bm z)}{max\{K_\epsilon(\bm y - \bm z\})}
+$.
+\hfill\break
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{images/NoisyABC.png}
+        \caption{
+        Illustration of \textit{Noisy} ABC rejection kernels, where
+        $s$ is the statistic from the ABC sampler and $s_{obs}$ is 
+        the observed value from the data.
+        Figure from \cite{Beaumont2018}.
+        \label{fig:noisyabc}
+        }
+    \end{figure}
+
+\subsection{Sequantial Techiniques}
+\label{subsec:statistical-summaries}
+
+Sequential techniques are also used with ABC to enhance the
+efficiency of the algorithms. A popular method in this regard is
+the ABC-PMC
+(ABC population Monte Carlo) by \citet{Beaumont2009}.
+It estimates the scale of the random walk step from the previous
+simulations and
+uses a sequence of tolerance thresholds
+($\epsilon_1 \geq ... \geq \epsilon_T$) to approximate the distribution.
+
+ A recent work by \citet{Simola2019} proposed a method
+ for adaptively selecting this sequence of tolerances in a way that
+ improves the computationl efficiency and defines a stopping rule,
+ thus assisting in automating the termination of the sampling
+ procedure. The algorithm is presented below.
+
+
+\hfill\break
+
+  \begin{algorithm}[H]
+  \SetAlgoLined
+  At iteration t=1,
+
+  \For{i=1 to N}{
+    \Repeat{$\rho[\eta(\bm y) , \eta (\bm z)] \leq \epsilon$}{
+      Sample $\bm\theta_i^{(1)} \sim \pi(\cdot)$
+
+      Generate $\bm z \sim p(\cdot \mid \bm\theta_i^{(1)})$
+   }
+   Set $w_i^{(1)} = 1/N$.
+  }
+  Set $\Sigma_1$ as twice the empirical variance of the
+  $\bm \theta_i^{(1)}$'s
+
+  \For{t=2 to T}{
+
+    \For{i=1 to N}{
+
+      \Repeat{$\rho[\eta(\bm y) , \eta (\bm z)] \leq \epsilon$}{
+        Sample $\bm\theta_i^{*}$ from
+        $\bm\theta_j^{(t-1)}$'s with probabilities $w_j^{(t-1)}$
+
+        Generate
+        $\bm\theta_i^{(t)} \sim N(\bm\theta_i^{*},\Sigma_{(t-1)})$ and
+        $\bm z \sim p(\cdot \mid \bm\theta_i^{(t)})$
+     }
+
+     Set $w_i^{(t)} \propto \frac{\pi(\bm\theta_i^{(t)})}
+     {\sum^N_{j=1}w_j^{(t-1)}\phi\{ (\Sigma_{t-1})^{-1/2} 
+     (\bm\theta_i^{(t)} - \bm\theta_j^{(t-1)})\} }$.
+    }
+  Set $\Sigma_t$ as twice the weighted variance of the
+  $\bm \theta_i^{(t)}$'s
+  }
+
+   \caption{ABC-PMC}
+  \end{algorithm}
+
+\hfill\break
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=11cm]{images/ABC-PMC.png}
+        \caption{Comparison of ABC-PMC samples with the true posterior
+        marginal distribution for $\theta_1$ (\textit{left}) and
+        $\theta_2$ (\textit{right}) using $\epsilon = 0.1\%$.
+        }
+    \end{figure}
 %
 % ---- Bibliography ----
 %
