@@ -398,8 +398,7 @@ much.
 Using non-informative priors is usually very inefficient,
 because it leads to lots of rejections. To tackle this
 problem, \citet{Marjoram2013} came up with MCMC-ABC.
-The idea is to use the previously accepted parameter $\bm \theta$
-to sample the next one. The algorithm is presented below.
+The algorithm is presented below.
 
 \hfill\break
 \begin{algorithm}[H]
@@ -440,8 +439,20 @@ posterior distribution. The initialisation of the algorithm
 actually uses the "vanilla" ABC method, thus the burn-in
 of the first iterations can be avoided.
 
-The MCMC-ABC method performs better in for our MA(2) example, as shown
-in Figure 
+The MCMC-ABC method performs a bit better
+for our MA(2) example, as shown
+in Figure ~\ref{fig:mcmcabc}.
+
+\hfill\break
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=10cm]{images/ABC-MCMC.png}
+        \caption{Comparison of ABC-MCMC samples with the true posterior
+        marginal distribution for $\theta_1$ (\textit{left}) and
+        $\theta_2$ (\textit{right}) using $\epsilon = 0.1\%$.
+        }
+        \label{fig:mcmcabc}
+    \end{figure}
 
 \subsection{Noisy ABC}
 \label{subsec:statistical-summaries}
