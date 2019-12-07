@@ -28,6 +28,12 @@ Marin, J.-M., Pudlo, P., Robert, C.~P., and Ryder, R.~J. (2012).
 \newblock Approximate bayesian computational methods.
 \newblock {\em Statistics and Computing}, 22(6):1167--1180.
 
+\bibitem[\protect\astroncite{Marjoram et~al.}{2003}]{Marjoram2013}
+Marjoram, P., Molitor, J., Plagnol, V., and Tavar{\'e}, S. (2003).
+\newblock Markov chain monte carlo without likelihoods.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  100(26):15324--15328.
+
 \bibitem[\protect\astroncite{Pritchard et~al.}{1999}]{Pritchard1999}
 Pritchard, J.~K., Seielstad, M.~T., Perez-Lezaun, A., and Feldman, M.~W.
   (1999).

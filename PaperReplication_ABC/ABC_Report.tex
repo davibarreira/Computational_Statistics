@@ -107,6 +107,7 @@ $\bm u$ the latent variable and $\bm\theta$ is the parameter of interest.
 techinique to obtain the posterior distribution without the explicit
 calculation of the likelihood. This original algorithm is given below.
 
+\hfill\break
 \begin{algorithm}[H]
 \SetAlgoLined
 \For{i=1 to N}{
@@ -119,7 +120,6 @@ calculation of the likelihood. This original algorithm is given below.
 }
  \caption{Original ABC method}
 \end{algorithm}
-
 The proof that the algorithm indeed results in an iid sample
 from the posterior is shown below. Let $\bm y$ be the observed,
 $\bm \theta$ the parameter of interest and $\bm z$ the generated
@@ -146,6 +146,7 @@ shown below, where
   \item[--] $\epsilon$ is an acceptance tolerance.
 \end{itemize}
 
+\hfill\break
 \begin{algorithm}[H]
 \SetAlgoLined
 \For{i=1 to N}{
@@ -158,6 +159,7 @@ shown below, where
 }
  \caption{ABC method for discrete and continuous distributions}
 \end{algorithm}
+\hfill\break
 
 For this ABC algorithm, instead of the actual posterior,
 we get
@@ -389,6 +391,60 @@ much.
         \label{fig:calibration2}
     \end{figure}
 
+\section{ABC Variations}
+\subsection{MCMC-ABC}
+\label{subsec:statistical-summaries}
+
+Using non-informative priors is usually very inefficient,
+because it leads to lots of rejections. To tackle this
+problem, \citet{Marjoram2013} came up with MCMC-ABC.
+The idea is to use the previously accepted parameter $\bm \theta$
+to sample the next one. The algorithm is presented below.
+
+\hfill\break
+\begin{algorithm}[H]
+\SetAlgoLined
+Use Algorithm 2 to get $(\bm \theta^{(0)}, \bm z^{(0)})$ from the
+target $\pi_\epsilon(\bm \theta, \bm z \mid \bm y)$.
+
+\For{i=1 to N}{
+ \Repeat{$\rho[\eta(\bm y) , \eta (\bm z)] \leq \epsilon$}{
+    Sample $\bm\theta'$ from the Markov kernel
+    $q(\cdot \mid \theta^{(i-1)})$
+
+    Generate $\bm z \sim p(\cdot \mid \bm\theta')$
+
+    Sample $u \sim U[0,1]$
+
+    \If{
+      $u \leq \frac{
+                    \pi(\bm\theta')q(\bm\theta^{(i-1)}\mid)}
+          {\pi(\bm\theta^{(i-1)})q(\bm\theta^{(i-1)}\mid)}$ and
+      $\rho\{ \eta(\bm z'),\eta(\bm y) \} \leq \epsilon$
+    }
+    {Set $(\bm \theta^{(i)}, \bm z^{(i)}) =
+    (\bm \theta', \bm z')$}
+    \Else
+    {Set $(\bm \theta^{(i)}, \bm z^{(i)}) =
+    (\bm \theta^{(i-1)}, \bm z^{(i-1)})$}
+}
+}
+ \caption{MCMC-ABC}
+\end{algorithm}
+\hfill\break
+
+As can be seen, the MCMC-ABC maintains the likelihood-free
+feature of the original ABC method, but it also estimates
+$\pi_\epsilon(\bm \theta \mid \bm y)$ instead of the true
+posterior distribution. The initialisation of the algorithm
+actually uses the "vanilla" ABC method, thus the burn-in
+of the first iterations can be avoided.
+
+The MCMC-ABC method performs better in for our MA(2) example, as shown
+in Figure 
+
+\subsection{Noisy ABC}
+\label{subsec:statistical-summaries}
 % \section{Moving Average}
 
 %
