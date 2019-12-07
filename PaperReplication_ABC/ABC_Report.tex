@@ -333,7 +333,7 @@ summary statistic is written as
 s_{opt} =  \beta^T f(s)
 \end{equation}
 where $\beta$ is the vector of the regression coefficients and
-$f(s)$ is the vector of summary statistics.
+$f(s)$ is the vector of summary statistics functions.
 
 
 \subsection{Tolerance threshold($\epsilon$)}
@@ -347,6 +347,47 @@ taking $\epsilon = 0.1\%$ corresponds to accepting
 $10^3$ sampled $\bm \theta$'s. This implies that the choice
 of $\epsilon$ is just a proxy for the number of simulations
 to be performed.
+
+\subsection{Calibration comparison in MA(2)}
+\label{subsec:statistical-summaries}
+
+Using the MA(2) model, we run the ABC algorithm comparing
+different calibrations. As stated before, two different
+summary statistics are used, the raw distance and the
+autocovariances distances. Figure ~\ref{fig:calibration1}
+makes it clear that
+the autocovariances distances perfom better that the raw distances,
+therefore, through the rest of this article we will only be using
+the autocovariances distances.
+
+Figure ~\ref{fig:calibration2} shows the improvement of the ABC
+approximation with the decrease of the tolerance comparing the
+marginal distributions of each parameter. Regarding $\theta_1$,
+the method seems to be converging to the real distribution,
+but for $\theta_2$ the approximation doesn't seem to be improving
+much.
+
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=11cm]{images/ABCmodel1_Comparison.png}
+        \caption{Comparison of ABC method when using autocovariance
+        distance 
+        (\textit{left}) versus raw distance (\textit{right}).
+        The number of simulations is $N = 10^6$ and different
+        thresholds $\epsilon$ are used.}
+        \label{fig:calibration1}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=11cm]{images/ABCmodel1_Marginal.png}
+        \caption{Comparison of ABC samples with the true posterior
+        marginal distribution for $\theta_1$ (\textit{left}) and
+        $\theta_2$ (\textit{right}).
+        }
+        \label{fig:calibration2}
+    \end{figure}
 
 % \section{Moving Average}
 
