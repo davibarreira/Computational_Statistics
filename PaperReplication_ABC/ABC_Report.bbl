@@ -1,5 +1,22 @@
 \begin{thebibliography}{}
 
+\bibitem[\protect\astroncite{Beaumont}{2019}]{Beaumont2018}
+Beaumont, M.~A. (2019).
+\newblock Approximate bayesian computation.
+\newblock {\em Annual Review of Statistics and Its Application}, 6(1):379--403.
+
+\bibitem[\protect\astroncite{Fearnhead and
+  Prangle}{2010}]{fearnhead2010constructing}
+Fearnhead, P. and Prangle, D. (2010).
+\newblock Constructing summary statistics for approximate bayesian computation:
+  Semi-automatic abc.
+
+\bibitem[\protect\astroncite{Joyce and Marjoram}{2008}]{Joyce2008}
+Joyce, P. and Marjoram, P. (2008).
+\newblock Approximately sufficient statistics and bayesian computation.
+\newblock {\em Statistical applications in genetics and molecular biology},
+  7:Article26.
+
 \bibitem[\protect\astroncite{Marin et~al.}{2012}]{Marin2012}
 Marin, J.-M., Pudlo, P., Robert, C.~P., and Ryder, R.~J. (2012).
 \newblock Approximate bayesian computational methods.

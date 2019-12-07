@@ -4,6 +4,7 @@
 %
 \documentclass[runningheads]{llncs}
 %
+\usepackage{float}
 \usepackage{natbib}
 \usepackage{amsfonts}
 \usepackage{amsmath, bm}
@@ -193,19 +194,148 @@ where $(u_k)_{k \in \mathbb Z} \overset{iid}{\sim} N(0,1)$.
 The true posterior distribution of MA(2) and MA(1) models can be
 numerically computed, since the likelihood function is indeed avaliable.
 Therefore, the approximations obtained through ABC can be compared with
-the true posterior.
+the true posterior. The marginal posterior distributions are also
+obtained numerically.
 
-For a $q=2$, imposing the standard identifiability condition
+For $q=2$, imposing the standard identifiability condition
 we obtain the following conditions:
 
 \begin{equation}
 -2 < \theta_1 < 2, \quad \quad \theta_1+\theta_2 > -1, \quad \quad
 \theta_1 - \theta_2 < 1.
 \end{equation}
+hence, we use an uniform distribution over this triangular region as
+prior for $\bm \theta$.
 
-Hence, we use an uniform distribution over this triangular region as
-prior for $\bm \theta$. The likelihood of $\bm y \mid \bm \theta$ is
-more complex because of the need to integrate $\bm u$.
+We generate a synthetic sample of length 100 using
+$(\theta_1, \theta_2) = (0.6, 0.2)$. For $q=2$, the 
+true posterior has the following form:
+\begin{equation}
+\pi(\bm\theta \mid \bm y) \propto \pi(\bm\theta)
+p(\bm y \mid \bm \theta), \quad \quad
+\bm y \mid \bm \theta \sim MVN(0, \Sigma) \quad
+\end{equation}
+
+$$
+\Sigma =
+\left[ 
+\begin{smallmatrix}
+ 1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2                     & 0                            & 0        & 0 & ... & 0 \\
+ \theta_1 + \theta_2 \theta_1 & 1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2                     & 0        & 0 & ... & 0 \\
+ \theta_2                     & \theta_1 + \theta_2 \theta_1 & 1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2 & 0 & ... & 0 \\
+ 0               & \theta_2   & \theta_1 + \theta_2 \theta_1 & 1+\theta_1^2 + \theta_2^2    & \theta_1 + \theta_2 \theta_1 & \theta_2 &... & 0 \\
+ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+ 0 & 0 & 0 & 0 & 0 & \theta_2 & \theta_1 + \theta_1\theta_2 & 1+\theta_1^2 + \theta_2^2 \\
+\end{smallmatrix}
+\right]
+$$
+
+For this model, applying the ABC algorithm consisted in the
+following steps:
+\begin{itemize}
+  \item Sample $\bm \theta ^ *$ from the uniform triangular prior
+  using rejection sampling;
+  \item For each $k \in \{-1,0, 1, ..., 100 \}$, sample
+  $u_k \overset{iid}{\sim} N(0,1)$.
+  \item For each $k \in \{ 1, 2, ..., 100\}$, calculate 
+  $z_k = u_k + \sum^2_{i=1}\theta_i^* u_{k-i}$.
+\end{itemize}
+
+Two distance metrics were initially compared.
+The raw distance between the series
+
+\begin{equation}
+\rho^2\{ \bm z, \bm y\} = \sum^{n=100}_{k=1}(y_k - z_k)^2
+\end{equation}
+and the sum of the quadratic distances between the first $q = 2$
+autocovariances.
+\begin{equation}
+\tau_j(\bm x) = \sum^{n=100}_{k = j+1} x_k x_{k-j}, \quad \quad
+\rho^2 = \sum^{q=2}_{j=0}(\tau_j(\bm y) - \tau_j(\bm z))^2
+\end{equation}
+
+Below we present the results of running ABC for the MA(2) process
+using the autocovariances distance.
+
+  \begin{figure}[H]
+      \centering
+      \includegraphics[width=10cm]{images/ABCmodel1.png}
+      \caption{Comparison between the true posterior
+      (\textit{line in black}), with the samples produced using the ABC
+      . The number of simulations is $N = 10^6$,
+      and the threshold $\epsilon$ corresponds to the quantile of
+      accepting 0.1\%. The $\rho$ used was the distance
+      of the autocovariances.}
+  \end{figure}
+
+\section{ABC Calibration}
+\subsection{Summary Statistics ($\eta$)}
+\label{subsec:statistical-summaries}
+
+As the number of observations
+grow, using the raw distance between each observation becomes too
+prohibitive, due to the rarity of actually
+obtaining samples close to each observation.
+The alternative is to try using summary statistics of low dimension.
+The ideal case is using sufficient statistics, which guarantee that the
+method indeed approximates the true posterior.
+The problem is that
+low-dimensional sufficient statistics are rarely available. Hence,
+choosing an appropriate low-dimensional statistic is paramount for
+obtaining good approximations with ABC \citep{Marin2012}.
+
+\citet{Beaumont2018} separates the approaches to address this
+problem into two categories: one is optimally choosing
+subsets of summary statistcs, and the other is projecting
+a set of summary statistics onto lower dimensional maps.
+
+In the first category, \citet{Joyce2008} introduced the concept
+of approximate sufficiency. The main idea is that given a set
+of summary statistics $s \subset S$, an approximately sufficient subset can
+be found by sequantially including those statistics into the ABC
+target. The method develops a score written as
+\begin{equation}
+\delta_k = sup_\theta \{
+\log f(s_k \mid s_1,...,s_{k-1},\theta)
+\}
+- inf_\theta\{
+\log f(s_k \mid s_1,...,s_{k-1},\theta)
+\}
+\end{equation}
+and tests whether $\delta_k$ is less than a given tolerance. In the
+case this is true, the statistic is deemed approximately sufficient.
+
+\citet{Marin2012} present some reservations regarding this method.
+They state that the construction of the statistics is not
+discussed in the paper by \citet{Joyce2008}. Secondly, the
+order in which the statistics are tested may alter the final subset.
+And finally, that the corrections proposed do not address the impact
+of correlation between the summary statistics.
+
+In the second category,
+\citet{fearnhead2010constructing} propose a way of constructing
+appropriate summary statistics for ABC in a semiautomatic manner.
+Their method aims at minimizing the expected posterior loss
+\begin{equation}
+\mathbb E[(\bm\theta - \bm{\hat\theta})\mid \bm y]
+\implies
+\bm {\hat\theta} = \mathbb E[\bm\theta \mid \bm y]
+\end{equation}
+hence, the optimal summary statistic is
+\begin{equation}
+s = \mathbb E[\bm \theta \mid \bm y]
+\end{equation}
+Since $E[\bm \theta \mid \bm y]$ is unknown, it can instead
+be estimated by performing a linear regression on each
+component of $\bm \theta$. Therefore, the single optimal
+summary statistic is written as
+\begin{equation}
+s_{opt} =  \beta^T f(s)
+\end{equation}
+where $\beta$ is the vector of the regression coefficients and
+$f(s)$ is the vector of summary statistics.
+
+
 
 
 % \section{Moving Average}
