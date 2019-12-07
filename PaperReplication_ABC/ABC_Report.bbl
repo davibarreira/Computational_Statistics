@@ -1,5 +1,11 @@
 \begin{thebibliography}{}
 
+\bibitem[\protect\astroncite{Beaumont et~al.}{2002}]{Beaumont2012}
+Beaumont, M., Zhang, W., and Balding, D. (2002).
+\newblock Approximate bayesian computation in population genetics.
+\newblock {\em Genetics}, 162(4):2025--2035.
+\newblock ID number: ISI:000180502300043.
+
 \bibitem[\protect\astroncite{Beaumont}{2019}]{Beaumont2018}
 Beaumont, M.~A. (2019).
 \newblock Approximate bayesian computation.

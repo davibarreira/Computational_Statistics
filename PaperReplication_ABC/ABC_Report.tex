@@ -336,7 +336,17 @@ where $\beta$ is the vector of the regression coefficients and
 $f(s)$ is the vector of summary statistics.
 
 
-
+\subsection{Tolerance threshold($\epsilon$)}
+\label{subsec:statistical-summaries}
+The choice of $\epsilon$ is mostly driven by computational
+limitations. The lower the value of $\epsilon$, the higher
+the number of simulations required. The standard practice
+\citep{Beaumont2012} is to chose $\epsilon$ as a quantile
+of the simulated distances $\rho$, e.g., for $10^6$ simulations,
+taking $\epsilon = 0.1\%$ corresponds to accepting
+$10^3$ sampled $\bm \theta$'s. This implies that the choice
+of $\epsilon$ is just a proxy for the number of simulations
+to be performed.
 
 % \section{Moving Average}
 
