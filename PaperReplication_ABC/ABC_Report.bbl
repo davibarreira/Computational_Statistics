@@ -1,0 +1,14 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\astroncite{Marin et~al.}{2012}]{Marin2012}
+Marin, J.-M., Pudlo, P., Robert, C.~P., and Ryder, R.~J. (2012).
+\newblock Approximate bayesian computational methods.
+\newblock {\em Statistics and Computing}, 22(6):1167--1180.
+
+\bibitem[\protect\astroncite{Rubin}{1984}]{Rubin1984}
+Rubin, D.~B. (1984).
+\newblock Bayesianly justifiable and relevant frequency calculations for the
+  applied statistician.
+\newblock {\em Ann. Statist.}, 12(4):1151--1172.
+
+\end{thebibliography}

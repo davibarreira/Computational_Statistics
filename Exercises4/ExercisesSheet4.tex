@@ -69,7 +69,47 @@ $$
 \newpage
 \section*{Exercise 2 (SIS filter)}
 \begin{enumerate}[leftmargin=!,labelindent=5pt]
+\item $v_t$ approximate $p(x_t \mid y_{0:t})$. Since this is the
+filtering distribution, that is why it is called a filter.
+
+\item 
+$$
+p_{Y_0}(y_0) = \int p_{Y_0,X_0}(y_0, x_0)dx_0
+= \int p_{Y_0\mid X_0}(y_0\mid x_0)p(x_0)dx_0 = 
+\int g(y_0 \mid x_0) \mu(x_0)dx_0
+$$
+And,
+$$
+p_{Y_0,X_0}(y_0, x_0) = \int p_{Y_0,X_0,X_0,Y_1}(y_0, x_0,x_1,y_1)dx_0 dx_1
+= $$
+$$
+\int 
+p_{Y_1 \mid X_0,X_0,Y_1}(y_1 \mid x_0,x_1,y_0)
+p_{X_1 \mid Y_0,X_0}(x_1 \mid x_0,y_0)
+p_{Y_0 \mid X_0}(y_0 \mid x_0) p_{X_0}(x_0)
+dx_0 dx_1 =
+$$
+$$
+\int 
+g(y_1 \mid x_1)
+f(x_1 \mid x_0)
+g(y_0 \mid x_0) \mu(x_0)
+dx_0 dx_1
+$$
+
+\item First, $p_{Y_0}(y_0) = E_\mu[g(Y_0 \mid X_0)] =
+E_{X_0}[g(Y_0 \mid X_0)]$, hence an unbiased estimator is 
+$\frac{\sum^n_{i=1} g(y_0 \mid X_0^{(i)})}{n}$, which is an estimation
+for the expected value.
+
+Now, $p_{Y_0,Y_1}(y_0, y_1) = E_{X_0,X_1}[g(y_1 \mid x_1)g(y_0 \mid x_0)]$,
+hence we have the unbiased estimator equal to 
+$\frac{\sum^n_{i=1} g(y_0 \mid X_0^{(i)})
+g (y_1 \mid X_1^{(i)})}{n}$.
+
 \item
+\item 
+\item 
 \end{enumerate}
 
 
@@ -136,5 +176,57 @@ can be seen in the figure below.
         \includegraphics[width=16cm]{images/Trace2.png}
         \caption{Trace plot for the \textit{parallel tempering} model.}
     \end{figure}
+
+
+\newpage
+\section*{Simulation question (linear Gaussian model - SIS and SIR)}
+
+The model is
+$$
+X_t = \phi X_{t-1} + \sigma_V V_t,
+\quad \quad
+Y_T = X_t + \sigma_W W_t,
+\quad \quad
+\phi = 0.95,\quad \sigma_V = 1, \quad \sigma_W = 1
+$$
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=12cm]{images/LinearGaussian.png}
+        \caption{$T = 100$ simulated observations for the Linear Gaussian
+        model.}
+    \end{figure}
+
+Using the prior as a proposal, we implement the sequential
+importance sampling algorithm.
+The results are shown below.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=12cm]{images/SIS_Paths.png}
+        \caption{Simulated particles for N = 1000 using SIS.}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=12cm]{images/ESS_SIS.png}
+        \caption{Effective sample size.}
+    \end{figure}
+    Looking at the effective sample size we immediatly notice
+    the problem with the SIS algorithm. The effective sample size
+    quickly drops.
+
+    Now let's show the SIR algorithm and how this problem is solved.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=12cm]{images/SIR_Paths.png}
+        \caption{Simulated particles for N = 1000 using SIR.}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=12cm]{images/ESS_SIR.png}
+        \caption{Effective sample size.}
+    \end{figure}
+
 
 \end{document}
