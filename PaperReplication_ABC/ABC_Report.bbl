@@ -5,10 +5,22 @@ Marin, J.-M., Pudlo, P., Robert, C.~P., and Ryder, R.~J. (2012).
 \newblock Approximate bayesian computational methods.
 \newblock {\em Statistics and Computing}, 22(6):1167--1180.
 
+\bibitem[\protect\astroncite{Pritchard et~al.}{1999}]{Pritchard1999}
+Pritchard, J.~K., Seielstad, M.~T., Perez-Lezaun, A., and Feldman, M.~W.
+  (1999).
+\newblock {Population growth of human Y chromosomes: a study of Y chromosome
+  microsatellites.}
+\newblock {\em Molecular Biology and Evolution}, 16(12):1791--1798.
+
 \bibitem[\protect\astroncite{Rubin}{1984}]{Rubin1984}
 Rubin, D.~B. (1984).
 \newblock Bayesianly justifiable and relevant frequency calculations for the
   applied statistician.
 \newblock {\em Ann. Statist.}, 12(4):1151--1172.
+
+\bibitem[\protect\astroncite{Tavar{\'e} et~al.}{1997}]{Tavare505}
+Tavar{\'e}, S., Balding, D.~J., Griffiths, R.~C., and Donnelly, P. (1997).
+\newblock Inferring coalescence times from dna sequence data.
+\newblock {\em Genetics}, 145(2):505--518.
 
 \end{thebibliography}
