@@ -634,16 +634,88 @@ the necessity of using low thresholds, thus accepting
 more simulated values.
 
 \section{Model Choice}
-Model choice is part of Bayesian analysis in which
-different models are compared and the end goal is
-to evaluate the probability a model generated the data
-compared to others. 
-In addition to the parameters
+Model choice is part of the framework of Bayesian analysis.
+In it, different models are compared and the end goal is
+to evaluate the probability that a specific model generated the data.
+Therefore, in addition to the parameters
 of each model, the inference also estimates
 a parameter
-$\mathcal{M}$ which corresponds to each specific
+$\mathcal{M}$ that corresponds to the index of each specific
 model, hence, $\mathcal{M}$ takes values in $\{1,2,...,m\}$, where
 $m$ is the total number of models being compared.
+
+The estimation of the posterior using ABC is straightfoward, the adpated algorithm is given below. Note that
+$\bm \theta_m$ corresponds to the parameters of each $m$, and
+$\eta(\bm z) = (\eta_1(\bm z),...,\eta_m(\bm z))$ is the concatenation
+of the summary statistics used for each model.
+
+\newpage
+  \begin{algorithm}[H]
+  \SetAlgoLined
+  \For{i=1 to N}{
+    \Repeat{$\rho[\eta(\bm y) , \eta (\bm z)] \leq \epsilon$}{
+      Sample $m \sim \pi(\mathcal{M}=m)$
+
+      Sample $\bm\theta_m \sim \pi_m(\bm \theta_m)$
+
+      Generate $\bm z \sim p_m(\cdot \mid \bm\theta_m)$
+   }
+   Set $m^{(i)}=m$ and $\bm\theta^{(i)} = \bm\theta_m$
+    
+  }
+   \caption{ABC Model Choice}
+  \end{algorithm}
+\hfill\break
+
+  The posterior probability $\pi(\mathcal{M}=m \mid \bm y)$
+  is the acceptance frequency from model m, given by
+  \begin{equation}
+  \frac{1}{N}\sum^N_{i=1}\mathbb I_{m^{(i)}=m}
+  \end{equation}
+
+We apply the ABC algorithm for the MA model, comparing
+MA(1) and MA(2) as possible generators for the data. A common
+metric in model choice is the Bayes Factor (BF), which in our
+case is given by
+\begin{equation}
+BF = \frac{P(M_2 \mid y)}{P(M_1 \mid y)}  = 
+\frac{\int \int P(y \mid \theta_1, \theta_2, M_2)\pi(\theta_1,\theta_2 \mid M_2)d\theta_1d\theta_2}
+{\int P(y \mid \theta_1, M_1)\pi(\theta_1 \mid M_1)d\theta_1}
+\end{equation}
+where $M_1$ is MA(1) and $M_2$ is MA(2).
+Two cases were simulated. First, a sample of length 100 was
+generated using MA(2) with $(\theta_1,\theta_2) = (0.6,0.38)$. And
+secondly, a sample of length 100 using MA(1) with $\theta_1 = 0.6$.
+For each case, the real Bayes Factor was numerically obtained and 
+compared to the one obtained through ABC, as shown below.
+
+\hfill\break
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=12cm]{images/ModelChoice_MA2.png}
+        \caption{Barplots of evolution of Bayes factor approximations
+        in terms of visits to models MA(1) and MA(2) using
+        ABC using thresholds of 10, 1, 0.1 , 0.01 \% on autocovariance
+        distance. The true model is MA(2) and the true Bayes factor is 0.952.
+        }
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=12cm]{images/ModelChoice_MA1.png}
+        \caption{Barplots of evolution of Bayes factor approximations
+        in terms of visits to models MA(1) and MA(2) using
+        ABC using thresholds of 10, 1, 0.1 , 0.01 \% on autocovariance
+        distance. The true model is MA(1) and the true Bayes factor is 0.943.
+        }
+    \end{figure}
+
+The ABC algorithm is able to get an approximation of the real
+Bayes factor, but even with lower thresholds it seems to plateau,
+never actually reaching the real value, similar to what happened
+to the posterior distribution of $\theta_2$.
+
+
 %
 % ---- Bibliography ----
 %
