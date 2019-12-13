@@ -16,6 +16,11 @@ Beaumont, M.~A., Cornuet, J.-M., Marin, J.-M., and Robert, C.~P. (2009).
 \newblock Adaptive approximate bayesian computation.
 \newblock {\em Biometrika}, 96(4):983–990.
 
+\bibitem[\protect\astroncite{Blum and Fran{\c{c}}ois}{2010}]{Blum2010}
+Blum, M. G.~B. and Fran{\c{c}}ois, O. (2010).
+\newblock Non-linear regression models for approximate bayesian computation.
+\newblock {\em Statistics and Computing}, 20(1):63--73.
+
 \bibitem[\protect\astroncite{Fearnhead and
   Prangle}{2010}]{fearnhead2010constructing}
 Fearnhead, P. and Prangle, D. (2010).

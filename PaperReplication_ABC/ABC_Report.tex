@@ -78,7 +78,7 @@ the paper Approximate Bayesian computational
 methods by \cite{Marin2012}.
 
 \keywords{Approximate Bayesian Computation \and likelihood-free \and
-Monte Carlo.}
+computational statistics.}
 \end{abstract}
 %
 %
@@ -116,6 +116,7 @@ calculation of the likelihood. This original algorithm is given below.
 
     Generate $\bm z \sim p(\cdot \mid \bm\theta')$
  }
+ Set $\bm \theta_i = \bm \theta'$
   
 }
  \caption{Original ABC method}
@@ -155,6 +156,7 @@ shown below, where
 
     Generate $\bm z \sim p(\cdot \mid \bm\theta')$
  }
+ Set $\bm \theta_i = \bm \theta'$
   
 }
  \caption{ABC method for discrete and continuous distributions}
@@ -174,7 +176,7 @@ p(\bm z \mid \bm \theta)d\bm z d \bm \theta}
 where, $A_{\epsilon,\bm y} = \{
 \bm z \in \mathcal D \mid \rho[\eta(\bm z), \eta(\bm y) \leq \epsilon]
 \}$.
-Hence, for a tolerance ($\epsilon$) "small enough", we expect a good
+Hence, for a tolerance ($\epsilon$) ``small enough", we expect a good
 approximation of the real posterior.
 \begin{equation}
 \pi_\epsilon(\bm \theta \mid \bm y) = 
@@ -279,7 +281,7 @@ grow, using the raw distance between each observation becomes too
 prohibitive, due to the rarity of actually
 obtaining samples close to each observation.
 The alternative is to try using summary statistics of low dimension.
-The ideal case is using sufficient statistics, which guarantee that the
+The ideal case is using sufficient statistics, which guarantees that the
 method indeed approximates the true posterior.
 The problem is that
 low-dimensional sufficient statistics are rarely available. Hence,
@@ -307,7 +309,7 @@ target. The method develops a score written as
 and tests whether $\delta_k$ is less than a given tolerance. In the
 case this is true, the statistic is deemed approximately sufficient.
 
-\citet{Marin2012} present some reservations regarding this method.
+\citet{Marin2012} criticize this method.
 They state that the construction of the statistics is not
 discussed in the paper by \citet{Joyce2008}. Secondly, the
 order in which the statistics are tested may alter the final subset.
@@ -332,10 +334,10 @@ be estimated by performing a linear regression on each
 component of $\bm \theta$. Therefore, the single optimal
 summary statistic is written as
 \begin{equation}
-s_{opt} =  \beta^T f(s)
+s_{opt} =  \bm\beta^T \bm f(s)
 \end{equation}
-where $\beta$ is the vector of the regression coefficients and
-$f(s)$ is the vector of summary statistics functions.
+where $\bm\beta$ is the vector of the regression coefficients and
+$\bm f(s)$ is the vector of summary statistics functions.
 
 
 \subsection{Tolerance threshold($\epsilon$)}
@@ -344,7 +346,7 @@ The choice of $\epsilon$ is mostly driven by computational
 limitations. The lower the value of $\epsilon$, the higher
 the number of simulations required. The standard practice
 \citep{Beaumont2012} is to chose $\epsilon$ as a quantile
-of the simulated distances $\rho$, e.g., for $10^6$ simulations,
+of the simulated distance $\rho$, e.g., for $10^6$ simulations,
 taking $\epsilon = 0.1\%$ corresponds to accepting
 $10^3$ sampled $\bm \theta$'s. This implies that the choice
 of $\epsilon$ is just a proxy for the number of simulations
@@ -356,11 +358,11 @@ to be performed.
 Using the MA(2) model, we run the ABC algorithm comparing
 different calibrations. As stated before, two different
 summary statistics are used, the raw distance and the
-autocovariances distances. Figure ~\ref{fig:calibration1}
+autocovariances distance. Figure ~\ref{fig:calibration1}
 makes it clear that
-the autocovariances distances perfom better that the raw distances,
+the autocovariances distance perfom better that the raw distance,
 therefore, through the rest of this article we will only be using
-the autocovariances distances.
+the autocovariances distance.
 
 Figure ~\ref{fig:calibration2} shows the improvement of the ABC
 approximation with the decrease of the tolerance comparing the
@@ -391,7 +393,16 @@ much.
         \label{fig:calibration2}
     \end{figure}
 
+
+\newpage
 \section{ABC Variations}
+Over the years, the ``vanilla'' ABC algorithm has
+been modified in order to get both better approximations
+for the posterior
+and lessen the need of using prohibitively small
+threshold values, thus decreasing the number
+of simulations necessary. In this section,
+some of these variations are presented.
 \subsection{MCMC-ABC}
 \label{subsec:statistical-summaries}
 
@@ -436,17 +447,18 @@ As can be seen, the MCMC-ABC maintains the likelihood-free
 feature of the original ABC method, but it also estimates
 $\pi_\epsilon(\bm \theta \mid \bm y)$ instead of the true
 posterior distribution. The initialisation of the algorithm
-actually uses the "vanilla" ABC method, thus the burn-in
+actually uses the ``vanilla" ABC method, thus the burn-in
 of the first iterations can be avoided.
 
 The MCMC-ABC method performs a bit better
 for our MA(2) example, as shown
 in Figure ~\ref{fig:mcmcabc}.
 
+\newpage
 \hfill\break
     \begin{figure}[H]
         \centering
-        \includegraphics[width=10cm]{images/ABC-MCMC.png}
+        \includegraphics[width=9cm]{images/ABC-MCMC.png}
         \caption{Comparison of ABC-MCMC samples with the true posterior
         marginal distribution for $\theta_1$ (\textit{left}) and
         $\theta_2$ (\textit{right}) using $\epsilon = 0.1\%$.
@@ -548,20 +560,94 @@ uses a sequence of tolerance thresholds
 
    \caption{ABC-PMC}
   \end{algorithm}
-
+\newpage
 \hfill\break
     \begin{figure}[H]
         \centering
-        \includegraphics[width=11cm]{images/ABC-PMC.png}
+        \includegraphics[width=9cm]{images/ABC-PMC.png}
         \caption{Comparison of ABC-PMC samples with the true posterior
         marginal distribution for $\theta_1$ (\textit{left}) and
         $\theta_2$ (\textit{right}) using $\epsilon = 0.1\%$.
         }
     \end{figure}
+
+\section{Post-processing of ABC}
+
+Instead of altering the ABC algorithm, methods have been
+developed that improve the estimated posterior
+by post-processing results of the ABC sampler. One
+of this methods is the
+\textit{local linear regression} proposed by
+\citet{Beaumont2012}.
+The idea is to use a weighted least squares regression
+of $\bm \theta$ on $(\eta(\bm y) - \eta(\bm z))$, with weights
+according to a chosen kernel.
+\begin{equation}
+\bm \theta^* = \bm \theta - (\eta(\bm y) - \eta(\bm z))^T\hat\beta
+\end{equation}
+Hence, this method adjusts the values of the sampled $\bm \theta$'s
+by projecting them in the axis where the error is equal to
+zero. Thus, the threshold of acceptance can be lessened without
+harming the posterior approximation.
+\hfill\break
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{images/RegressionABC1.png}
+        \caption{Scatter plots of simulated $\theta_1$ and
+        $(\eta(\bm y)-\eta(\bm z))$ for autocovariance with
+        $lag = 1$. On the \textit{left} there are all the
+        $N=10^6$ simulations, while on the \textit{right} only the
+        accepted samples for $\epsilon = 10\%$ with the regression
+        line.
+        }
+        \label{fig:regression}
+    \end{figure}
+
+Note that the linear regression is not done for every simulated
+value, but only those that have
+$\eta(\bm y) - \eta(\bm z) \leq \epsilon$. As
+shown in 
+Figure ~\ref{fig:regression}, after a certain error,
+the scatter plot starts to present a non-linear behavior, which
+is why the correction by \citet{Beaumont2012} is only local.
+The results of this correction applied to the MA(2) model
+are shown below, and they are indeed as good, if not better,
+then when we used $\epsilon = 0.1\%$ in the ``vanilla'' algorithm.
+\hfill\break
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{images/ABCRegression_Marginal.png}
+        \caption{Comparison of ABC samples corrected through
+        local linear regression versus the true marginal posterior
+        distribution for $\theta_1$ (\textit{left}) and
+        $\theta_2$ (\textit{right}) using $\epsilon = 10\%$.
+        }
+    \end{figure}
+
+\citet{Blum2010}
+proposed a nonlinear model with heteroskedasticity,
+instead of the linear regression. In this approach,
+the parameters are estimated by a neural network with
+one hidden layer. This model reduces event further
+the necessity of using low thresholds, thus accepting
+more simulated values.
+
+\section{Model Choice}
+Model choice is part of Bayesian analysis in which
+different models are compared and the end goal is
+to evaluate the probability a model generated the data
+compared to others. 
+In addition to the parameters
+of each model, the inference also estimates
+a parameter
+$\mathcal{M}$ which corresponds to each specific
+model, hence, $\mathcal{M}$ takes values in $\{1,2,...,m\}$, where
+$m$ is the total number of models being compared.
 %
 % ---- Bibliography ----
 %
-% BibTeX users should specify bibliography style 'splncs04'.
+% BibTeX users should specify biblikography style 'splncs04'.
 % References will then be sorted and formatted in the correct style.
 %
 \bibliographystyle{apa}
