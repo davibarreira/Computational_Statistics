@@ -674,7 +674,8 @@ of the summary statistics used for each model.
   \end{equation}
 
 We apply the ABC algorithm for the MA model, comparing
-MA(1) and MA(2) as possible generators for the data. A common
+MA(1) and MA(2) as possible generators for the data, with
+$\pi(\mathcal{M}=1)=\pi(\mathcal{M}=2) = 1/2$. A common
 metric in model choice is the Bayes Factor (BF), which in our
 case is given by
 \begin{equation}
@@ -696,7 +697,8 @@ compared to the one obtained through ABC, as shown below.
         \caption{Barplots of evolution of Bayes factor approximations
         in terms of visits to models MA(1) and MA(2) using
         ABC using thresholds of 10, 1, 0.1 , 0.01 \% on autocovariance
-        distance. The true model is MA(2) and the true Bayes factor is 0.952.
+        distance. The true model is MA(2) and the true probability
+        is 0.952, with true BC = 20.02.
         }
     \end{figure}
 
@@ -706,7 +708,8 @@ compared to the one obtained through ABC, as shown below.
         \caption{Barplots of evolution of Bayes factor approximations
         in terms of visits to models MA(1) and MA(2) using
         ABC using thresholds of 10, 1, 0.1 , 0.01 \% on autocovariance
-        distance. The true model is MA(1) and the true Bayes factor is 0.943.
+        distance. The true model is MA(1) and the true probability
+        is 0.943, with true BC = 0.06.
         }
     \end{figure}
 
@@ -715,6 +718,31 @@ Bayes factor, but even with lower thresholds it seems to plateau,
 never actually reaching the real value, similar to what happened
 to the posterior distribution of $\theta_2$.
 
+\section{Conclusion}
+
+The ABC algorithm is a prominent method for dealing with models
+where calculating the likelihood is problematic.
+It is also a very simple
+algorithm to implement and to parallelize, thus, it is
+a great algorithm to get an initial approximation
+for the posterior distribution.
+
+The main problem
+regarding the use of ABC is the
+the need of choosing summary statistics, which are paramount for
+the success of the approximation. Up to this moment there is still no
+objective method of choosing such low-dimensional
+statistics in a way that guarantees
+convergence to the real posterior. Although, methods have been developed
+as a possible solution to mitigate the problem
+(e.g. \citet{fearnhead2010constructing}).
+Our ABC estimation of the MA(2) model
+illustrated this well. The parameter $\theta_2$
+was not properly approximated even as we lowered the threshold,
+and the autocovariance distance presented a much better approximation
+then the raw distance.
+
+% section  (end)
 
 %
 % ---- Bibliography ----
